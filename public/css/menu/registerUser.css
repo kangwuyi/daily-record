@@ -1,0 +1,129 @@
+.registerMain {
+  display: inline-block; }
+  .registerMain .registerBox {
+    float: left;
+    margin-left: 200px;
+    width: 400px;
+    height: 600px;
+    font-family: "Microsoft YaHei", "Simsun", Tahoma, Arial, "Helvetica Neue", "Hiragino Sans GB", "sans-self";
+    font-size: 14px;
+    line-height: 24px; }
+    .registerMain .registerBox div, .registerMain .registerBox ul, .registerMain .registerBox ol, .registerMain .registerBox li, .registerMain .registerBox p, .registerMain .registerBox i, .registerMain .registerBox em, .registerMain .registerBox h1, .registerMain .registerBox h2, .registerMain .registerBox h3, .registerMain .registerBox h4, .registerMain .registerBox a, .registerMain .registerBox strong, .registerMain .registerBox span, .registerMain .registerBox img, .registerMain .registerBox form, .registerMain .registerBox input, .registerMain .registerBox textarea, .registerMain .registerBox button {
+      padding: 0;
+      margin: 0; }
+    .registerMain .registerBox .box_content {
+      float: left;
+      width: 400px;
+      margin: 100px auto;
+      padding-bottom: 1px;
+      background: #fff; }
+      .registerMain .registerBox .box_content .signup-email {
+        margin: 20px auto;
+        width: 300px; }
+        .registerMain .registerBox .box_content .signup-email .form-group {
+          margin-top: 20px; }
+          .registerMain .registerBox .box_content .signup-email .form-group .signup-form {
+            width: 300px;
+            height: 48px;
+            line-height: 48px \9;
+            font-size: 14px;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box; }
+          .registerMain .registerBox .box_content .signup-email .form-group .error-notic {
+            color: #ff4e00;
+            display: none; }
+          .registerMain .registerBox .box_content .signup-email .form-group .buttontTan {
+            position: relative;
+            width: 300px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+            border: 0;
+            background-color: #03a9f4;
+            color: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease-out;
+            -webkit-transition: all 0.3s ease-out;
+            -moz-transition: all 0.3s ease-out;
+            -o-transition: all 0.3s ease-out; }
+            .registerMain .registerBox .box_content .signup-email .form-group .buttontTan:hover {
+              padding-top: 3px;
+              height: 53px;
+              line-height: 50px;
+              background-color: #0096da;
+              transition: all 0.3s ease-out;
+              -webkit-transition: all 0.3s ease-out;
+              -moz-transition: all 0.3s ease-out;
+              -o-transition: all 0.3s ease-out; }
+          .registerMain .registerBox .box_content .signup-email .form-group input {
+            padding: 0 10px;
+            height: 48px;
+            width: 100%;
+            outline: none;
+            border: 1px #d9d9d9 solid;
+            border-radius: 5px !important;
+            overflow: hidden; }
+            .registerMain .registerBox .box_content .signup-email .form-group input:focus {
+              border-color: #03a9f4;
+              box-shadow: 0 0 15px #03a9f4;
+              -webkit-box-shadow: 0 0 15px #03a9f4;
+              -moz-box-shadow: 0 0 15px #03a9f4;
+              transition: all 0.3s ease-out;
+              -webkit-transition: all 0.3s ease-out;
+              -moz-transition: all 0.3s ease-out;
+              -o-transition: all 0.3s ease-out; }
+          .registerMain .registerBox .box_content .signup-email .form-group img {
+            border: 0; }
+          .registerMain .registerBox .box_content .signup-email .form-group div {
+            *zoom: 1; }
+            .registerMain .registerBox .box_content .signup-email .form-group div:after {
+              content: '';
+              display: table;
+              clear: both; }
+        .registerMain .registerBox .box_content .signup-email .view-clause {
+          padding-top: 20px;
+          line-height: 14px;
+          text-align: center;
+          color: #808080; }
+          .registerMain .registerBox .box_content .signup-email .view-clause .colorRed {
+            color: #ff4e00; }
+          .registerMain .registerBox .box_content .signup-email .view-clause a {
+            color: #03a9f4; }
+            .registerMain .registerBox .box_content .signup-email .view-clause a:hover {
+              text-decoration: underline; }
+            .registerMain .registerBox .box_content .signup-email .view-clause a.reacquire {
+              color: #c1c1c1; }
+  .registerMain .imgBox {
+    position: relative;
+    float: left;
+    margin-left: 100px;
+    width: 400px;
+    height: 500px; }
+    .registerMain .imgBox .imgContent {
+      margin-top: 50px;
+      width: 400px;
+      height: 500px;
+      background: url("../../img/registerUser/bg.png") no-repeat center;
+      background-size: 100%; }
+    .registerMain .imgBox .backHome {
+      position: absolute;
+      top: 40px;
+      left: 170px;
+      width: 125px;
+      height: 125px;
+      background: url("../../img/forgetPassword/back.png") no-repeat center;
+      background-size: 76%;
+      cursor: pointer;
+      z-index: 99;
+      transition: opacity 0.7s ease-out 0.3s;
+      -moz-transition: opacity 0.7s ease-out 0.3s;
+      -webkit-transition: opacity 0.7s ease-out 0.3s; }
+    .registerMain .imgBox div.backHome {
+      top: 40px;
+      left: 330px; }
+    .registerMain .imgBox a.backHome {
+      top: -10px;
+      left: -10px; }
+
+/*# sourceMappingURL=registerUser.css.map */

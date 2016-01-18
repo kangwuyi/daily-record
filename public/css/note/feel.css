@@ -1,0 +1,52 @@
+@charset "UTF-8";
+body {
+  color: rgba(255, 255, 255, 0.5);
+  zoom: 1;
+  font: 14px Arial, Helvetica, sans-serif;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  transition: color 0.5s ease; }
+
+.leftFeel {
+  font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #333;
+  position: relative;
+  margin-bottom: 30px;
+  float: left; }
+  .leftFeel .leftFeelBox {
+    background: #fff;
+    border-radius: 3px; }
+    .leftFeel .leftFeelBox .feelBoxList {
+      list-style: none;
+      padding: 0;
+      margin: 0; }
+      .leftFeel .leftFeelBox .feelBoxList li:first-child {
+        border-top: none; }
+      .leftFeel .leftFeelBox .feelBoxList .feelBoxListLi {
+        list-style: none;
+        border-top: 1px solid #e5e5e5; }
+        .leftFeel .leftFeelBox .feelBoxList .feelBoxListLi a {
+          position: relative;
+          display: block;
+          padding: 15px 0px 15px 10px;
+          font-size: 14px;
+          color: #4183c4;
+          text-decoration: none;
+          background: transparent;
+          list-style: none;
+          font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+        .leftFeel .leftFeelBox .feelBoxList .feelBoxListLi .feelInco {
+          background: url("../../img/book.png") no-repeat center;
+          height: 20px; }
+        .leftFeel .leftFeelBox .feelBoxList .feelBoxListLi .feelTag {
+          text-align: right; }
+        .leftFeel .leftFeelBox .feelBoxList .feelBoxListLi .feelTag::before {
+          content: "《"; }
+        .leftFeel .leftFeelBox .feelBoxList .feelBoxListLi .feelTag::after {
+          content: "》"; }
+        .leftFeel .leftFeelBox .feelBoxList .feelBoxListLi .feelDate {
+          text-align: right; }
+
+/*# sourceMappingURL=feel.css.map */

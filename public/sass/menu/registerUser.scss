@@ -1,0 +1,152 @@
+.registerMain {
+  display : inline-block;
+  .registerBox {
+    float       : left;
+    margin-left : 200px;
+    width       : 400px;
+    height      : 600px;
+    font-family : "Microsoft YaHei", "Simsun", Tahoma, Arial, "Helvetica Neue", "Hiragino Sans GB", "sans-self";
+    font-size   : 14px;
+    line-height : 24px;
+    div, ul, ol, li, p, i, em, h1, h2, h3, h4, a, strong, span, img, form, input, textarea, button {
+      padding : 0;
+      margin  : 0;
+    }
+    .box_content {
+      float          : left;
+      width          : 400px;
+      margin         : 100px auto;
+      padding-bottom : 1px;
+      background     : #fff;
+      .signup-email {
+        margin : 20px auto;
+        width  : 300px;
+        .form-group {
+          margin-top : 20px;
+          .signup-form {
+            width              : 300px;
+            height             : 48px;
+            line-height        : 48px \9;
+            font-size          : 14px;
+            box-sizing         : border-box;
+            -webkit-box-sizing : border-box;
+            -moz-box-sizing    : border-box;
+          }
+          .error-notic {
+            color   : #ff4e00;
+            display : none;
+          }
+          .buttontTan {
+            position           : relative;
+            width              : 300px;
+            height             : 50px;
+            line-height        : 50px;
+            font-size          : 16px;
+            border             : 0;
+            background-color   : #03a9f4;
+            color              : #fff;
+            border-radius      : 5px;
+            transition         : all 0.3s ease-out;
+            -webkit-transition : all 0.3s ease-out;
+            -moz-transition    : all 0.3s ease-out;
+            -o-transition      : all 0.3s ease-out;
+            &:hover {
+              padding-top        : 3px;
+              height             : 53px;
+              line-height        : 50px;
+              background-color   : #0096da;
+              transition         : all 0.3s ease-out;
+              -webkit-transition : all 0.3s ease-out;
+              -moz-transition    : all 0.3s ease-out;
+              -o-transition      : all 0.3s ease-out;
+            }
+          }
+          input {
+            padding       : 0 10px;
+            height        : 48px;
+            width         : 100%;
+            outline       : none;
+            border        : 1px #d9d9d9 solid;
+            border-radius : 5px !important;
+            overflow      : hidden;
+            &:focus {
+              border-color       : #03a9f4;
+              box-shadow         : 0 0 15px #03a9f4;
+              -webkit-box-shadow : 0 0 15px #03a9f4;
+              -moz-box-shadow    : 0 0 15px #03a9f4;
+              transition         : all 0.3s ease-out;
+              -webkit-transition : all 0.3s ease-out;
+              -moz-transition    : all 0.3s ease-out;
+              -o-transition      : all 0.3s ease-out;
+            }
+          }
+          img {
+            border : 0;
+          }
+          div {
+            *zoom : 1;
+            &:after {
+              content : '';
+              display : table;
+              clear   : both;
+            }
+          }
+        }
+        .view-clause {
+          padding-top : 20px;
+          line-height : 14px;
+          text-align  : center;
+          color       : #808080;
+          .colorRed{
+            color : #ff4e00;
+          }
+          a {
+            color : #03a9f4;
+            &:hover {
+              text-decoration : underline;
+            }
+            &.reacquire {
+              color : #c1c1c1;
+            }
+          }
+        }
+      }
+    }
+  }
+  .imgBox {
+    position    : relative;
+    float       : left;
+    margin-left : 100px;
+    width       : 400px;
+    height      : 500px;
+    .imgContent {
+      margin-top      : 50px;
+      width           : 400px;
+      height          : 500px;
+      background      : url("../../img/registerUser/bg.png") no-repeat center;
+      background-size : 100%;
+    }
+    .backHome {
+      position           : absolute;
+      top                : 40px;
+      left               : 170px;
+      width              : 125px;
+      height             : 125px;
+      background         : url("../../img/forgetPassword/back.png") no-repeat center;
+      background-size    : 76%;
+      cursor             : pointer;
+      z-index            : 99;
+      transition         : opacity 0.7s ease-out 0.3s;
+      -moz-transition    : opacity 0.7s ease-out 0.3s;
+      -webkit-transition : opacity 0.7s ease-out 0.3s;
+    }
+    div.backHome{
+      top                : 40px;
+      left               : 330px;
+    }
+    a.backHome{
+      top                : -10px;
+      left               : -10px;
+    }
+  }
+}

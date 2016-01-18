@@ -1,0 +1,161 @@
+body {
+  color: rgba(255, 255, 255, 0.5);
+  zoom: 1;
+  font: 14px Arial, Helvetica, sans-serif;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  transition: color 0.5s ease; }
+
+.loginBox {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 500px;
+  font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "\9ED1\4F53", Arial, sans-serif;
+  color: #222;
+  font-size: 12px; }
+  .loginBox .formBox {
+    margin-top: 200px;
+    width: 100%;
+    height: 500px; }
+  .loginBox .top_div_box {
+    position: relative;
+    left: -100px;
+    margin: 0 auto auto;
+    border: 1px solid #e7e7e7;
+    border-image: none;
+    width: 400px;
+    height: 220px;
+    text-align: center;
+    background: white; }
+    .loginBox .top_div_box .top_div_content {
+      width: 165px;
+      height: 96px;
+      position: absolute; }
+    .loginBox .top_div_box .colorRed_box {
+      position: absolute;
+      top: 134px;
+      left: 163px;
+      color: red; }
+    .loginBox .top_div_box .box_p_content {
+      padding: 30px 0px 10px;
+      position: relative; }
+    .loginBox .top_div_box .box_p_content2 {
+      position: relative; }
+    .loginBox .top_div_box .form_content {
+      height: 40px;
+      line-height: 30px;
+      margin-top: 30px;
+      border-top: 1px solid #e7e7e7; }
+      .loginBox .top_div_box .form_content .form_p_content {
+        margin: 10px 35px 20px 45px;
+        height: 40px; }
+        .loginBox .top_div_box .form_content .form_p_content .content_span_forget {
+          float: left;
+          margin: 0; }
+          .loginBox .top_div_box .form_content .form_p_content .content_span_forget .span_a {
+            color: #cccccc;
+            text-decoration: none;
+            cursor: pointer; }
+        .loginBox .top_div_box .form_content .form_p_content .content_span {
+          float: right; }
+          .loginBox .top_div_box .form_content .form_p_content .content_span .span_a {
+            color: #cccccc;
+            margin-right: 10px;
+            cursor: pointer; }
+          .loginBox .top_div_box .form_content .form_p_content .content_span .span_button {
+            background: #008ead;
+            margin-right: 30px;
+            height: 30px;
+            line-height: 27px;
+            border-radius: 4px;
+            border: 1px solid #1a7598;
+            border-image: none;
+            color: white;
+            font-weight: bold;
+            text-decoration: none; }
+  .loginBox .ipt {
+    border: 1px solid #d3d3d3;
+    padding: 10px 10px;
+    width: 290px;
+    border-radius: 4px;
+    padding-left: 35px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
+  .loginBox .ipt:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
+  .loginBox .u_logo {
+    background: url("../../img/login/username.png") no-repeat;
+    background-size: 100%;
+    padding: 10px 10px;
+    position: absolute;
+    top: 43px;
+    left: 20px; }
+  .loginBox .p_logo {
+    background: url("../../img/login/password.png") no-repeat;
+    background-size: 100%;
+    padding: 10px 10px;
+    position: absolute;
+    top: 12px;
+    left: 20px; }
+  .loginBox a {
+    text-decoration: none; }
+  .loginBox .tou {
+    background: url("../../img/login/tou.png") no-repeat;
+    width: 97px;
+    height: 92px;
+    position: absolute;
+    top: -87px;
+    left: 140px; }
+  .loginBox .left_hand {
+    background: url("../../img/login/left_hand.png") no-repeat;
+    width: 32px;
+    height: 37px;
+    position: absolute;
+    top: -38px;
+    left: 150px; }
+  .loginBox .right_hand {
+    background: url("../../img/login/right_hand.png") no-repeat;
+    width: 32px;
+    height: 37px;
+    position: absolute;
+    top: -38px;
+    right: -64px; }
+  .loginBox .initial_left_hand {
+    background: url("../../img/login/hand.png") no-repeat;
+    width: 30px;
+    height: 20px;
+    position: absolute;
+    top: -12px;
+    left: 100px; }
+  .loginBox .initial_right_hand {
+    background: url("../../img/login/hand.png") no-repeat;
+    width: 30px;
+    height: 20px;
+    position: absolute;
+    top: -12px;
+    right: -112px; }
+  .loginBox .left_handing {
+    background: url("../../img/login/left-handing.png") no-repeat;
+    width: 30px;
+    height: 20px;
+    position: absolute;
+    top: -24px;
+    left: 139px; }
+  .loginBox .right_handinging {
+    background: url("../../img/login/right_handing.png") no-repeat;
+    width: 30px;
+    height: 20px;
+    position: absolute;
+    top: -21px;
+    left: 210px; }
+
+/*# sourceMappingURL=login.css.map */

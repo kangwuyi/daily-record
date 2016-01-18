@@ -1,0 +1,109 @@
+<%- include ../poHeaderLoader %>
+<div class="container poContents" id="contents">
+  <%- include ../header %>
+  <form action="toAddProse" method="post">
+    <div class="poAddBox">
+      <div class="poReviseCententTitle">
+        <div class="poReviseCententTitleLeft"><span style="float: none">日报后台管理</span></div>
+        <div class="poReviseCententTitleRight">
+          <input class="poAddBoxButton" type="submit" value="提交表单">
+        </div>
+        <% if (locals.success && locals.success.length) { %>
+        <span class="poReviseCententTitleNote">
+          <%= locals.success %>
+        </span>
+        <% } %>
+        <% if (locals.error && locals.error.length) { %>
+        <span class="poReviseCententTitleNote">
+          <%= locals.error %>
+        </span>
+        <% } %>
+      </div>
+      <table class="table table-striped" style="margin-bottom:0;">
+        <tr>
+          <td>
+            <div class="tdLeft">
+              <span>译文标题：</span>
+              <input class="NewTitle" style="width:300px;" name="proseTitle" type="text" placeholder="请输入日报标题" value="">
+            </div>
+            <div class="tdContent">
+              <span>选择日期：</span>
+              <input type="text" id="startDate" class="Wdate dataPicker"
+                     onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',onpicked:function(dp){document.getElementById
+                     ('startDateHidden').value= new Date(dp.cal.newdate.y,dp.cal.newdate.M-1,dp.cal.newdate.d,dp.cal.newdate.H,dp.cal.newdate.m,dp.cal.newdate.s).getTime()}})"
+                     value="<%= (new Date ()).format ( 'yyyy-MM-dd hh:mm:ss' ) %>">
+              <input type="hidden" class="start" name="proseDatetime" id="startDateHidden"
+                     value="<%= (new Date ()).getTime () %>">
+            </div>
+
+            <div class="tdRight">
+              <span>标签：</span>
+              <input type="hidden" id="uiSelect1BlogType" name="uiSelect1BlogType" value=""/>
+
+              <div id="uiSelect1" class="ui-select w150 blogTagId" data-name="uiSelect1">
+                <a href="javascript:void(0)" class="ui-select-trigger"><span>快速搜索</span><i><b></b></i></a>
+                <ul class="ui-select-content">
+                  <% department_g.forEach(  function( data ){ %>
+                  <li class="ui-select-item" data-value="<%= JSON.parse ( data ).did %>"><%= JSON.parse ( data ).dname
+                    %></li>
+                  <% }); %>
+                </ul>
+              </div>
+            </div>
+            <div class="tdRight">
+              <input type="hidden" id="uiSelect2BlogType" name="uiSelect2BlogType" value=""/>
+              <input type="hidden" id="uiSelect2InputType" value="<%= JSON.stringify ( group ) %>"/>
+
+              <div id="uiSelect2" class="ui-select w150" data-name="uiSelect2">
+                <a href="javascript:void(0)" class="ui-select-trigger"><span>快速搜索</span><i><b></b></i></a>
+                <ul class="ui-select-content">
+                  <li class="ui-select-item" data-value="请选择主类别">请选择主类别</li>
+                </ul>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="poTextarea">
+      <textarea class="ckeditor" name="editor1"></textarea>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+  $ ( function () {
+    $ ( "#uiSelect1" ).selectInit ( {
+      callback : function () {
+        var _this          = $ ( this )
+          , ui_select_2    = $ ( "#uiSelect2" )
+          , _groupInfo     = JSON.parse ( $ ( "input#uiSelect2InputType" ).val () )
+          , _val           = _this.selectValue ()
+          , uiSelect2UlBox = ui_select_2.find ( '.ui-select-content' )
+          , liSelectArr    = [];
+        uiSelect2UlBox.empty ();
+        $.each ( _groupInfo, function ( index, item ) {
+          if ( item.did == _val ) {
+            liSelectArr.push ( { value : item.gid, text : item.gname } );
+          }
+        } );
+        ui_select_2.selectReset ( {
+          dataList : liSelectArr,
+          callback : function () {
+            var _this = $ ( this );
+            var _vval   = _this.selectValue ();
+            $ ( '#uiSelect2BlogType' ).val ( _vval )
+          }
+        } );
+        $ ( '#uiSelect1BlogType' ).val ( _val )
+      }
+    } );
+    $ ( "#uiSelect2" ).selectInit ( {
+      callback : function () {
+        var _this = $ ( this )
+          , _val  = _this.selectValue ();
+        $ ( '#uiSelect2BlogType' ).val ( _val )
+      }
+    } );
+  } );
+</script>
+<%- include ../poFooterLoader %>

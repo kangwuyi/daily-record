@@ -1,0 +1,84 @@
+.auditUserBox {
+  display    : inline-block;
+  width      : 100%;
+  background : #fff;
+  .ui-select {
+    float      : left;
+    top        : 6px;
+    right      : 0;
+    background : transparent;
+    .ui-select-input {
+      border-radius : 5px;
+      & > input {
+        border-radius : 5px;
+      }
+      & > i {
+        background : rgba(0, 0, 0, 0);
+        &:before {
+          position : relative;
+          left     : 5px;
+        }
+      }
+    }
+    .ui-select-trigger {
+      display : none;
+    }
+  }
+  .ui-select-down {
+    .ui-select-content {
+      margin-top : 0 !important;
+    }
+  }
+  .tdRight {
+    display : inline-block;
+  }
+  .td_user {
+    width   : 100px;
+    padding : 20px;
+  }
+  .td_department {
+    width : 200px;
+  }
+  .td_post {
+    width : 100px;
+  }
+  .td_post_buttom {
+    padding       : 5px 10px;
+    margin        : 10px 30px;
+    width         : 50px;
+    text-align    : center;
+    height        : 20px;
+    line-height   : 15px;
+    color         : #fff;
+    background    : #4a9ce2;
+    border-radius : 5px;
+    cursor        : pointer;
+  }
+  .groupBox {
+    display            : inline-block;
+    padding            : 0 10px;
+    width              : 100%;
+    height             : 40px;
+    line-height        : 40px;
+    border-left        : 1px solid #ccc;
+    -moz-box-sizing    : border-box;
+    -webkit-box-sizing : border-box;
+    -o-box-sizing      : border-box;
+    -ms-box-sizing     : border-box;
+    box-sizing         : border-box;
+    span {
+      display         : inline-block;
+      float           : left;
+      margin-right    : 10px;
+      font-size       : 12px;
+      height          : 35px;
+      line-height     : 15px;
+      padding         : 10px 10px;
+      border          : 1px solid #FFB9B9;
+      border-radius   : 5px;
+      color           : #FFB9B9;
+      cursor          : pointer;
+      text-decoration : none;
+    }
+  }
+}

@@ -1,0 +1,205 @@
+.waitBox {
+  width: 100%;
+  height: 500px;
+  position: relative; }
+  .waitBox .waitContainer {
+    position: absolute;
+    margin-top: 200px;
+    width: 600px;
+    height: 400px;
+    top: 20%;
+    left: 45%;
+    transform: translate(-50%, -50%); }
+    .waitBox .waitContainer div, .waitBox .waitContainer span {
+      position: absolute; }
+    .waitBox .waitContainer .item {
+      width: 200px;
+      height: 200px;
+      bottom: 70px;
+      left: 50%;
+      margin-left: -50px;
+      -webkit-transform-origin: center bottom;
+      transform-origin: center bottom; }
+      .waitBox .waitContainer .item .chewing {
+        width: 100px;
+        height: 100px;
+        bottom: 0;
+        left: 50%;
+        margin-left: -50px;
+        box-shadow: inset 10px -6px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+        -webkit-animation: bounce 0.6s ease-in-out infinite;
+        animation: bounce 0.6s ease-in-out infinite; }
+        .waitBox .waitContainer .item .chewing .eye {
+          background: #fff;
+          border-radius: 50%;
+          border-top: 2px solid #111; }
+          .waitBox .waitContainer .item .chewing .eye span {
+            width: 4px;
+            height: 4px;
+            background: #232323;
+            border-radius: 2px; }
+          .waitBox .waitContainer .item .chewing .eye.left {
+            top: 30px;
+            left: 20px;
+            width: 30px;
+            height: 29px;
+            -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg); }
+            .waitBox .waitContainer .item .chewing .eye.left span {
+              top: 14px;
+              left: 15px; }
+          .waitBox .waitContainer .item .chewing .eye.right {
+            top: 35px;
+            right: 20px;
+            width: 20px;
+            height: 20px;
+            -webkit-transform: rotate(10deg);
+            transform: rotate(10deg); }
+            .waitBox .waitContainer .item .chewing .eye.right span {
+              top: 9px;
+              left: 7px; }
+        .waitBox .waitContainer .item .chewing .mounth {
+          width: 16px;
+          height: 4px;
+          bottom: 20px;
+          background: #fff;
+          border-radius: 50% 50% 100% 100%; }
+          .waitBox .waitContainer .item .chewing .mounth .arm {
+            width: 15px;
+            height: 16px;
+            bottom: 28px;
+            border-radius: 7px;
+            z-index: -1;
+            -webkit-animation: arm-bounce 0.7s ease-in infinite;
+            animation: arm-bounce 0.7s ease-in infinite; }
+            .waitBox .waitContainer .item .chewing .mounth .arm.left {
+              left: -13px;
+              -webkit-transform: rotate(-20deg);
+              transform: rotate(-20deg); }
+            .waitBox .waitContainer .item .chewing .mounth .arm.right {
+              right: -13px;
+              -webkit-transform: rotate(20deg);
+              transform: rotate(20deg); }
+      .waitBox .waitContainer .item .shadow {
+        width: 70px;
+        height: 10px;
+        bottom: -10px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border-radius: 50%;
+        background: #37a45b;
+        box-shadow: 0 0 5px #37a45b;
+        -webkit-animation: shadow 0.7s ease-in-out infinite;
+        animation: shadow 0.7s ease-in-out infinite;
+        -webkit-animation-delay: 0.3s;
+        animation-delay: 0.3s; }
+      .waitBox .waitContainer .item#pink {
+        left: 44%;
+        z-index: 30; }
+        .waitBox .waitContainer .item#pink .chewing {
+          background: #faa8d7; }
+        .waitBox .waitContainer .item#pink .mounth {
+          left: 43px; }
+        .waitBox .waitContainer .item#pink .arm {
+          background: #faa8d7; }
+      .waitBox .waitContainer .item#orange {
+        left: 31%;
+        z-index: 20;
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1); }
+        .waitBox .waitContainer .item#orange .chewing {
+          background: #f0a524;
+          -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+        .waitBox .waitContainer .item#orange .mounth {
+          left: 37px;
+          -webkit-transform: rotate(5deg);
+          transform: rotate(5deg);
+          -webkit-animation: mounth 0.7s ease-in-out infinite;
+          animation: mounth 0.7s ease-in-out infinite; }
+        .waitBox .waitContainer .item#orange .arm {
+          background: #f0a524; }
+      .waitBox .waitContainer .item#blue {
+        left: 64%;
+        z-index: 20;
+        -webkit-transform: scale(1.4);
+        transform: scale(1.4); }
+        .waitBox .waitContainer .item#blue .chewing {
+          background: royalblue;
+          -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s; }
+        .waitBox .waitContainer .item#blue .mounth {
+          left: 37px;
+          width: 20px;
+          height: 5px;
+          -webkit-transform: rotate(5deg);
+          transform: rotate(5deg);
+          -webkit-animation: mounth 0.7s ease-in-out infinite;
+          animation: mounth 0.7s ease-in-out infinite; }
+        .waitBox .waitContainer .item#blue .arm {
+          background: royalblue; }
+  .waitBox .backHome {
+    position: absolute;
+    top: 40px;
+    left: 170px;
+    width: 125px;
+    height: 125px;
+    background: url("../../img/forgetPassword/back.png") no-repeat center;
+    background-size: 76%;
+    cursor: pointer;
+    z-index: 99;
+    transition: opacity 0.7s ease-out 0.3s;
+    -moz-transition: opacity 0.7s ease-out 0.3s;
+    -webkit-transition: opacity 0.7s ease-out 0.3s; }
+  .waitBox div.backHome {
+    top: 40px;
+    left: 330px; }
+  .waitBox a.backHome {
+    top: -10px;
+    left: -10px; }
+  .waitBox .waitWords {
+    position: absolute;
+    top: 140px;
+    left: 590px;
+    width: 400px;
+    height: 50px;
+    color: #fff;
+    font-size: 20px; }
+@keyframes bounce {
+  0% {
+    bottom: 0; }
+  65% {
+    bottom: 8px; }
+  100% {
+    bottom: 0;
+    border-radius: 49% 47% 42% 40%/60% 60% 40% 40%; } }
+@keyframes arm-bounce {
+  0%, 100% {
+    bottom: 28px; }
+  33% {
+    bottom: 23px; }
+  40% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8); }
+  66% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+@keyframes shadow {
+  0%, 100% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1); }
+  50% {
+    -webkit-transform: scaleX(0.9);
+    transform: scaleX(0.9); } }
+@keyframes mounth {
+  0%, 100% {
+    height: 4px;
+    border-radius: 50% 50% 100% 100%; }
+  50% {
+    height: 8px;
+    bottom: 17px;
+    border-radius: 30% 30% 100% 100%; } }
+
+/*# sourceMappingURL=waitSate.css.map */

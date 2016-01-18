@@ -1,0 +1,46 @@
+/* .skin1{
+  background:url(../../img/gb/201.gif);
+}
+body{
+  background:url(../../img/gb/205.gif);
+}
+.headerWrapper{
+	background-image: url(../../img/gb/001.jpg);
+}
+#jsmind_container{
+	border: 1px solid #452625;
+} */
+/* .container aside dl dd a{
+	color:#8744DB !important;
+} */
+.textTiTle{color:#fff !important;
+	font-size: 18px;
+	text-shadow:0 0 5px #CCCCCC, 0 0 10px #CCCCCC, 0 0 15px #CCCCCC, 0 0 20px #095816, 0 0 25px #095816, 0 0 30px #095816, 0 0 50px #095816, 0 0 80px #095816, 0 0 100px #095816, 0 0 150px #095816;
+}
+.skin1{
+  background:#000;
+}
+body{
+	font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+	background: transparent url('../../img/bg.png') repeat;
+}
+.headerWrapper{
+	background: #278CDE;
+}
+#jsmind_container{
+	border: 1px solid #452625;
+}
+.textTiTle{
+	border-radius: 50%;
+	background: #278CDE;
+	padding: 20px 0 20px 0;
+	border: 1px solid #075C18;
+	box-shadow: 0 0 50px rgba(15, 104, 223, 0.8);
+	height:400px;
+}
+.textTiTlePhoto{
+	background:url(../../img/emc2.png) no-repeat 50% 50%;
+	background-size: 50%;
+	height: 360px;
+	width:100%;
+}

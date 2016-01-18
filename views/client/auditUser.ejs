@@ -1,0 +1,107 @@
+<%- include modulesTools/headerLoader %>
+<%- include modulesTools/header %>
+<link rel="stylesheet" href="../lib/ui-select/module.css">
+<script type="text/javascript" src="../lib/ui-select/ui-select.js"></script>
+<div class="wrapper main-content">
+  <div class="auditUserBox">
+    <table class="table">
+      <thead>
+      <tr>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% noAuditUser.forEach(  function( noAuditUser ){ %>
+      <tr user-id="<%= noAuditUser.rb_user_id %>">
+        <td class="td_post">
+          <div class="td_post_buttom">提交</div>
+        </td>
+        <td class="td_user" user-account="<%= noAuditUser.rb_user_account %>"><%= noAuditUser.rb_user_name %></td>
+        <td class="td_department">
+          <div class="tdRight">
+            <input type="hidden" id="inputSelect_id_<%= noAuditUser.rb_user_id %>" name="uiSelect1BlogType" value=""/>
+
+            <div id="uiSelect_id_<%= noAuditUser.rb_user_id %>" class="ui-select w150 blogTagId"
+                 data-name="uiSelect1" style="width:190px;">
+              <a href="javascript:void(0)" class="ui-select-trigger"><span>快速搜索部门</span><i><b></b></i></a>
+              <ul class="ui-select-content">
+                <% queryAllDepartment.forEach(  function( data ){ %>
+                <li class="ui-select-item" data-value="<%= data.rb_department_id %>"><%= data.rb_department_name %></li>
+                <% }); %>
+              </ul>
+            </div>
+            <script>
+              $ ( "#uiSelect_id_<%= noAuditUser.rb_user_id %>" ).selectInit ( {
+                callback : function () {
+                  var _this = $ ( this )
+                    , _val  = _this.selectValue ();
+                  _this.parent ().parent ().parent ().attr ( 'department-id', _val )
+                }
+              } );
+            </script>
+          </div>
+        </td>
+        <td class="td_group">
+          <div class="groupBox">
+            <% queryAllGroup.forEach(  function( data ){ %>
+            <span value-span="<%= data.rb_group_id %>"><%= data.rb_group_name %></span>
+            <% }); %>
+          </div>
+        </td>
+      </tr>
+      <% }); %>
+      </tbody>
+    </table>
+    <script>
+      $ ( function () {
+        $ ( '.groupBox' ).on ( 'click', 'span', function () {
+          var _this = $ ( this );
+          _this_id  = _this.attr ( 'value-span' );
+          if ( _this.hasClass ( 'noclick' ) ) {
+            return false;
+          }
+          if ( _this.parent ().parent ().parent ().attr ( 'group-arr' ) ) {
+            var _group_arr = _this.parent ().parent ().parent ().attr ( 'group-arr' );
+            _group_arr     = _group_arr + ',' + _this_id;
+            _this.parent ().parent ().parent ().attr ( 'group-arr', _group_arr )
+          } else {
+            _this.parent ().parent ().parent ().attr ( 'group-arr', _this_id )
+          }
+          _this.addClass ( 'noclick' )
+          _this.css ( { 'color' : '#fff', 'background' : '#FFB9B9' } );
+          event.stopPropagation ();
+        } );
+        $ ( '.auditUserBox' ).on ( 'click', '.td_post_buttom', function () {
+          var _this = $ ( this );
+          var _that = _this.parent ().parent ();
+          if ( ! _that.attr ( 'department-id' ) ) {
+            alert ( '请选择部门' )
+            return false;
+          }
+          if ( ! _that.attr ( 'group-arr' ) ) {
+            alert ( '请选择组' )
+            return false;
+          }
+          $.ajax ( {
+            type     : "post",
+            url      : "postNoAuditUser",
+            data     : { userId : _that.attr ( 'user-id' ), groupArr : _that.attr ( 'group-arr' ), department : _that.attr ( 'department-id' ) },
+            dataType : "json",
+            success  : function ( data ) {
+              console.log ( 'yes' );
+              _that.css ( { 'display' : 'none' } );
+            },
+            error    : function ( XMLHttpRequest, textStatus, errorThrown ) {
+              console.log ( 'textStatus' );
+              _that.css ( { 'display' : 'none' } );
+            }
+          } );
+          _that.css ( { 'display' : 'none' } );
+          event.stopPropagation ();//阻止冒泡事件，上级的单击事件不会被调用
+        } )
+      } )
+    </script>
+  </div>
+</div>
+<script type="text/javascript" src="/js/module/forgetPassword.js"></script>
+<%- include modulesTools/footerLoader %>

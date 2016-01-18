@@ -1,0 +1,50 @@
+<%- include modulesTools/headerLoader %>
+<%- include modulesTools/header %>
+<div class="wrapper main-content">
+  <div class="loginBox">
+    <form class="formBox" method="post" action="/in/login">
+      <div class="top_div_box">
+        <div class="top_div_content">
+          <div class="tou"></div>
+          <div class="initial_left_hand" id="left_hand"></div>
+          <div class="initial_right_hand" id="right_hand"></div>
+        </div>
+        <p class="colorRed_box">
+          <span class="colorRed">
+            <% if (locals.success && locals.success.length) { %>
+            <%= locals.success %>
+            <% } %>
+            <% if (locals.error && locals.error.length) { %>
+            <%= locals.error %>
+            <% } %>
+          </span>
+        </p>
+
+        <p class="box_p_content">
+          <span class="u_logo"></span>
+          <input class="ipt" id="login_username" name="username" type="text" placeholder="请输入用户名" value="">
+        </p>
+
+        <p class="box_p_content2">
+          <span class="p_logo"></span>
+          <input class="ipt" name="password" id="password" type="password" placeholder="请输入密码" value="">
+        </p>
+
+        <div class="form_content">
+          <p class="form_p_content">
+            <span class="content_span_forget">
+              <a class="span_a" href="/in/forgetPassword">忘记密码?</a>
+            </span>
+            <span class="content_span">
+              <a class="span_a" href="/in/registerUser">注册</a>
+              <button class="span_button" id="login_submit">登 录</button>
+            </span>
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/ecmascript" src="/lib/md5.js"></script>
+<script type="text/javascript" src="/js/module/login.js"></script>
+<%- include modulesTools/footerLoader %>
