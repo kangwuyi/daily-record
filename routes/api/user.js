@@ -261,6 +261,7 @@ exports.postNoAuditUser = function ( req, res ) {
             req.flash ( 'error', '程序出错，请联系小康同学!' );
             return res.redirect ( 'back' );
           }
+          cb();
         } );
       }, function ( err ) {
         console.log ( "err: " + err );
