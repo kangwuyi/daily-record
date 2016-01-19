@@ -143,7 +143,7 @@
                     _userAccountmd5) ? 'basicBg' : '' %>"
                     datenote-id="inexistence"
                     date-time="<%= new Date ( (new Date ( poDataList_data ).format ( 'yyyy-MM-dd 12:59:59' )) ).getTime () %>"
-                    user-account="<%= _data_box_user.uaccount %>" group-id="<%= _data_box_group.id %>">
+                    user-account="<%= _data_box_user.uaccount %>" group-id="<%= _data_box_group.id %>"><%=nowTimeFormat%>
                 </td>
                 <% if((( nowTimeFormat === poDataList_data) && ( _data_box_user.uaccount === _userAccountmd5))){ %>
                 <script>
