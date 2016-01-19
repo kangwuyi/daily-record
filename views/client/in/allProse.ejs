@@ -51,9 +51,6 @@
                       <% poDataList.forEach(  function( poDataList_data ){ %>
                       <th style="width: 300px;height: 50px;display: inline-block;"><%= poDataList_data %></th>
                       <% }); %>
-                      <!--<% _data_box_user.children.forEach(  function( _data_box_datenote ){ %>
-                                            <th style="width: 300px;height: 50px;display: inline-block;"><%= new Date ( Number ( _data_box_datenote.ndate ) ).format ( 'yyyy-MM-dd' ) %></th>
-                                            <% }); %>-->
                     </tr>
                     </thead>
                   </table>
@@ -68,8 +65,8 @@
 
                 <% poDataList.forEach(  function( poDataList_data ){
                   var poDataList_data_sign = false;
-                  var nowTimeFormat          = ( new Date ()).format ( 'yyyy-MM-dd' );
-                if(_data_box_user.children !=''){
+                  var nowTimeFormat        = ( new Date ()).format ( 'yyyy-MM-dd' );
+                if(_data_box_user.children != ''){
                   _data_box_user.children.forEach(  function( _data_box_datenote, index_data ){
                 if(poDataList_data === (new Date ( Number ( _data_box_datenote.ndate ) ).format ( 'yyyy-MM-dd' ))){
                   poDataList_data_sign       = true;
@@ -77,151 +74,40 @@
                     , thisUserAccount        = _data_box_datenote.uaccount;
                 %>
                 <td style="width: 300px;height: 150px;display: inline-block;background: #e972ff"
-                    id="<%= (( nowTimeFormat === thisDatenoteTimeFormat) && ( thisUserAccount === _userAccountmd5)) ?
-                      ('basic-editor_' + _data_box_datenote.gid + '_' + _data_box_datenote.ndate) : '' %>"
-                    class="td_content_box <%= (( nowTimeFormat === thisDatenoteTimeFormat) && ( thisUserAccount === _userAccountmd5)) ? 'basicBg' : '' %>"
+                    class="td_content_box"
                     datenote-id="<%=
                       _data_box_datenote.nid %>"
                     date-time="<%= _data_box_datenote.ndate %>"
                     user-account="<%= _data_box_datenote.uaccount %>" group-id="<%= _data_box_datenote.gid %>">
                   <%- _data_box_datenote.ncontent %>
                 </td>
-                <% if((( nowTimeFormat === thisDatenoteTimeFormat) && ( thisUserAccount === _userAccountmd5))){ %>
-                <script>
-                  var basicEditor = new Quill ( '#basic-editor_<%=_data_box_datenote.gid%>_<%=_data_box_datenote.ndate%>' );
-                  $ ( document ).ready ( function () {
-                    $ ( '#ql-editor-<%= ql_editor_index %>' ).blur ( function ( event ) {
-                      var _that            = $ ( this );
-                      var _that_node_clone = _that.html ();
-                      var datenote_id      = _that.parent ().attr ( 'datenote-id' );
-                      var group_id         = _that.parent ().attr ( 'group-id' );
-                      var user_account     = _that.parent ().attr ( 'user-account' );
-                      var date_time        = _that.parent ().attr ( 'date-time' );
-                      $.ajax ( {
-                        type     : "post",
-                        url      : "postProseById",
-                        data     : {
-                          datenote_id : datenote_id, datenote_content : _that_node_clone, user_account : user_account,
-                          date_time   : date_time, group_id : group_id
-                        },
-                        dataType : "json",
-                        success  : function ( data ) {
-                          console.log ( 'yes' );
-                          alert ( '修改成功' );
-                        },
-                        error    : function ( XMLHttpRequest, textStatus, errorThrown ) {
-                          console.log ( 'textStatus' );
-                          alert ( '修改成功' );
-                        }
-                      } );
-                      event.stopPropagation ();//阻止冒泡事件，上级的单击事件不会被调用
-                    } );
-                    <% ql_editor_index = ql_editor_index + 1; %>
-                  } );
-                </script>
 
-                <% }
+                <%
                 }
                 if((poDataList_data_sign === false) && (index_data === (_data_box_user.children.length - 1))){
                 %>
                 <td style="width: 300px;height: 150px;display: inline-block;background: #FFF000"
-                    id="<%= (( nowTimeFormat === poDataList_data) && ( thisUserAccount === _userAccountmd5)) ? ('basic-editor_' + _data_box_group.id + '_' + new Date(
-                      poDataList_data).getTime()) : '' %>"
-                    class="td_content_box <%= (( nowTimeFormat === poDataList_data) && ( thisUserAccount === _userAccountmd5)) ? 'basicBg' : '' %>"
+                    class="td_content_box"
                     datenote-id="inexistence"
                     date-time="<%= new Date ( (new Date ( poDataList_data ).format ( 'yyyy-MM-dd 12:59:59' )) ).getTime () %>"
                     user-account="<%= _data_box_datenote.uaccount %>" group-id="<%= _data_box_datenote.gid %>">
                 </td>
-                <%  }
-                if((( nowTimeFormat === poDataList_data) && ( _data_box_user.uaccount === _userAccountmd5))){ %>
-                <script>
-                  var basicEditor = new Quill ( '#basic-editor_<%=_data_box_group.id%>_<%=new Date(
-                  poDataList_data).getTime()%>' );
-                  $ ( document ).ready ( function () {
-                    $ ( '#ql-editor-<%= ql_editor_index %>' ).blur ( function ( event ) {
-                      var _that            = $ ( this );
-                      var _that_node_clone = _that.html ();
-                      var datenote_id      = _that.parent ().attr ( 'datenote-id' );
-                      var group_id         = _that.parent ().attr ( 'group-id' );
-                      var user_account     = _that.parent ().attr ( 'user-account' );
-                      var date_time        = _that.parent ().attr ( 'date-time' );
-                      $.ajax ( {
-                        type     : "post",
-                        url      : "postProseById",
-                        data     : {
-                          datenote_id : datenote_id, datenote_content : _that_node_clone, user_account : user_account,
-                          date_time   : date_time, group_id : group_id
-                        },
-                        dataType : "json",
-                        success  : function ( data ) {
-                          console.log ( 'yes' );
-                          alert ( '修改成功' );
-                        },
-                        error    : function ( XMLHttpRequest, textStatus, errorThrown ) {
-                          console.log ( 'textStatus' );
-                          alert ( '修改成功' );
-                        }
-                      } );
-                      event.stopPropagation ();//阻止冒泡事件，上级的单击事件不会被调用
-                    } );
-                    <% ql_editor_index = ql_editor_index + 1; %>
-                  } );
-                </script>
-
                 <% }
 
-
-                  });
-                  }else{
-             %>
+                <%
+                });
+                }else{
+                %>
                 <td style="width: 300px;height: 150px;display: inline-block;background: #ff1f30"
-                    id="<%= ( poDataList_data === nowTimeFormat &&_data_box_user.uaccount === _userAccountmd5) ?
-                      ('basic-editor_' + _data_box_group.id + '_' + new Date(
-                        poDataList_data).getTime()) : '' %>"
-                    class="td_content_box <%=  ( poDataList_data === nowTimeFormat && _data_box_user.uaccount ===
-                    _userAccountmd5) ? 'basicBg' : '' %>"
+                    class="td_content_box"
                     datenote-id="inexistence"
                     date-time="<%= new Date ( (new Date ( poDataList_data ).format ( 'yyyy-MM-dd 12:59:59' )) ).getTime () %>"
                     user-account="<%= _data_box_user.uaccount %>" group-id="<%= _data_box_group.id %>">
                 </td>
-                <% if((( nowTimeFormat === poDataList_data) && ( _data_box_user.uaccount === _userAccountmd5))){ %>
-                <script>
-                  var basicEditor = new Quill ( '#basic-editor_<%=_data_box_group.id%>_<%=new Date(
-                  poDataList_data).getTime()%>' );
-                  $ ( document ).ready ( function () {
-                    $ ( '#ql-editor-<%= ql_editor_index %>' ).blur ( function ( event ) {
-                      var _that            = $ ( this );
-                      var _that_node_clone = _that.html ();
-                      var datenote_id      = _that.parent ().attr ( 'datenote-id' );
-                      var group_id         = _that.parent ().attr ( 'group-id' );
-                      var user_account     = _that.parent ().attr ( 'user-account' );
-                      var date_time        = _that.parent ().attr ( 'date-time' );
-                      $.ajax ( {
-                        type     : "post",
-                        url      : "postProseById",
-                        data     : {
-                          datenote_id : datenote_id, datenote_content : _that_node_clone, user_account : user_account,
-                          date_time   : date_time, group_id : group_id
-                        },
-                        dataType : "json",
-                        success  : function ( data ) {
-                          console.log ( 'yes' );
-                          alert ( '修改成功' );
-                        },
-                        error    : function ( XMLHttpRequest, textStatus, errorThrown ) {
-                          console.log ( 'textStatus' );
-                          alert ( '修改成功' );
-                        }
-                      } );
-                      event.stopPropagation ();//阻止冒泡事件，上级的单击事件不会被调用
-                    } );
-                    <% ql_editor_index = ql_editor_index + 1; %>
-                  } );
-                </script>
 
-                <% }
-                  }
-                  }); %>
+                <%
+                }
+                }); %>
               </tr>
               <% }); %>
               </tbody>
