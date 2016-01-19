@@ -84,7 +84,7 @@
                       _data_box_datenote.nid %>"
                     date-time="<%= _data_box_datenote.ndate %>"
                     user-account="<%= _data_box_datenote.uaccount %>" group-id="<%= _data_box_datenote.gid %>">
-                  <%- _data_box_datenote.ncontent %>
+                  <%- _data_box_datenote.ncontent %><%=thisDatenoteTimeFormat%>
                 </td>
                 <% if((( nowTimeFormat === thisDatenoteTimeFormat) && ( thisUserAccount === _userAccountmd5))){ %>
                 <script>
