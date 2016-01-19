@@ -146,8 +146,17 @@ exports.proseById     = function ( req, res ) {
  * @param res
  */
 exports.allProse      = function ( req, res ) {
-  var _userAccountmd5 = req.cookies.username;
-  var _data           = [];
+  var _userAccountmd5 = req.cookies.username
+    , _data           = []
+    , endTime         = req.query.endTime ? Number ( kcool.trim ( req.query.endTime ) ) : new Date ().getTime ()
+    , startTime       = req.query.startTime ? Number ( kcool.trim ( req.query.startTime ) ) : new Date ( endTime ).getNextDate ( - 6 ).getTime ()
+    , thisDateDiff    = Math.floor ( new Date ( endTime ).diff ( new Date ( startTime ) ) )
+    , poDataList      = [];
+  for ( var i = thisDateDiff; i >= 0; i -- ) {
+    poDataList.push ( new Date ( startTime ).getNextDate ( i ).format ( 'yyyy-MM-dd' ) )
+  }
+  startTime = (new Date ( (new Date ( startTime )).format ( 'yyyy-MM-dd 00:00:00' ) )).getTime ();
+  endTime = (new Date ( (new Date ( endTime )).format ( 'yyyy-MM-dd 23:59:59' ) )).getTime ();
   Prose.queryAllDepartment ( null, function ( err_department, data_department ) {
     async.eachSeries ( data_department, function ( item_department, data_department_callback ) {
       var department_id = item_department.rb_department_id;
@@ -156,9 +165,9 @@ exports.allProse      = function ( req, res ) {
         async.eachSeries ( data_group, function ( item_group, data_group_callback ) {
           var group_id = item_group.rb_group_id;
           async.auto ( {
-            queryAllDatenoteByGroup_id : function ( auto_callback ) {
+            queryAllDatenoteByGroup_idAndDate : function ( auto_callback ) {
               var _data_group = [];
-              Prose.queryAllDatenoteByGroup_id ( group_id, function ( err_datenote, data_datenote ) {
+              Prose.queryAllDatenoteByGroup_idAndDate ( group_id, startTime, endTime, function ( err_datenote, data_datenote ) {
                 async.eachSeries ( data_datenote, function ( item_datenote, _data_datenotecallback ) {
                   _data_group.push ( {
                     did      : item_datenote.rb_department_id,
@@ -176,10 +185,10 @@ exports.allProse      = function ( req, res ) {
                 } );
               } );
             },
-            queryUserInfoByGroupId     : function ( auto_callback ) {
+            queryUserInfoByGroupId            : function ( auto_callback ) {
               User.queryUserInfoByGroupId ( group_id, function ( err, data ) {
                 if ( data.length < 1 ) {
-                  data = [ { rb_user_id : 9999, rb_user_name : '暂无' } ];
+                  data = [ { rb_user_id : 99999, rb_user_name : '暂无' } ];
                   auto_callback ( err, data );
                 } else {
                   auto_callback ( err, data );
@@ -189,7 +198,7 @@ exports.allProse      = function ( req, res ) {
           }, function ( err, results ) {
             var _user_data   = []
               , user_arr     = results.queryUserInfoByGroupId
-              , datenote_arr = results.queryAllDatenoteByGroup_id;
+              , datenote_arr = results.queryAllDatenoteByGroup_idAndDate;
             user_arr.forEach ( function ( user_arr_item ) {
               var _user__datenotedata = [];
               datenote_arr.forEach ( function ( datenote_arr_item ) {
@@ -240,6 +249,7 @@ exports.allProse      = function ( req, res ) {
               title           : '瑞博科技｜日报',
               _data           : _data,
               _userAccountmd5 : _userAccountmd5,
+              poDataList      : poDataList,
               loadTagOjNew    : loadTagJsFn_data
             }
           );
@@ -543,12 +553,12 @@ exports.toAddProse    = function ( req, res ) {
                                 req.flash ( 'error', '程序出错，错误码：insterAllByUser!' );
                                 return res.redirect ( 'back' );
                               } else {
-                                cb();
+                                cb ();
                               }
                             }
-                          })
-                        }else{
-                          cb();
+                          } )
+                        } else {
+                          cb ();
                         }
                       } );
                     }, function ( err ) {

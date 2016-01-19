@@ -1,17 +1,17 @@
-var express                     = require ( 'express' )
-  , mysql                       = require ( 'mysql' )
-  , http                        = require ( 'http' );
-var queryDb                     = require ( '../db' );
-mysql                           = queryDb.getMysqlConn ();
-var mysqlString                 = require ( './api/sql' );
-var object                      = require ( './api/object' );
-var app                         = express ();
+var express                        = require ( 'express' )
+  , mysql                          = require ( 'mysql' )
+  , http                           = require ( 'http' );
+var queryDb                        = require ( '../db' );
+mysql                              = queryDb.getMysqlConn ();
+var mysqlString                    = require ( './api/sql' );
+var object                         = require ( './api/object' );
+var app                            = express ();
 /**
  * 根据用户 ID 查找 所有日报信息
  * @param userid
  * @param callback
  */
-exports.getDatenoteById         = function ( userid, callback ) {
+exports.getDatenoteById            = function ( userid, callback ) {
   var sql = mysqlString.rb_datenote.getDatenoteById ( userid );
   object.queryMysql ( sql, callback );
 };
@@ -21,7 +21,7 @@ exports.getDatenoteById         = function ( userid, callback ) {
  * @param userGroupId
  * @param callback
  */
-exports.getDatenoteByIdAndGroupId = function ( userId, userGroupId, callback ) {
+exports.getDatenoteByIdAndGroupId  = function ( userId, userGroupId, callback ) {
   var sql = mysqlString.rb_datenote.getDatenoteByIdAndGroupId ( userId, userGroupId );
   object.queryMysql ( sql, callback );
 };
@@ -31,7 +31,7 @@ exports.getDatenoteByIdAndGroupId = function ( userId, userGroupId, callback ) {
  * @param dataString
  * @param callback
  */
-exports.getNoteDateByDataString = function ( userid, dataString, callback ) {
+exports.getNoteDateByDataString    = function ( userid, dataString, callback ) {
   var sql = mysqlString.rb_datenote.getNoteDateByDataString ( userid, dataString );
   object.queryMysql ( sql, callback );
 };
@@ -42,7 +42,7 @@ exports.getNoteDateByDataString = function ( userid, dataString, callback ) {
  * @param groupid
  * @param callback
  */
-exports.cheackNoteByDataGroupId = function ( userid, dataString, groupid, callback ) {
+exports.cheackNoteByDataGroupId    = function ( userid, dataString, groupid, callback ) {
   var sql = mysqlString.rb_datenote.cheackNoteByDataGroupId ( userid, dataString, groupid );
   object.queryMysql ( sql, callback );
 };
@@ -52,7 +52,7 @@ exports.cheackNoteByDataGroupId = function ( userid, dataString, groupid, callba
  * @param content
  * @param callback
  */
-exports.postProseById           = function ( userid, content, callback ) {
+exports.postProseById              = function ( userid, content, callback ) {
   var sql = mysqlString.rb_datenote.postProseById ( userid, content );
   object.queryMysql ( sql, callback );
 };
@@ -61,7 +61,7 @@ exports.postProseById           = function ( userid, content, callback ) {
  * @param sqlInsterString
  * @param callback
  */
-exports.insterAllByUser         = function ( sqlInsterString, callback ) {
+exports.insterAllByUser            = function ( sqlInsterString, callback ) {
   object.queryMysql ( sqlInsterString, callback );
 };
 /**
@@ -74,7 +74,7 @@ exports.insterAllByUser         = function ( sqlInsterString, callback ) {
  * @param groupId
  * @param callback
  */
-exports.addProse                = function ( id, proseTitle, proseDateOld, proseDate, proseContent, groupId, callback ) {
+exports.addProse                   = function ( id, proseTitle, proseDateOld, proseDate, proseContent, groupId, callback ) {
   var sql = mysqlString.rb_datenote.postAddProse ( id, proseTitle, proseDateOld, proseDate, proseContent, groupId );
   object.queryMysql ( sql, callback );
 };
@@ -83,7 +83,7 @@ exports.addProse                = function ( id, proseTitle, proseDateOld, prose
  * @param err
  * @param callback
  */
-exports.allUserForProse         = function ( err, callback ) {
+exports.allUserForProse            = function ( err, callback ) {
   var sql = mysqlString.rb_datenote.allUserForProse ( null );
   object.queryMysql ( sql, callback );
 };
@@ -101,7 +101,12 @@ exports.queryAllDepartment         = function ( err, callback ) {
  * @param group_id
  * @param callback
  */
-exports.queryAllDatenoteByGroup_id         = function ( group_id, callback ) {
+exports.queryAllDatenoteByGroup_id = function ( group_id, callback ) {
   var sql = mysqlString.rb_datenote.queryAllDatenoteByGroup_id ( group_id );
+  object.queryMysql ( sql, callback );
+};
+
+exports.queryAllDatenoteByGroup_idAndDate = function ( group_id, startTime, endTime, callback ) {
+  var sql = mysqlString.rb_datenote.queryAllDatenoteByGroup_idAndDate ( group_id, startTime, endTime );
   object.queryMysql ( sql, callback );
 };

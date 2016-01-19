@@ -37,11 +37,11 @@
             </div>
 
             <div class="tdRight">
-              <span>标签：</span>
+              <span>选择工程组：</span>
               <input type="hidden" id="uiSelect1BlogType" name="uiSelect1BlogType" value=""/>
 
               <div id="uiSelect1" class="ui-select w150 blogTagId" data-name="uiSelect1">
-                <a href="javascript:void(0)" class="ui-select-trigger"><span>快速搜索</span><i><b></b></i></a>
+                <a href="javascript:void(0)" class="ui-select-trigger"><span>选择工程</span><i><b></b></i></a>
                 <ul class="ui-select-content">
                   <% department_g.forEach(  function( data ){ %>
                   <li class="ui-select-item" data-value="<%= JSON.parse ( data ).did %>"><%= JSON.parse ( data ).dname
@@ -55,9 +55,9 @@
               <input type="hidden" id="uiSelect2InputType" value="<%= JSON.stringify ( group ) %>"/>
 
               <div id="uiSelect2" class="ui-select w150" data-name="uiSelect2">
-                <a href="javascript:void(0)" class="ui-select-trigger"><span>快速搜索</span><i><b></b></i></a>
+                <a href="javascript:void(0)" class="ui-select-trigger"><span>选择小组</span><i><b></b></i></a>
                 <ul class="ui-select-content">
-                  <li class="ui-select-item" data-value="请选择主类别">请选择主类别</li>
+                  <li class="ui-select-item" data-value="请选择主类别">请先选择工程</li>
                 </ul>
               </div>
             </div>
