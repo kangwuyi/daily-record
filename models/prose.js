@@ -105,8 +105,25 @@ exports.queryAllDatenoteByGroup_id = function ( group_id, callback ) {
   var sql = mysqlString.rb_datenote.queryAllDatenoteByGroup_id ( group_id );
   object.queryMysql ( sql, callback );
 };
-
+/**
+ * 根据组 ID、开始时间、结束时间搜索日报
+ * @param group_id
+ * @param startTime
+ * @param endTime
+ * @param callback
+ */
 exports.queryAllDatenoteByGroup_idAndDate = function ( group_id, startTime, endTime, callback ) {
   var sql = mysqlString.rb_datenote.queryAllDatenoteByGroup_idAndDate ( group_id, startTime, endTime );
+  object.queryMysql ( sql, callback );
+};
+/**
+ * 根据组 ID、用户 ID、时间插入日报
+ * @param group_id
+ * @param user_id
+ * @param dateTime
+ * @param callback
+ */
+exports.interByGroupidAndUserIdAndTime = function ( group_id, user_id, dateTime, callback ) {
+  var sql = mysqlString.rb_datenote.interByGroupidAndUserIdAndTime ( group_id, user_id, dateTime );
   object.queryMysql ( sql, callback );
 };

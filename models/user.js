@@ -70,11 +70,11 @@ exports.registerUserInfo       = function ( user_account, user_name, user_passwo
 };
 /**
  * 通过用户名查找用户id
- * @param username
+ * @param user_account
  * @param callback
  */
-exports.idByName               = function ( username, callback ) {
-  var sql = mysqlString.rb_user.idByName ( username );
+exports.idByName               = function ( user_account, callback ) {
+  var sql = mysqlString.rb_user.idByName ( user_account );
   object.queryMysql ( sql, callback );
 };
 /**

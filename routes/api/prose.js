@@ -156,7 +156,7 @@ exports.allProse      = function ( req, res ) {
     poDataList.push ( new Date ( startTime ).getNextDate ( i ).format ( 'yyyy-MM-dd' ) )
   }
   startTime = (new Date ( (new Date ( startTime )).format ( 'yyyy-MM-dd 00:00:00' ) )).getTime ();
-  endTime = (new Date ( (new Date ( endTime )).format ( 'yyyy-MM-dd 23:59:59' ) )).getTime ();
+  endTime   = (new Date ( (new Date ( endTime )).format ( 'yyyy-MM-dd 23:59:59' ) )).getTime ();
   Prose.queryAllDepartment ( null, function ( err_department, data_department ) {
     async.eachSeries ( data_department, function ( item_department, data_department_callback ) {
       var department_id = item_department.rb_department_id;
@@ -217,6 +217,7 @@ exports.allProse      = function ( req, res ) {
               _user_data.push ( {
                 uid      : user_arr_item.rb_user_id,
                 uname    : user_arr_item.rb_user_name,
+                uaccount : user_arr_item.rb_user_account,
                 children : _user__datenotedata
               } )
             } );
@@ -349,11 +350,197 @@ exports.poProse       = function ( req, res ) {
  * @param res
  */
 exports.postProseById = function ( req, res ) {
-  var datenote_id      = req.body.datenote_id;
-  var datenote_content = req.body.datenote_content;
-  Prose.postProseById ( datenote_id, datenote_content, function ( err, postProseById ) {
-    return res.redirect ( 'back' );
-  } )
+  var datenote_id      = req.body.datenote_id
+    , datenote_content = req.body.datenote_content
+    , date_time        = req.body.date_time
+    , _group_id        = req.body.group_id
+    , user_account     = req.body.user_account
+    , dateSting        = (new Date ( Number ( date_time ) )).format ( 'yyyy-MM-dd' );
+  if ( datenote_id === 'inexistence' ) {
+    async.auto ( {
+      /**
+       * 根据 id cache 搜索用户信息
+       * @param callback
+       */
+      idByName        : function ( callback ) {
+        User.idByName ( user_account, function ( err, data ) {
+          if ( err ) {
+            req.flash ( 'error', '程序出错，错误码：idByName!' );
+            return res.redirect ( 'back' );
+          } else {
+            if ( data.length < 1 ) {
+              res.render ( 'client/index', { title : '瑞博科技｜日报', loadTagOjNew : null } );
+            } else {
+              callback ( err, data );
+            }
+          }
+        } );
+      },
+      /**
+       * 检查是否存在状态日期
+       */
+      cheackDateState : [ 'idByName', function ( callback, result ) {
+        User.cheackDateState ( dateSting, _group_id, function ( err, data ) {
+          if ( err ) {
+            req.flash ( 'error', '程序出错，错误码：cheackDateState!' );
+            return res.redirect ( 'back' );
+          } else {
+            callback ( err, data );
+          }
+        } );
+      } ]
+    }, function ( err, results ) {
+      var _user_id = results.idByName[ 0 ].rb_user_id;
+
+      /**
+       * 不存在状态日期
+       */
+      if ( results.cheackDateState.length < 1 ) {
+        async.auto ( {
+          /**
+           * 插入状态日期
+           * @param callback
+           */
+          insterDateState                : function ( callback ) {
+            User.insterDateState ( dateSting, _group_id, function ( err, data ) {
+              if ( err ) {
+                req.flash ( 'error', '程序出错，错误码：insterDateState!' );
+                return res.redirect ( 'back' );
+              } else {
+                if ( data.length < 1 ) {
+                  req.flash ( 'error', '程序出错，错误码：insterDateState!' );
+                  return res.redirect ( 'back' );
+                } else {
+                  callback ( err, data );
+                }
+              }
+            } );
+          },
+          /**
+           * 插入自己的日报
+           */
+          interByGroupidAndUserIdAndTime : [ 'insterDateState', function ( callback, result ) {
+            Prose.interByGroupidAndUserIdAndTime ( _group_id, _user_id, date_time, function ( err, data ) {
+              if ( err ) {
+                req.flash ( 'error', '程序出错，错误码：allUser!' );
+                return res.redirect ( 'back' );
+              } else {
+                callback ( err, data );
+              }
+            } );
+          } ],
+          /**
+           * 查询自己的最后一个日报的日期
+           */
+          getNoteDateByDataString        : [ 'insterDateState', 'interByGroupidAndUserIdAndTime',
+            function ( callback, result ) {
+              Prose.getNoteDateByDataString ( _user_id, dateSting, function ( err, data ) {
+                if ( err ) {
+                  req.flash ( 'error', '程序出错，错误码：getNoteDateByDataString!' );
+                  return res.redirect ( 'back' );
+                } else {
+                  callback ( err, data );
+                }
+              } );
+            } ],
+          /**
+           * 开始添加日报
+           */
+          addProse                       : [ 'insterDateState', 'interByGroupidAndUserIdAndTime',
+            'getNoteDateByDataString',
+            function ( callback, result ) {
+              var getNoteDateByDataString = result.getNoteDateByDataString;
+              var proseDateOld            = getNoteDateByDataString[ getNoteDateByDataString.length - 1 ].rb_datenote_date;
+              Prose.addProse ( _user_id, '没写日报标题╮(╯▽╰)╭', proseDateOld, date_time, datenote_content, _group_id, function ( err, data ) {
+                if ( err ) {
+                  req.flash ( 'error', '程序出错，错误码：addProse!' );
+                  return res.redirect ( 'back' );
+                } else {
+                  callback ( err, data );
+                }
+              } );
+            } ]
+        }, function ( err, results ) {
+          if ( err ) {
+            req.flash ( 'error', '程序出错，错误码：results!' );
+            return res.redirect ( 'back' );
+          }
+          req.flash ( 'success', '添加成功!' );
+          return res.redirect ( 'back' );
+        } );
+      } else {
+        /**
+         * 如果存在状态日期
+         */
+        async.auto ( {
+          /**
+           * 根据当前日期、组 ID、用户 ID 检查是否存在日报
+           * @param callback
+           */
+          cheackNoteByDataGroupId : function ( callback ) {
+            Prose.cheackNoteByDataGroupId ( _user_id, dateSting, _group_id, function ( err, data ) {
+              if ( err ) {
+                req.flash ( 'error', '程序出错，错误码：cheackNoteByDataGroupId!' );
+                return res.redirect ( 'back' );
+              } else {
+                if ( data.length < 1 ) {
+                  /**
+                   * 如果不存在日报则插入
+                   */
+                  Prose.interByGroupidAndUserIdAndTime ( _group_id, _user_id, date_time, function ( err, data ) {
+                    if ( err ) {
+                      req.flash ( 'error', '程序出错，错误码：allUser!' );
+                      return res.redirect ( 'back' );
+                    } else {
+                      Prose.cheackNoteByDataGroupId ( _user_id, dateSting, _group_id, function ( err, cheackNoteByDataGroupId ) {
+                        if ( err ) {
+                          req.flash ( 'error', '程序出错，错误码：cheackNoteByDataGroupId!' );
+                          return res.redirect ( 'back' );
+                        } else {
+                          if ( data.length < 1 ) {
+                            req.flash ( 'error', '程序出错，错误码：cheackNoteByDataGroupId!' );
+                            return res.redirect ( 'back' );
+                          } else {
+                            callback ( err, cheackNoteByDataGroupId );
+                          }
+                        }
+                      } );
+                    }
+                  } );
+                } else {
+                  callback ( err, data );
+                }
+              }
+            } );
+          },
+          addProse                : [ 'cheackNoteByDataGroupId',
+            function ( callback, result ) {
+              var cheackNoteByDataGroupId = result.cheackNoteByDataGroupId
+                , proseDateOld            = cheackNoteByDataGroupId[ cheackNoteByDataGroupId.length - 1 ].rb_datenote_date;
+              Prose.addProse ( _user_id, '没写日报标题╮(╯▽╰)╭', proseDateOld, date_time, datenote_content, _group_id, function ( err, data ) {
+                if ( err ) {
+                  req.flash ( 'error', '程序出错，错误码：addProse!' );
+                  return res.redirect ( 'back' );
+                } else {
+                  callback ( err, data );
+                }
+              } );
+            } ]
+        }, function ( err, results ) {
+          if ( err ) {
+            req.flash ( 'error', '程序出错，错误码：results!' );
+            return res.redirect ( 'back' );
+          }
+          req.flash ( 'success', '添加成功!' );
+          return res.redirect ( 'back' );
+        } );
+      }
+    } );
+  } else {
+    Prose.postProseById ( datenote_id, datenote_content, function ( err, postProseById ) {
+      return res.redirect ( 'back' );
+    } )
+  }
 };
 /**
  * 开始添加日报
@@ -419,7 +606,7 @@ exports.toAddProse    = function ( req, res ) {
          * 插入状态日期
          * @param callback
          */
-        insterDateState         : function ( callback ) {
+        insterDateState                : function ( callback ) {
           User.insterDateState ( proseDateString, groupId, function ( err, data ) {
             if ( err ) {
               req.flash ( 'error', '程序出错，错误码：insterDateState!' );
@@ -435,37 +622,12 @@ exports.toAddProse    = function ( req, res ) {
           } );
         },
         /**
-         * 编辑同组内的用户 SQL 语句
-         */
-        queryUserInfoByGroupId  : [ 'insterDateState', function ( callback, result ) {
-          User.queryUserInfoByGroupId ( groupId, function ( err, data ) {
-            if ( err ) {
-              req.flash ( 'error', '程序出错，错误码：allUser!' );
-              return res.redirect ( 'back' );
-            } else {
-              var sqlInsterString = 'INSERT INTO `rb_datenote` (`rb_datenote_id`,`rb_datenote_user_id`,' +
-                ' `rb_datenote_date`, `rb_datenote_title`, `rb_datenote_content`, `rb_group_id`) VALUES ';
-              for ( var i = 0; i < data.length; i ++ ) {
-                sqlInsterString += '(NULL, "' + data[ i ].rb_user_id + '", "' + proseDate + '", "没写日报标题╮(╯▽╰)╭", " ", "' + groupId + '")';
-                if ( i == (data.length - 1) ) {
-                  sqlInsterString += ';';
-                } else {
-                  sqlInsterString += ',';
-                }
-              }
-              data = sqlInsterString;
-              callback ( err, data );
-            }
-          } );
-        } ],
-        /**
          * 开始插入
          */
-        insterAllByUser         : [ 'insterDateState', 'queryUserInfoByGroupId', function ( callback, result ) {
-          var sqlInsterString = result.queryUserInfoByGroupId;
-          Prose.insterAllByUser ( sqlInsterString, function ( err, data ) {
+        interByGroupidAndUserIdAndTime : [ 'insterDateState', function ( callback, result ) {
+          Prose.interByGroupidAndUserIdAndTime ( groupId, user_id, proseDate, function ( err, data ) {
             if ( err ) {
-              req.flash ( 'error', '程序出错，错误码：insterAllByUser!' );
+              req.flash ( 'error', '程序出错，错误码：allUser!' );
               return res.redirect ( 'back' );
             } else {
               callback ( err, data );
@@ -475,7 +637,7 @@ exports.toAddProse    = function ( req, res ) {
         /**
          * 查询自己的最后一个日报的日期
          */
-        getNoteDateByDataString : [ 'insterDateState', 'queryUserInfoByGroupId', 'insterAllByUser',
+        getNoteDateByDataString        : [ 'insterDateState', 'interByGroupidAndUserIdAndTime',
           function ( callback, result ) {
             Prose.getNoteDateByDataString ( user_id, proseDateString, function ( err, data ) {
               if ( err ) {
@@ -489,7 +651,7 @@ exports.toAddProse    = function ( req, res ) {
         /**
          * 开始添加日报
          */
-        addProse                : [ 'insterDateState', 'queryUserInfoByGroupId', 'insterAllByUser',
+        addProse                       : [ 'insterDateState', 'interByGroupidAndUserIdAndTime',
           'getNoteDateByDataString',
           function ( callback, result ) {
             var getNoteDateByDataString = result.getNoteDateByDataString;
@@ -528,54 +690,25 @@ exports.toAddProse    = function ( req, res ) {
             } else {
               if ( data.length < 1 ) {
                 /**
-                 * 如果不存在日报则全组选择性插入
+                 * 如果不存在日报则插入
                  */
-                User.queryUserInfoByGroupId ( groupId, function ( err, data ) {
+                Prose.interByGroupidAndUserIdAndTime ( groupId, user_id, proseDate, function ( err, data ) {
                   if ( err ) {
                     req.flash ( 'error', '程序出错，错误码：allUser!' );
                     return res.redirect ( 'back' );
                   } else {
-                    /**
-                     * 遍历查找插入
-                     */
-                    async.eachSeries ( data, function ( item, cb ) {
-                      Prose.cheackNoteByDataGroupId ( item.rb_user_id, proseDateString, groupId, function ( err, cheackNoteByDataGroupId_data ) {
-                        if ( cheackNoteByDataGroupId_data.length < 1 ) {
-                          var sqlInsterString = 'INSERT INTO `rb_datenote` (`rb_datenote_id`,`rb_datenote_user_id`,' +
-                            ' `rb_datenote_date`, `rb_datenote_title`, `rb_datenote_content`, `rb_group_id`) VALUES ' +
-                            '(NULL, "' + item.rb_user_id + '", "' + proseDate + '", "没写日报标题╮(╯▽╰)╭", " ", "' + groupId + '")';
-                          Prose.insterAllByUser ( sqlInsterString, function ( err, insterAllByUser ) {
-                            if ( err ) {
-                              req.flash ( 'error', '程序出错，错误码：insterAllByUser!' );
-                              return res.redirect ( 'back' );
-                            } else {
-                              if ( data.length < 1 ) {
-                                req.flash ( 'error', '程序出错，错误码：insterAllByUser!' );
-                                return res.redirect ( 'back' );
-                              } else {
-                                cb ();
-                              }
-                            }
-                          } )
-                        } else {
-                          cb ();
-                        }
-                      } );
-                    }, function ( err ) {
-                      console.log ( "err: " + err );
-                      Prose.cheackNoteByDataGroupId ( user_id, proseDateString, groupId, function ( err, cheackNoteByDataGroupId ) {
-                        if ( err ) {
+                    Prose.cheackNoteByDataGroupId ( user_id, proseDateString, groupId, function ( err, cheackNoteByDataGroupId ) {
+                      if ( err ) {
+                        req.flash ( 'error', '程序出错，错误码：cheackNoteByDataGroupId!' );
+                        return res.redirect ( 'back' );
+                      } else {
+                        if ( data.length < 1 ) {
                           req.flash ( 'error', '程序出错，错误码：cheackNoteByDataGroupId!' );
                           return res.redirect ( 'back' );
                         } else {
-                          if ( data.length < 1 ) {
-                            req.flash ( 'error', '程序出错，错误码：cheackNoteByDataGroupId!' );
-                            return res.redirect ( 'back' );
-                          } else {
-                            callback ( err, cheackNoteByDataGroupId );
-                          }
+                          callback ( err, cheackNoteByDataGroupId );
                         }
-                      } );
+                      }
                     } );
                   }
                 } );

@@ -47,19 +47,19 @@
       }
     },
     rb_datenote   : {
-      getDatenoteById                   : function ( user_id ) {
+      getDatenoteById                        : function ( user_id ) {
         return "select * from rb_user u, rb_datenote dn,rb_group g where dn.rb_group_id = g.rb_group_id" +
           " and u.rb_user_id =" +
           " dn.rb_datenote_user_id and" +
           " u.rb_user_id='" + user_id + "' ";
       },
-      queryAllDatenoteByGroup_id        : function ( group_id ) {
+      queryAllDatenoteByGroup_id             : function ( group_id ) {
         return "select * from rb_user u, rb_datenote dn,rb_group g where dn.rb_group_id = g.rb_group_id" +
           " and u.rb_user_id =" +
           " dn.rb_datenote_user_id and" +
           " dn.rb_group_id='" + group_id + "' ";
       },
-      queryAllDatenoteByGroup_idAndDate : function ( group_id, startTime, endTime ) {
+      queryAllDatenoteByGroup_idAndDate      : function ( group_id, startTime, endTime ) {
         return "select * from rb_user u, rb_datenote dn,rb_group g where dn.rb_group_id = g.rb_group_id" +
           " and u.rb_user_id =" +
           " dn.rb_datenote_user_id and" +
@@ -67,29 +67,32 @@
           " (dn.rb_datenote_date+0)" +
           " < ('" + endTime + "'+0)";
       },
-      getDatenoteByIdAndGroupId         : function ( userId, userGroupId ) {
+      getDatenoteByIdAndGroupId              : function ( userId, userGroupId ) {
         return "select * from rb_user u, rb_datenote dn,rb_group g where dn.rb_group_id = g.rb_group_id" +
           " and u.rb_user_id =" +
           " dn.rb_datenote_user_id and" +
           " u.rb_user_id='" + userId + "' and dn.rb_group_id = '" + userGroupId + "'";
       },
-      getNoteDateByDataString           : function ( user_id, dataString ) {
+      getNoteDateByDataString                : function ( user_id, dataString ) {
         return "select dn.rb_datenote_date from rb_user u, rb_datenote dn where u.rb_user_id =" +
           " dn.rb_datenote_user_id and u.rb_user_id='" + user_id + "' and FROM_UNIXTIME(floor(dn.rb_datenote_date/1000), '%Y-%m-%d') = '" + dataString + "'";
       },
-      cheackNoteByDataGroupId           : function ( user_id, dataString, groupid ) {
+      cheackNoteByDataGroupId                : function ( user_id, dataString, groupid ) {
         return "select dn.rb_datenote_id,dn.rb_datenote_date from rb_user u, rb_datenote dn where u.rb_user_id =" +
           " dn.rb_datenote_user_id and dn.rb_group_id='" + groupid + "' and u.rb_user_id='" + user_id + "' and" +
           " FROM_UNIXTIME(floor(dn.rb_datenote_date/1000), '%Y-%m-%d') = '" + dataString + "'";
       },
-      postAddProse                      : function ( id, proseTitle, proseDate, proseDateNew, proseContent, groupId ) {
+      postAddProse                           : function ( id, proseTitle, proseDate, proseDateNew, proseContent, groupId ) {
         return "UPDATE  `daily_report`.`rb_datenote` SET `rb_datenote_date` = '" + proseDateNew + "',`rb_datenote_title` = '" + proseTitle + "',`rb_datenote_content` = '" + proseContent + "' WHERE  `rb_datenote`.`rb_datenote_date` ='" + proseDate + "' and `rb_datenote`.`rb_datenote_user_id` =  '" + id + "' and `rb_datenote`.`rb_group_id` = '" + groupId + "';";
       },
-      postProseById                     : function ( id, proseContent ) {
+      postProseById                          : function ( id, proseContent ) {
         return "UPDATE  `daily_report`.`rb_datenote` SET `rb_datenote_content` = '" + proseContent + "' WHERE `rb_datenote`.`rb_datenote_id` =  '" + id + "';";
       },
-      allUserForProse                   : function ( err ) {
+      allUserForProse                        : function ( err ) {
         return "select * from rb_datenote";
+      },
+      interByGroupidAndUserIdAndTime : function ( group_id, user_id, dateTime ) {
+        return 'INSERT INTO `rb_datenote` (`rb_datenote_id`,`rb_datenote_user_id`,`rb_datenote_date`, `rb_datenote_title`, `rb_datenote_content`, `rb_group_id`) VALUES (NULL, "' + user_id + '", "' + dateTime + '", "没写日报标题╮(╯▽╰)╭", " ", "' + group_id + '")';
       }
     },
     rb_datestate  : {
@@ -117,7 +120,8 @@
         return "select * from rb_group";
       },
       queryUserInfoByGroupId      : function ( group_id ) {
-        return "select u.rb_user_id,u.rb_user_name from rb_user_group ug,rb_user u where ug.rb_user_id = u.rb_user_id and ug.rb_group_id='" + group_id + "'";
+        return "select u.rb_user_id,u.rb_user_name,u.rb_user_account from rb_user_group ug,rb_user u where" +
+          " ug.rb_user_id = u.rb_user_id and ug.rb_group_id='" + group_id + "'";
       },
       queryAllGroupByDepartmentid : function ( department_id ) {
         return "select * from rb_group where rb_department_id='" + department_id + "'";
