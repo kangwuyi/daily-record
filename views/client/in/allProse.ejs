@@ -124,13 +124,50 @@
                 }
                 if((poDataList_data_sign === false) && (index_data === (_data_box_user.children.length - 1))){ %>
                 <td style="width: 300px;height: 150px;display: inline-block;"
-                    id="<%= (( nowTimeFormat === thisDatenoteTimeFormat) && ( thisUserAccount === _userAccountmd5)) ? 'basic-editor' : '' %>"
-                    class="td_content_box <%= (( nowTimeFormat === thisDatenoteTimeFormat) && ( thisUserAccount === _userAccountmd5)) ? 'basicBg' : '' %>"
+                    id="<%= (( nowTimeFormat === poDataList_data) && ( thisUserAccount === _userAccountmd5)) ? ('basic-editor_' + _data_box_group.id + '_' + new Date(
+                      poDataList_data).getTime()) : '' %>"
+                    class="td_content_box <%= (( nowTimeFormat === poDataList_data) && ( thisUserAccount === _userAccountmd5)) ? 'basicBg' : '' %>"
                     datenote-id="inexistence"
                     date-time="<%= new Date ( (new Date ( poDataList_data ).format ( 'yyyy-MM-dd 12:59:59' )) ).getTime () %>"
-                    user-account="<%= _data_box_datenote.uaccount %>" group-id="<%= _data_box_datenote.gid %>"><%=thisDatenoteTimeFormat%>
+                    user-account="<%= _data_box_datenote.uaccount %>" group-id="<%= _data_box_datenote.gid %>">
                 </td>
-                  <% }
+                <% if((( nowTimeFormat === poDataList_data) && ( _data_box_user.uaccount === _userAccountmd5))){ %>
+                <script>
+                  var basicEditor = new Quill ( '#basic-editor_<%=_data_box_group.id%>_<%=new Date(
+                  poDataList_data).getTime()%>' );
+                  $ ( document ).ready ( function () {
+                    $ ( '#ql-editor-<%= ql_editor_index %>' ).blur ( function ( event ) {
+                      var _that            = $ ( this );
+                      var _that_node_clone = _that.html ();
+                      var datenote_id      = _that.parent ().attr ( 'datenote-id' );
+                      var group_id         = _that.parent ().attr ( 'group-id' );
+                      var user_account     = _that.parent ().attr ( 'user-account' );
+                      var date_time        = _that.parent ().attr ( 'date-time' );
+                      $.ajax ( {
+                        type     : "post",
+                        url      : "postProseById",
+                        data     : {
+                          datenote_id : datenote_id, datenote_content : _that_node_clone, user_account : user_account,
+                          date_time   : date_time, group_id : group_id
+                        },
+                        dataType : "json",
+                        success  : function ( data ) {
+                          console.log ( 'yes' );
+                          alert ( '修改成功' );
+                        },
+                        error    : function ( XMLHttpRequest, textStatus, errorThrown ) {
+                          console.log ( 'textStatus' );
+                          alert ( '修改成功' );
+                        }
+                      } );
+                      event.stopPropagation ();//阻止冒泡事件，上级的单击事件不会被调用
+                    } );
+                    <% ql_editor_index = ql_editor_index + 1; %>
+                  } );
+                </script>
+
+                <% }
+                  }
 
                   });
                   }else{
