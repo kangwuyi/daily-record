@@ -76,7 +76,7 @@
                     , thisDatenoteTimeFormat = (new Date ( Number ( _data_box_datenote.ndate ) )).format ( 'yyyy-MM-dd' )
                     , thisUserAccount        = _data_box_datenote.uaccount;
                 %>
-                <td style="width: 300px;height: 150px;display: inline-block;"
+                <td style="width: 300px;height: 150px;display: inline-block;background: #e972ff"
                     id="<%= (( nowTimeFormat === thisDatenoteTimeFormat) && ( thisUserAccount === _userAccountmd5)) ?
                       ('basic-editor_' + _data_box_datenote.gid + '_' + _data_box_datenote.ndate) : '' %>"
                     class="td_content_box <%= (( nowTimeFormat === thisDatenoteTimeFormat) && ( thisUserAccount === _userAccountmd5)) ? 'basicBg' : '' %>"
@@ -123,7 +123,7 @@
                 <% }
                 }
                 if((poDataList_data_sign === false) && (index_data === (_data_box_user.children.length - 1))){ %>
-                <td style="width: 300px;height: 150px;display: inline-block;"
+                <td style="width: 300px;height: 150px;display: inline-block;background: #FFF000"
                     id="<%= (( nowTimeFormat === poDataList_data) && ( thisUserAccount === _userAccountmd5)) ? ('basic-editor_' + _data_box_group.id + '_' + new Date(
                       poDataList_data).getTime()) : '' %>"
                     class="td_content_box <%= (( nowTimeFormat === poDataList_data) && ( thisUserAccount === _userAccountmd5)) ? 'basicBg' : '' %>"
@@ -131,7 +131,8 @@
                     date-time="<%= new Date ( (new Date ( poDataList_data ).format ( 'yyyy-MM-dd 12:59:59' )) ).getTime () %>"
                     user-account="<%= _data_box_datenote.uaccount %>" group-id="<%= _data_box_datenote.gid %>">
                 </td>
-                <% if((( nowTimeFormat === poDataList_data) && ( _data_box_user.uaccount === _userAccountmd5))){ %>
+                <%  }
+                if((( nowTimeFormat === poDataList_data) && ( _data_box_user.uaccount === _userAccountmd5))){ %>
                 <script>
                   var basicEditor = new Quill ( '#basic-editor_<%=_data_box_group.id%>_<%=new Date(
                   poDataList_data).getTime()%>' );
@@ -167,12 +168,12 @@
                 </script>
 
                 <% }
-                  }
+
 
                   });
                   }else{
                   var nowTimeFormat          = ( new Date ()).format ( 'yyyy-MM-dd' )%>
-                <td style="width: 300px;height: 150px;display: inline-block;"
+                <td style="width: 300px;height: 150px;display: inline-block;background: #ff1f30"
                     id="<%= ( poDataList_data === nowTimeFormat &&_data_box_user.uaccount === _userAccountmd5) ?
                       ('basic-editor_' + _data_box_group.id + '_' + new Date(
                         poDataList_data).getTime()) : '' %>"
