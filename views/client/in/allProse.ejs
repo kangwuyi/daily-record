@@ -68,12 +68,12 @@
 
                 <% poDataList.forEach(  function( poDataList_data ){
                   var poDataList_data_sign = false;
+                  var nowTimeFormat          = ( new Date ()).format ( 'yyyy-MM-dd' );
                 if(_data_box_user.children !=''){
                   _data_box_user.children.forEach(  function( _data_box_datenote, index_data ){
                 if(poDataList_data === (new Date ( Number ( _data_box_datenote.ndate ) ).format ( 'yyyy-MM-dd' ))){
                   poDataList_data_sign       = true;
-                  var nowTimeFormat          = ( new Date ()).format ( 'yyyy-MM-dd' )
-                    , thisDatenoteTimeFormat = (new Date ( Number ( _data_box_datenote.ndate ) )).format ( 'yyyy-MM-dd' )
+                  var thisDatenoteTimeFormat = (new Date ( Number ( _data_box_datenote.ndate ) )).format ( 'yyyy-MM-dd' )
                     , thisUserAccount        = _data_box_datenote.uaccount;
                 %>
                 <td style="width: 300px;height: 150px;display: inline-block;background: #e972ff"
@@ -122,7 +122,8 @@
 
                 <% }
                 }
-                if((poDataList_data_sign === false) && (index_data === (_data_box_user.children.length - 1))){ %>
+                if((poDataList_data_sign === false) && (index_data === (_data_box_user.children.length - 1))){
+                %>
                 <td style="width: 300px;height: 150px;display: inline-block;background: #FFF000"
                     id="<%= (( nowTimeFormat === poDataList_data) && ( thisUserAccount === _userAccountmd5)) ? ('basic-editor_' + _data_box_group.id + '_' + new Date(
                       poDataList_data).getTime()) : '' %>"
@@ -172,7 +173,7 @@
 
                   });
                   }else{
-                  var nowTimeFormat          = ( new Date ()).format ( 'yyyy-MM-dd' )%>
+             %>
                 <td style="width: 300px;height: 150px;display: inline-block;background: #ff1f30"
                     id="<%= ( poDataList_data === nowTimeFormat &&_data_box_user.uaccount === _userAccountmd5) ?
                       ('basic-editor_' + _data_box_group.id + '_' + new Date(
