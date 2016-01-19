@@ -93,8 +93,6 @@
                     user-account="<%= _data_box_datenote.uaccount %>" group-id="<%= _data_box_datenote.gid %>">
                 </td>
                 <% }
-
-                <%
                 });
                 }else{
                 %>
@@ -104,7 +102,6 @@
                     date-time="<%= new Date ( (new Date ( poDataList_data ).format ( 'yyyy-MM-dd 12:59:59' )) ).getTime () %>"
                     user-account="<%= _data_box_user.uaccount %>" group-id="<%= _data_box_group.id %>">
                 </td>
-
                 <%
                 }
                 }); %>
