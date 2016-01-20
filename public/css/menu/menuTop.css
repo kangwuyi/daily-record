@@ -1,0 +1,205 @@
+#main-container {
+  float: left; }
+  #main-container #sidebar {
+    position: inherit; }
+
+.MenuWrapper {
+  display: inline-block;
+  float: left;
+  opacity: 0.9;
+  border: none;
+  /* 	border-top: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8); */
+  color: #ff6600;
+  font-size: 14px;
+  width: 700px;
+  height: 40px;
+  text-align: center;
+  z-index: 9999;
+  font-weight: 400; }
+  .MenuWrapper .menu, .MenuWrapper .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+  .MenuWrapper .menu {
+    height: 40px; }
+    .MenuWrapper .menu > li {
+      display: block;
+      float: left;
+      position: relative; }
+      .MenuWrapper .menu > li:first-child {
+        border-radius: 5px 0 0; }
+    .MenuWrapper .menu li {
+      background: -moz-linear-gradient(#278CDE, #137ACE);
+      background: -ms-linear-gradient(#278CDE, #137ACE);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #278CDE), color-stop(100%, #137ACE));
+      background: -webkit-linear-gradient(#278CDE, #137ACE);
+      background: -o-linear-gradient(#278CDE, #137ACE);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#278CDE', endColorstr='#137ACE');
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#278CDE', endColorstr='#137ACE')";
+      background: linear-gradient(#278CDE, #137ACE);
+      border-bottom: 2px solid #1869AB;
+      border-top: 2px solid #5FA7E2;
+      min-width: 160px; }
+      .MenuWrapper .menu li:hover {
+        background-color: #1c1c1c;
+        background: -moz-linear-gradient(#1869AB, #5FA7E2);
+        background: -ms-linear-gradient(#1869AB, #5FA7E2);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1869AB), color-stop(100%, #5FA7E2));
+        background: -webkit-linear-gradient(#1869AB, #5FA7E2);
+        background: -o-linear-gradient(#1869AB, #5FA7E2);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1869AB', endColorstr='#5FA7E2');
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#1869AB', endColorstr='#5FA7E2')";
+        background: linear-gradient(#1869AB, #5FA7E2);
+        border-bottom: 2px solid #278CDE;
+        border-top: 2px solid #137ACE; }
+        .MenuWrapper .menu li:hover > a {
+          border-radius: 5px 0 0 0;
+          border-left: 3px solid #1967ab;
+          color: #fff; }
+    .MenuWrapper .menu a {
+      border-left: 3px solid transparent;
+      color: #fff;
+      display: block;
+      font-family: 'Lucida Console';
+      font-size: 18px;
+      line-height: 36px;
+      padding: 0 25px;
+      text-decoration: none;
+      text-transform: uppercase; }
+  .MenuWrapper .submenu {
+    left: 0;
+    max-height: 0;
+    position: absolute;
+    top: 100%;
+    z-index: 0;
+    -webkit-perspective: 400px;
+    -moz-perspective: 400px;
+    -ms-perspective: 400px;
+    -o-perspective: 400px;
+    perspective: 400px; }
+  .MenuWrapper .submenu li {
+    opacity: 0;
+    -webkit-transform: rotateY(90deg);
+    -moz-transform: rotateY(90deg);
+    -ms-transform: rotateY(90deg);
+    -o-transform: rotateY(90deg);
+    transform: rotateY(90deg);
+    -webkit-transition: opacity .4s, -webkit-transform .5s;
+    -moz-transition: opacity .4s, -moz-transform .5s;
+    -ms-transition: opacity .4s, -ms-transform .5s;
+    -o-transition: opacity .4s, -o-transform .5s;
+    transition: opacity .4s, transform .5s; }
+  .MenuWrapper .menu .submenu li:hover a {
+    border-left: 3px solid #454545;
+    border-radius: 0;
+    color: #ffffff; }
+  .MenuWrapper .menu > li:hover .submenu, .MenuWrapper .menu > li:focus .submenu {
+    max-height: 2000px;
+    z-index: 10; }
+  .MenuWrapper .menu > li:hover .submenu li, .MenuWrapper .menu > li:focus .submenu li {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none; }
+  .MenuWrapper .menu li:hover .submenu li:nth-child(1) {
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -ms-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s; }
+  .MenuWrapper .menu li:hover .submenu li:nth-child(2) {
+    -webkit-transition-delay: 50ms;
+    -moz-transition-delay: 50ms;
+    -ms-transition-delay: 50ms;
+    -o-transition-delay: 50ms;
+    transition-delay: 50ms; }
+  .MenuWrapper .menu li:hover .submenu li:nth-child(3) {
+    -webkit-transition-delay: 100ms;
+    -moz-transition-delay: 100ms;
+    -ms-transition-delay: 100ms;
+    -o-transition-delay: 100ms;
+    transition-delay: 100ms; }
+  .MenuWrapper .menu li:hover .submenu li:nth-child(4) {
+    -webkit-transition-delay: 150ms;
+    -moz-transition-delay: 150ms;
+    -ms-transition-delay: 150ms;
+    -o-transition-delay: 150ms;
+    transition-delay: 150ms; }
+  .MenuWrapper .menu li:hover .submenu li:nth-child(5) {
+    -webkit-transition-delay: 200ms;
+    -moz-transition-delay: 200ms;
+    -ms-transition-delay: 200ms;
+    -o-transition-delay: 200ms;
+    transition-delay: 200ms; }
+  .MenuWrapper .menu li:hover .submenu li:nth-child(6) {
+    -webkit-transition-delay: 250ms;
+    -moz-transition-delay: 250ms;
+    -ms-transition-delay: 250ms;
+    -o-transition-delay: 250ms;
+    transition-delay: 250ms; }
+  .MenuWrapper .menu li:hover .submenu li:nth-child(7) {
+    -webkit-transition-delay: 300ms;
+    -moz-transition-delay: 300ms;
+    -ms-transition-delay: 300ms;
+    -o-transition-delay: 300ms;
+    transition-delay: 300ms; }
+  .MenuWrapper .menu li:hover .submenu li:nth-child(8) {
+    -webkit-transition-delay: 350ms;
+    -moz-transition-delay: 350ms;
+    -ms-transition-delay: 350ms;
+    -o-transition-delay: 350ms;
+    transition-delay: 350ms; }
+  .MenuWrapper .submenu li:nth-child(1) {
+    -webkit-transition-delay: 350ms;
+    -moz-transition-delay: 350ms;
+    -ms-transition-delay: 350ms;
+    -o-transition-delay: 350ms;
+    transition-delay: 350ms; }
+  .MenuWrapper .submenu li:nth-child(2) {
+    -webkit-transition-delay: 300ms;
+    -moz-transition-delay: 300ms;
+    -ms-transition-delay: 300ms;
+    -o-transition-delay: 300ms;
+    transition-delay: 300ms; }
+  .MenuWrapper .submenu li:nth-child(3) {
+    -webkit-transition-delay: 250ms;
+    -moz-transition-delay: 250ms;
+    -ms-transition-delay: 250ms;
+    -o-transition-delay: 250ms;
+    transition-delay: 250ms; }
+  .MenuWrapper .submenu li:nth-child(4) {
+    -webkit-transition-delay: 200ms;
+    -moz-transition-delay: 200ms;
+    -ms-transition-delay: 200ms;
+    -o-transition-delay: 200ms;
+    transition-delay: 200ms; }
+  .MenuWrapper .submenu li:nth-child(5) {
+    -webkit-transition-delay: 150ms;
+    -moz-transition-delay: 150ms;
+    -ms-transition-delay: 150ms;
+    -o-transition-delay: 150ms;
+    transition-delay: 150ms; }
+  .MenuWrapper .submenu li:nth-child(6) {
+    -webkit-transition-delay: 100ms;
+    -moz-transition-delay: 100ms;
+    -ms-transition-delay: 100ms;
+    -o-transition-delay: 100ms;
+    transition-delay: 100ms; }
+  .MenuWrapper .submenu li:nth-child(7) {
+    -webkit-transition-delay: 50ms;
+    -moz-transition-delay: 50ms;
+    -ms-transition-delay: 50ms;
+    -o-transition-delay: 50ms;
+    transition-delay: 50ms; }
+  .MenuWrapper .submenu li:nth-child(8) {
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -ms-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s; }
+
+/*# sourceMappingURL=menuTop.css.map */

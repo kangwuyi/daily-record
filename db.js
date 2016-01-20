@@ -8,10 +8,10 @@
     var err;
     try {
       if (conn) {
-        conn = mysql.createConnection(connMysql.db);
+        conn = mysql.createConnection(connMysql.db_test);
         conn.connect();
       } else {
-        conn = new mysql.createConnection(connMysql.db);
+        conn = new mysql.createConnection(connMysql.db_test);
         //conn = mysql.createConnection(connMysql.db);
         conn.connect();
       }

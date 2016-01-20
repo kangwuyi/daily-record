@@ -73,7 +73,7 @@
                   var thisDatenoteTimeFormat = (new Date ( Number ( _data_box_datenote.ndate ) )).format ( 'yyyy-MM-dd' )
                     , thisUserAccount        = _data_box_datenote.uaccount;
                 %>
-                <td style="width: 300px;height: 150px;display: inline-block;background: #e972ff;overflow: auto;"
+                <td style="width: 300px;height: 150px;display: inline-block;background: #eefffa;overflow: auto;"
                     class="td_content_box"
                     datenote-id="<%=
                       _data_box_datenote.nid %>"
@@ -86,7 +86,7 @@
                 }
                 if((poDataList_data_sign === false) && (index_data === (_data_box_user.children.length - 1))){
                 %>
-                <td style="width: 300px;height: 150px;display: inline-block;background: #FFF000;overflow: auto;"
+                <td style="width: 300px;height: 150px;display: inline-block;background: #fff7c7;overflow: auto;"
                     class="td_content_box"
                     datenote-id="inexistence"
                     date-time="<%= new Date ( (new Date ( poDataList_data ).format ( 'yyyy-MM-dd 12:59:59' )) ).getTime () %>"
@@ -96,7 +96,7 @@
                 });
                 }else{
                 %>
-                <td style="width: 300px;height: 150px;display: inline-block;background: #ff1f30;overflow: auto;"
+                <td style="width: 300px;height: 150px;display: inline-block;background: #ffd6de;overflow: auto;"
                     class="td_content_box"
                     datenote-id="inexistence"
                     date-time="<%= new Date ( (new Date ( poDataList_data ).format ( 'yyyy-MM-dd 12:59:59' )) ).getTime () %>"

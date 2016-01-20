@@ -1,0 +1,24 @@
+<ul class="menu">
+  <li><a href="/">主页</a></li>
+  <li class="active"><a href="#s2">日报</a>
+    <ul class="submenu">
+      <li>
+        <a href="/in/prose">查看日报</a>
+      </li>
+      <li>
+        <a href="/poProse">编辑日报</a>
+      </li>
+      <li>
+        <a href="/in/allProse">查看全部</a>
+      </li>
+    </ul>
+  </li>
+  <% if(locals.publicUserKpi === '1'){ %>
+  <li>
+    <a class="liColorOne" href="/in/auditState" style="color: #fff;">审核</a>
+  </li>
+  <% } %>
+  <li>
+    <a class="liColorOne" href="/" style="color: #fff;">退出</a>
+  </li>
+</ul>

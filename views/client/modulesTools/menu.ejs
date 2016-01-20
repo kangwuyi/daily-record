@@ -1,8 +1,8 @@
 <nav class="MenuWrapper MenuStatic">
-  <ul class="ulMenu">
-    <% if(loadTagOjNew){ %>
-    <%- include menu/menuAbout %>
-    <%- include menu/menuHome %>
-    <% } %>
-  </ul>
+  <% if(loadTagOjNew){ %>
+  <%- include menu/menuTop %>
+  <% } %>
 </nav>
+<% if(loadTagOjNew){ %>
+<%- include menu/menuLeft %>
+<% } %>
