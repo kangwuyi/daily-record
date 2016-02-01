@@ -201,11 +201,29 @@ exports.allProse      = function ( req, res ) {
               , datenote_arr = results.queryAllDatenoteByGroup_idAndDate;
             user_arr.forEach ( function ( user_arr_item ) {
               var _user__datenotedata = [];
-              datenote_arr.forEach ( function ( datenote_arr_item ) {
-                if ( user_arr_item.rb_user_id === datenote_arr_item.uid ) {
-                  _user__datenotedata.push ( datenote_arr_item )
+              poDataList.forEach ( function ( poDataList_item ) {
+                var _poDataListSign = false;
+                datenote_arr.forEach ( function ( datenote_arr_item ) {
+                  if ( user_arr_item.rb_user_id === datenote_arr_item.uid
+                    && new Date(Number(datenote_arr_item.ndate )).format('yyyy-MM-dd')===poDataList_item) {
+                    _user__datenotedata.push ( datenote_arr_item );
+                    _poDataListSign = true;
+                  }
+                } );
+                if ( _poDataListSign === false ) {
+                  _user__datenotedata.push ( {
+                    did      : '',
+                    gid      : '',
+                    uaccount : user_arr_item.rb_user_account,
+                    uid      : user_arr_item.rb_user_id,
+                    nid      : '',
+                    ncontent : '',
+                    ntitle   : '',
+                    ndate    : new Date ( poDataList_item ).getTime()
+                  } )
                 }
               } );
+
               _user__datenotedata.sort ( function ( a, b ) {
                 if ( a.ndate > b.ndate ) {
                   return - 1;
