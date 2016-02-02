@@ -1,53 +1,101 @@
-/*
-Error: File to import not found or unreadable: definition.
-       Load path: C:/Users/Administrator/Desktop/todayWork/public/sass/life
-        on line 2 of C:\Users\Administrator\Desktop\todayWork\public\sass\life\prose.scss
+body {
+  color: rgba(255, 255, 255, 0.5);
+  zoom: 1;
+  font: 14px Arial, Helvetica, sans-serif;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  transition: color 0.5s ease; }
 
-1: @import '../definition';
-2: @import 'definition';
-3: 
-4: .closeProse {
-5:   h2 i {
-6:     @include transform(rotate(-90deg));
-7:   }
+.closeProse h2 i {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg); }
+.closeProse .list {
+  opacity: 0;
+  height: 0 !important; }
 
-Backtrace:
-C:\Users\Administrator\Desktop\todayWork\public\sass\life\prose.scss:2
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/import_node.rb:66:in `rescue in import'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/import_node.rb:45:in `import'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/import_node.rb:28:in `imported_file'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/import_node.rb:37:in `css_import?'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:301:in `visit_import'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `with_base'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `map'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:157:in `visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:8:in `visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:36:in `css_tree'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:369:in `_render_with_sourcemap'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:286:in `render_with_sourcemap'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:396:in `run'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:62:in `process_result'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
-C:/Program Files (x86)/Koala/bin/sass:18:in `load'
-C:/Program Files (x86)/Koala/bin/sass:18:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: File to import not found or unreadable: definition.\A        Load path: C:/Users/Administrator/Desktop/todayWork/public/sass/life\A         on line 2 of C:\Users\Administrator\Desktop\todayWork\public\sass\life\prose.scss\A \A 1: @import '../definition';\A 2: @import 'definition';\A 3: \A 4: .closeProse {\A 5:   h2 i {\A 6:     @include transform(rotate(-90deg));\A 7:   }"; }
+.prose-tree {
+  position: relative;
+  width: 960px;
+  margin: 0 auto; }
+  .prose-tree h2 {
+    height: 40px;
+    width: 170px;
+    padding-right: 30px;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: right; }
+    .prose-tree h2 a {
+      color: #58a6fb;
+      text-decoration: none; }
+      .prose-tree h2 a i {
+        display: block;
+        position: relative;
+        height: 0;
+        width: 0;
+        left: 190px;
+        top: -20px;
+        border-width: 6px;
+        border-style: solid;
+        border-color: #59a7fb transparent transparent transparent;
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+        transition: 0.5s;
+        -webkit-transform-origin: 6px 3px;
+        -moz-transform-origin: 6px 3px;
+        -ms-transform-origin: 6px 3px;
+        -o-transform-origin: 6px 3px;
+        transform-origin: 6px 3px; }
+  .prose-tree .list {
+    margin: 10px 0;
+    overflow: hidden;
+    -webkit-transition: height 1s cubic-bezier(0.025, 0.025, 0, 1.115), opacity 1s;
+    -moz-transition: height 1s cubic-bezier(0.025, 0.025, 0, 1.115), opacity 1s;
+    -ms-transition: height 1s cubic-bezier(0.025, 0.025, 0, 1.115), opacity 1s;
+    -o-transition: height 1s cubic-bezier(0.025, 0.025, 0, 1.115), opacity 1s;
+    transition: height 1s cubic-bezier(0.025, 0.025, 0, 1.115), opacity 1s;
+    bottom: 0; }
+    .prose-tree .list .cls {
+      padding: 30px 0;
+      color: #a1a4b8;
+      zoom: 1;
+      list-style-type: none; }
+      .prose-tree .list .cls:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden; }
+      .prose-tree .list .cls .version, .prose-tree .list .cls .date {
+        float: left;
+        display: block;
+        clear: left;
+        width: 200px;
+        line-height: 24px;
+        text-align: right; }
+      .prose-tree .list .cls .date {
+        font-size: 18px;
+        line-height: 32px;
+        color: #bec1d5; }
+      .prose-tree .list .cls .more, .prose-tree .list .cls .intro {
+        float: left;
+        display: block;
+        width: 650px;
+        margin-left: 100px;
+        line-height: 24px; }
+      .prose-tree .list .cls .intro {
+        font-size: 18px;
+        line-height: 32px;
+        color: #63d029; }
+
+.basicBg {
+  background: #23E5DB;
+  color: #fff; }
+
+/*# sourceMappingURL=prose.css.map */

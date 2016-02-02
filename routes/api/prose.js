@@ -149,7 +149,7 @@ exports.allProse      = function ( req, res ) {
   var _userAccountmd5 = req.cookies.username
     , _data           = []
     , endTime         = req.query.endTime ? Number ( kcool.trim ( req.query.endTime ) ) : new Date ().getTime ()
-    , startTime       = req.query.startTime ? Number ( kcool.trim ( req.query.startTime ) ) : new Date ( endTime ).getNextDate ( - 6 ).getTime ()
+    , startTime       = req.query.startTime ? Number ( kcool.trim ( req.query.startTime ) ) : new Date ( endTime ).getNextDate ( - 4 ).getTime ()
     , thisDateDiff    = Math.floor ( new Date ( endTime ).diff ( new Date ( startTime ) ) )
     , poDataList      = [];
   for ( var i = thisDateDiff; i >= 0; i -- ) {
@@ -205,7 +205,7 @@ exports.allProse      = function ( req, res ) {
                 var _poDataListSign = false;
                 datenote_arr.forEach ( function ( datenote_arr_item ) {
                   if ( user_arr_item.rb_user_id === datenote_arr_item.uid
-                    && new Date(Number(datenote_arr_item.ndate )).format('yyyy-MM-dd')===poDataList_item) {
+                    && new Date ( Number ( datenote_arr_item.ndate ) ).format ( 'yyyy-MM-dd' ) === poDataList_item ) {
                     _user__datenotedata.push ( datenote_arr_item );
                     _poDataListSign = true;
                   }
@@ -216,10 +216,10 @@ exports.allProse      = function ( req, res ) {
                     gid      : '',
                     uaccount : user_arr_item.rb_user_account,
                     uid      : user_arr_item.rb_user_id,
-                    nid      : '',
+                    nid      : 'inexistence',
                     ncontent : '',
                     ntitle   : '',
-                    ndate    : new Date ( poDataList_item ).getTime()
+                    ndate    : new Date ( poDataList_item ).getTime ()
                   } )
                 }
               } );

@@ -9,16 +9,6 @@ body {
   -o-transition: color 0.5s ease;
   transition: color 0.5s ease; }
 
-body {
-  color: rgba(255, 255, 255, 0.5);
-  zoom: 1;
-  font: 14px Arial, Helvetica, sans-serif;
-  -webkit-transition: color 0.5s ease;
-  -moz-transition: color 0.5s ease;
-  -ms-transition: color 0.5s ease;
-  -o-transition: color 0.5s ease;
-  transition: color 0.5s ease; }
-
 .closeProse h2 i {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
