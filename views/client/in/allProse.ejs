@@ -85,6 +85,12 @@
                 </td>
                 <% if(_data_box_user.uaccount === _userAccountmd5){ %>
                 <script>
+                  $ ( '#quill_<%=_data_box_datenote.nid %>_<%= _data_box_datenote.ndate %>_<%=
+                  _data_box_datenote.gid ||
+                    _data_box_group.id %>_<%= _data_box_user.uaccount %>' ).css ( {
+                    'background' : '#683BB0',
+                    'color'      : '#fff'
+                  } )
                   var basicEditor = new Quill ( '#quill_<%=_data_box_datenote.nid %>_<%= _data_box_datenote.ndate %>_<%=
                   _data_box_datenote.gid ||
                     _data_box_group.id %>_<%= _data_box_user.uaccount %>' );
