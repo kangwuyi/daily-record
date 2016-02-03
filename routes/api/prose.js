@@ -19,72 +19,77 @@ var kcool             = require ( './module/config/kcool' )
  * @param res
  */
 exports.prose         = function ( req, res ) {
-  var user_id_cache = req.cookies.userid;
-  async.auto ( {
-    cheackUserIdCache : function ( callback ) {
-      User.cheackUserIdCache ( user_id_cache, function ( err, data ) {
-        if ( err ) {
-          req.flash ( 'error', '错误码：cheackUserIdCache，快联系小康同学!' );
-          return res.redirect ( 'back' );
-        } else {
-          if ( data.length < 1 ) {
+  var user_id_cache = req.cookies.user_Hex;
+  if ( ! user_id_cache ) {
+    req.flash ( 'error', '请先登录。' );
+    res.render ( 'client/index', { title : '瑞博科技｜日报', loadTagOjNew : null } );
+  } else {
+    async.auto ( {
+      cheackUserIdCache : function ( callback ) {
+        User.cheackUserIdCache ( user_id_cache, function ( err, data ) {
+          if ( err ) {
             req.flash ( 'error', '错误码：cheackUserIdCache，快联系小康同学!' );
+            return res.redirect ( 'back' );
+          } else {
+            if ( data.length < 1 ) {
+              req.flash ( 'error', '错误码：cheackUserIdCache，快联系小康同学!' );
+              return res.redirect ( 'back' );
+            } else {
+              callback ( err, data );
+            }
+          }
+        } );
+      },
+      getDatenoteById   : [ 'cheackUserIdCache', function ( callback, result ) {
+        var user_id = result.cheackUserIdCache[ 0 ].rb_user_id;
+        Prose.getDatenoteById ( user_id, function ( err, data ) {
+          if ( err ) {
+            req.flash ( 'error', '错误码：getDatenoteById，快联系小康同学!' );
+            return res.redirect ( 'back' );
+          } else {
+            if ( data.length < 1 ) {
+              callback ( err, { data : [], PostDataProse : [] } );
+            } else {
+              var PostDataProse = []
+                , data_parent   = {};
+              for ( var index = 0; index < data.length; index ++ ) {
+                var dateGetTime         = data[ index ].rb_datenote_date;
+                dateGetTime             = (typeof dateGetTime == Number) ? dateGetTime : Number ( dateGetTime );
+                data[ index ].dataYear  = new Date ( dateGetTime ).format ( "yyyy" );
+                data[ index ].dataMonth = new Date ( dateGetTime ).format ( "MM" );
+                data[ index ].dataDay   = new Date ( dateGetTime ).format ( "dd" );
+                PostDataProse.push ( new Date ( dateGetTime ).format ( "MM" ) );
+              }
+              PostDataProse             = kcool.unique ( PostDataProse );
+              data_parent.data          = data;
+              data_parent.PostDataProse = PostDataProse;
+              callback ( err, data_parent );
+            }
+          }
+        } );
+      } ],
+      loadTagJsFn       : [ 'cheackUserIdCache', 'getDatenoteById', function ( callback, result ) {
+        loadTagJsFn ( function ( err, data ) {
+          if ( data.length < 1 ) {
+            req.flash ( 'error', '错误码：loadTagJsFn，请联系小康同学!' );
             return res.redirect ( 'back' );
           } else {
             callback ( err, data );
           }
+        } );
+      } ]
+    }, function ( err, results ) {
+      res.render (
+        'client/in/prose',
+        {
+          title         : '瑞博科技｜日报',
+          PostGetProse  : results.getDatenoteById.data,
+          PostDataProse : results.getDatenoteById.PostDataProse,
+          loadTagOjNew  : results.loadTagJsFn
         }
-      } );
-    },
-    getDatenoteById   : [ 'cheackUserIdCache', function ( callback, result ) {
-      var user_id = result.cheackUserIdCache[ 0 ].rb_user_id;
-      Prose.getDatenoteById ( user_id, function ( err, data ) {
-        if ( err ) {
-          req.flash ( 'error', '错误码：getDatenoteById，快联系小康同学!' );
-          return res.redirect ( 'back' );
-        } else {
-          if ( data.length < 1 ) {
-            callback ( err, { data : [], PostDataProse : [] } );
-          } else {
-            var PostDataProse = []
-              , data_parent   = {};
-            for ( var index = 0; index < data.length; index ++ ) {
-              var dateGetTime         = data[ index ].rb_datenote_date;
-              dateGetTime             = (typeof dateGetTime == Number) ? dateGetTime : Number ( dateGetTime );
-              data[ index ].dataYear  = new Date ( dateGetTime ).format ( "yyyy" );
-              data[ index ].dataMonth = new Date ( dateGetTime ).format ( "MM" );
-              data[ index ].dataDay   = new Date ( dateGetTime ).format ( "dd" );
-              PostDataProse.push ( new Date ( dateGetTime ).format ( "MM" ) );
-            }
-            PostDataProse             = kcool.unique ( PostDataProse );
-            data_parent.data          = data;
-            data_parent.PostDataProse = PostDataProse;
-            callback ( err, data_parent );
-          }
-        }
-      } );
-    } ],
-    loadTagJsFn       : [ 'cheackUserIdCache', 'getDatenoteById', function ( callback, result ) {
-      loadTagJsFn ( function ( err, data ) {
-        if ( data.length < 1 ) {
-          req.flash ( 'error', '错误码：loadTagJsFn，请联系小康同学!' );
-          return res.redirect ( 'back' );
-        } else {
-          callback ( err, data );
-        }
-      } );
-    } ]
-  }, function ( err, results ) {
-    res.render (
-      'client/in/prose',
-      {
-        title         : '瑞博科技｜日报',
-        PostGetProse  : results.getDatenoteById.data,
-        PostDataProse : results.getDatenoteById.PostDataProse,
-        loadTagOjNew  : results.loadTagJsFn
-      }
-    );
-  } );
+      );
+    } );
+  }
 };
 /**
  * 按照组别查看日报
@@ -283,7 +288,7 @@ exports.allProse      = function ( req, res ) {
  * @param res
  */
 exports.poProse       = function ( req, res ) {
-  var user_id_cache = req.cookies.userid;
+  var user_id_cache = req.cookies.user_Hex;
   async.auto ( {
     cheackUserIdCache   : function ( callback ) {
       User.cheackUserIdCache ( user_id_cache, function ( err, data ) {
@@ -566,7 +571,7 @@ exports.postProseById = function ( req, res ) {
  * @param res
  */
 exports.toAddProse    = function ( req, res ) {
-  var user_id_cache   = req.cookies.userid
+  var user_id_cache   = req.cookies.user_Hex
     , proseTitle      = req.body.proseTitle ? kcool.trim ( req.body.proseTitle ) : '您忘记输入标题了'
     , proseDate       = req.body.proseDatetime
     , departmentId    = req.body.uiSelect1BlogType || 9999

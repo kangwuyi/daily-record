@@ -1,9 +1,9 @@
-var express = require ( 'express' )
-  , http    = require ( 'http' )
-  , crypto  = require ( 'crypto' )
-  , kcool   = require ( '../../public/lib/kcool' )
-  , queryDb = require ( '../../db' )
-  , mysql   = queryDb.getMysqlConn ();
+var express           = require ( 'express' )
+  , http              = require ( 'http' )
+  , crypto            = require ( 'crypto' )
+  , kcool             = require ( '../../public/lib/kcool' )
+  , queryDb           = require ( '../../db' )
+  , mysql             = queryDb.getMysqlConn ();
 exports.queryMysql    = function ( sql, callback ) {
   mysql.query ( sql, function ( err, rows, fields ) {
     if ( err ) {

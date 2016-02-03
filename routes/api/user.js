@@ -11,81 +11,7 @@ var User                = require ( '../../models/user' )
   , fs                  = require ( 'fs' )
   , pem                 = fs.readFileSync ( 'server.pem' )
   , key                 = pem.toString ( 'ascii' );
-/**
- * 开始登陆
- * @param req
- * @param res
- */
-exports.login           = function ( req, res ) {
-  var user_account  = req.body.username || ''
-    , user_password = req.body.password || '';
-  if ( (user_account === '') || (user_account === null) || (user_account === undefined) ) {
-    req.flash ( 'error', '没有输入账号!' );
-    return res.redirect ( 'back' );
-  } else {
-    var md5_user_account = crypto.createHash ( 'md5' );
-    user_account         = md5_user_account.update ( user_account ).digest ( 'hex' );
-  }
-  if ( (user_password !== '') || (user_password !== null) || (user_password !== undefined) ) {
-    var md5_user_password = crypto.createHash ( 'md5' );
-    user_password         = md5_user_password.update ( user_password ).digest ( 'hex' );
-  } else {
-    req.flash ( 'error', '没有输入密码!' );
-    return res.redirect ( 'back' );
-  }
-  async.auto ( {
-    cheackByAccount   : function ( callback ) {
-      User.cheackByAccount ( user_account, function ( err, data ) {
-        if ( data.length < 1 ) {
-          req.flash ( 'error', '账户不存在!' );
-          return res.redirect ( 'back' );
-        } else {
-          if ( data[ 0 ].rb_user_pw != user_password ) {
-            req.flash ( 'error', '密码错误!' );
-            return res.redirect ( 'back' );//返回之前的页面
-          }
-          callback ( err, data );
-        }
-      } );
-    },
-    cheackByState     : [ 'cheackByAccount', function ( callback, result ) {
-      User.cheackByState ( user_account, function ( err, data ) {
-        if ( data.length < 1 ) {
-          res.render ( 'client/waitState', { title : '瑞博科技｜日报', loadTagOjNew : null } );
-        } else {
-          callback ( err, data );
-        }
-      } );
-    } ],
-    updateUserIdCache : [ 'cheackByAccount', 'cheackByState', function ( callback, result ) {
-      var user_id = result.cheackByAccount[ 0 ].rb_user_id
-        , hmac    = crypto.createHmac ( 'sha1', key );
-      hmac.update ( result.cheackByAccount[ 0 ].rb_user_id.toString () );
-      var hmacHex = hmac.digest ( 'hex' );
-      res.cookie ( 'userid', hmacHex );
-      User.updateUserIdCache ( user_id, hmacHex, function ( err, data ) {
-        callback ( err, data );
-      } );
-    } ],
-    loadTagJsFn       : [ 'cheackByAccount', 'cheackByState', 'updateUserIdCache', function ( callback, result ) {
-      loadTagJsFn ( function ( err, data ) {
-        if ( data.length < 1 ) {
-          req.flash ( 'error', 'loadTagJsFn程序出错，请联系小康同学!' );
-          return res.redirect ( 'back' );
-        } else {
-          callback ( err, data );
-        }
-      } );
-    } ]
-  }, function ( err, results ) {
-    req.session = {
-      publicUserId  : results.cheackByAccount[ 0 ].rb_user_id,
-      publicUserKpi : results.cheackByAccount[ 0 ].rb_user_type
-    };
-    req.flash ( 'success', '登陆成功!' );
-    res.render ( 'client/in/index', { title : '瑞博科技｜日报', loadTagOjNew : results.loadTagJsFn } );
-  } );
-};
+
 /**
  * 开始注册信息
  * @param req
@@ -181,7 +107,7 @@ exports.registerInfo    = function ( req, res ) {
  * @param res
  */
 exports.auditState      = function ( req, res ) {
-  var user_id_cache = req.cookies.userid;
+  var user_id_cache = req.cookies.user_Hex;
   async.auto ( {
     cheackAuditStateById : function ( callback ) {
       User.cheackAuditStateById ( user_id_cache, function ( err, data ) {
@@ -261,7 +187,7 @@ exports.postNoAuditUser = function ( req, res ) {
             req.flash ( 'error', '程序出错，请联系小康同学!' );
             return res.redirect ( 'back' );
           }
-          cb();
+          cb ();
         } );
       }, function ( err ) {
         console.log ( "err: " + err );
@@ -283,9 +209,11 @@ exports.leave           = function ( req, res ) {
   res.clearCookie ( 'userId' );
   res.clearCookie ( 'rb_user_id' );
   req.flash ( 'success', '退出成功!' );
-  loadTagJsFn ( function ( loadTagOjNode ) {
+  /*loadTagJsFn ( function ( loadTagOjNode ) {
     res.render ( 'client/index', { title : '瑞博科技｜日报', loadTagOjNew : loadTagOjNode } );
-  } );
+  } );*/
+  req.logout();
+  res.redirect('/');
 };
 /**
  * 进入忘记密码页面
