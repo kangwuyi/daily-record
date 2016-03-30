@@ -57,6 +57,8 @@ var isAuthenticated = function ( req, res, next ) {
 router.post ( '/in/leave', User.leave );
 router.get ( '/in/leave', User.leave );
 router.get ( '/in/forgetPassword', User.forgetPassword );
+router.post('/in/forgetPasswordFn',User.forgetPasswordFn);
+router.get('/in/forgetPasswordFn',User.forgetPassword);
 router.get ( '/in/registerUser', User.registerUser );
 router.get ( '/in/auditState', User.auditState );
 router.post ( '/in/registerInfo', User.registerInfo );

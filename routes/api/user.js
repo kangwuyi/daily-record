@@ -223,6 +223,72 @@ exports.leave           = function ( req, res ) {
 exports.forgetPassword  = function ( req, res ) {
   res.render ( 'client/forgetPassword', { title : '瑞博科技｜日报', loadTagOjNew : null } );
 };
+
+exports.forgetPasswordFn  = function ( req, res ) {
+  /**
+  * 获取提交的用户名和邮箱
+   */
+  var user_name_forget     = req.body.userNameForget || ''
+      , user_emil_forget     = req.body.userEmilForget || '';
+  /**
+   * 判断用户有没有提交空值
+   */
+  /**
+   * 判断是否传入空值
+   */
+
+  if ( (user_name_forget === '') || (user_name_forget === null) || (user_name_forget === undefined) ) {
+    req.flash ( 'error', '请输入姓名!' );
+    return res.redirect ( 'back' );
+  }
+  if ( (user_emil_forget === '') || (user_emil_forget === null) || (user_emil_forget === undefined) ) {
+    req.flash ( 'error', '没有设置邮箱!' );
+    return res.redirect ( 'back' );
+  }
+  async.auto({
+    cheackByName: function (callback) {
+      User.cheackByName(user_name_forget, function (err, data) {
+        if (data.length <= 0) {
+          callback(err, {status: false, content: '姓名不存在!'});
+        } else {
+          callback(err, {status: true, content: data});
+        }
+      });
+    },
+    cheackByEmil: ['cheackByName', function (callback) {
+      User.cheackByEmil(user_emil_forget, function (err, data) {
+        if (data.length <= 0) {
+          callback(err, {status: false, content: '邮箱不存在!'});
+        } else {
+          callback(err, {status: true, content: data});
+        }
+      })
+    }]
+    }, function ( err, results ) {
+    if(results.cheackByName.status === false || results.cheackByEmil.status === false) {
+      var aa = [[results.cheackByName.status, results.cheackByName.content], [results.cheackByEmil.status, results.cheackByEmil.content]];
+      var bb = '';
+      aa.forEach(function(key, index){
+        if( key[0] === false){
+          if( index !== 0 ){
+            bb += '和';
+          }
+          bb += key[1];
+        }
+      });
+      req.flash('error', bb);
+      /*if(results.cheackByName.status === false && results.cheackByEmil.status === false){
+        req.flash('error', results.cheackByName.content + 'and' + results.cheackByEmil.content);
+      }else{
+        req.flash('error', (results.cheackByName.status === false) ? results.cheackByName.content : results.cheackByEmil.content);
+      }*/
+      return res.redirect('back');
+    } else {
+      res.render ( 'client/forgetPassword', { title : '瑞博科技｜日报', loadTagOjNew : null } );
+    }
+  } );
+};
+
 /**
  * 进入注册页面
  * @param req
