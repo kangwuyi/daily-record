@@ -10,7 +10,8 @@ var User                = require ( '../../models/user' )
   , loadTagJsFn         = require ( './module/public/loadTagJs.js' )
   , fs                  = require ( 'fs' )
   , pem                 = fs.readFileSync ( 'server.pem' )
-  , key                 = pem.toString ( 'ascii' );
+  , key                 = pem.toString ( 'ascii' )
+  ,nodemailer        = require('nodemailer');
 
 /**
  * 开始注册信息
@@ -228,7 +229,7 @@ exports.forgetPasswordFn  = function ( req, res ) {
   /**
   * 获取提交的用户名和邮箱
    */
-  var user_name_forget     = req.body.userNameForget || ''
+  var user_account_forget     = req.body.userAccountForget || ''
       , user_emil_forget     = req.body.userEmilForget || '';
   /**
    * 判断用户有没有提交空值
@@ -237,17 +238,19 @@ exports.forgetPasswordFn  = function ( req, res ) {
    * 判断是否传入空值
    */
 
-  if ( (user_name_forget === '') || (user_name_forget === null) || (user_name_forget === undefined) ) {
-    req.flash ( 'error', '请输入姓名!' );
+  if ( (user_account_forget === '') || (user_account_forget === null) || (user_account_forget === undefined) ) {
+    req.flash ( 'error', '请输入账号!' );
     return res.redirect ( 'back' );
   }
   if ( (user_emil_forget === '') || (user_emil_forget === null) || (user_emil_forget === undefined) ) {
     req.flash ( 'error', '没有设置邮箱!' );
     return res.redirect ( 'back' );
   }
+  var md5_user_account = crypto.createHash ( 'md5' );
+  var md5_user_account_forget         = md5_user_account.update ( user_account_forget ).digest ( 'hex' );
   async.auto({
-    cheackByName: function (callback) {
-      User.cheackByName(user_name_forget, function (err, data) {
+    cheackByAccount: function (callback) {
+      User.cheackByAccount(md5_user_account_forget, function (err, data) {
         if (data.length <= 0) {
           callback(err, {status: false, content: '姓名不存在!'});
         } else {
@@ -255,7 +258,7 @@ exports.forgetPasswordFn  = function ( req, res ) {
         }
       });
     },
-    cheackByEmil: ['cheackByName', function (callback) {
+    cheackByEmil: ['cheackByAccount', function (callback) {
       User.cheackByEmil(user_emil_forget, function (err, data) {
         if (data.length <= 0) {
           callback(err, {status: false, content: '邮箱不存在!'});
@@ -265,8 +268,8 @@ exports.forgetPasswordFn  = function ( req, res ) {
       })
     }]
     }, function ( err, results ) {
-    if(results.cheackByName.status === false || results.cheackByEmil.status === false) {
-      var aa = [[results.cheackByName.status, results.cheackByName.content], [results.cheackByEmil.status, results.cheackByEmil.content]];
+    if(results.cheackByAccount.status === false || results.cheackByEmil.status === false) {
+      var aa = [[results.cheackByAccount.status, results.cheackByAccount.content], [results.cheackByEmil.status, results.cheackByEmil.content]];
       var bb = '';
       aa.forEach(function(key, index){
         if( key[0] === false){
@@ -277,18 +280,94 @@ exports.forgetPasswordFn  = function ( req, res ) {
         }
       });
       req.flash('error', bb);
-      /*if(results.cheackByName.status === false && results.cheackByEmil.status === false){
-        req.flash('error', results.cheackByName.content + 'and' + results.cheackByEmil.content);
-      }else{
-        req.flash('error', (results.cheackByName.status === false) ? results.cheackByName.content : results.cheackByEmil.content);
-      }*/
       return res.redirect('back');
     } else {
-      res.render ( 'client/forgetPassword', { title : '瑞博科技｜日报', loadTagOjNew : null } );
+      /**
+       * 发送确认邮件
+       */
+      var transporter = nodemailer.createTransport({
+        service: '163',
+        auth: {
+          user: 'lianzixunyi@163.com',
+          pass: 'lianzixunyi123',
+          port:  465
+        }
+      });
+        var mailOptions = {
+            from: '"太一科技"<lianzixunyi@163.com>', // sender address
+            to: '1605457871@qq.com', // list of receivers
+            subject: 'Hello ✔', // Subject line
+            text: 'Hello world ✔', // plaintext body
+            html: '<a href="http://localhost:3001/in/confirmPassword?userAccount=' + user_account_forget + '&&userEmail=' + user_emil_forget + '">http://localhost:3001/in/confirmPassword?userAccount=' + user_account_forget + '&&userEmail=' + user_emil_forget + '</a>' // html body
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if(error){
+                console.log(error);
+            }else{
+                console.log('Message sent: ' + info.response);
+              res.render ( 'client/forgetEmail', {
+                title : '瑞博科技｜日报',
+                loadTagOjNew : null,
+                content: {
+                  userName: user_account_forget,
+                  userEmail: user_emil_forget
+                }
+              } );
+            }
+        });
     }
   } );
 };
-
+/**
+ * 进入重新设置密码
+ */
+exports.confirmPassword  = function ( req, res ) {
+  var userAccount = req.query.userAccount || false,
+      userEmail = req.query.userEmail || false;
+  res.render ( 'client/confirmPassword', {
+    title : '瑞博科技｜日报',
+    loadTagOjNew : null,
+    content: {
+      userAccount: userAccount,
+      userEmail: userEmail
+    }
+  } );
+};
+exports.refreshPassword = function ( req, res ) {
+  var refreshPassword  =  req.body.userPassword || ''
+      ,confirmPassword  = req.body.confirmPassword || ''
+      ,userAccount  = req.body.userAccount || ''
+      ,userEmail  = req.body.userEmail || '';
+  if ( (refreshPassword === '') || (refreshPassword === null) || (refreshPassword === undefined) ) {
+    req.flash ( 'error', '密码不能为空!' );
+    return res.redirect ( 'back' );
+  }
+  if ( (confirmPassword === '') || (confirmPassword === null) || (confirmPassword === undefined) ) {
+    req.flash ( 'error', '密码不能为空!' );
+    return res.redirect ( 'back' );
+  }
+  var md5_user_account = crypto.createHash ( 'md5' );
+  var userAccount         = md5_user_account.update ( userAccount ).digest ( 'hex' );
+  var md5_user_password = crypto.createHash ( 'md5' );
+  refreshPassword         = md5_user_password.update ( refreshPassword ).digest ( 'hex' );
+  async.auto({
+    resetPassword : function (callback) {
+      User.resetPassword(userAccount, refreshPassword, userEmail, function (err, data) {
+        if (data.length <= 0) {
+          callback(err, {status: false, content: '姓名不存在!'});
+        } else {
+          callback(err, {status: true, content: data});
+        }
+      });
+    }
+  }, function ( err, results ) {
+      res.render ( 'client/index', {
+        title : '瑞博科技｜日报',
+        loadTagOjNew : null
+      } );
+  } );
+};
 /**
  * 进入注册页面
  * @param req

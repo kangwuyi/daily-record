@@ -64,6 +64,9 @@ router.get ( '/in/auditState', User.auditState );
 router.post ( '/in/registerInfo', User.registerInfo );
 router.get ( '/in/registerInfo', User.getRegisterInfo );
 //
+router.get('/in/confirmPassword',User.confirmPassword);
+router.post('/in/confirmPassword',User.refreshPassword);
+//
 router.get ( '/in/prose', Prose.prose );
 //
 router.get ( '/in/proseById', Prose.proseById );

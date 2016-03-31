@@ -24,6 +24,8 @@
   , key           = pem.toString ( 'ascii' );
 
 
+
+
 passport.use ( 'local', new LocalStrategy (
   {
     usernameField : 'username',

@@ -69,6 +69,17 @@ exports.registerUserInfo       = function ( user_account, user_name, user_passwo
   object.queryMysql ( sql, callback );
 };
 /**
+ * 重新设定密码
+ * @param user_name
+ * @param user_password
+ * @param user_emil
+ * @param callback
+ */
+exports.resetPassword       = function ( user_account, user_password, user_emil, callback ) {
+  var sql = mysqlString.rb_user.resetPassword ( user_account, user_password, user_emil );
+  object.queryMysql ( sql, callback );
+};
+/**
  * 通过用户名查找用户id
  * @param user_account
  * @param callback

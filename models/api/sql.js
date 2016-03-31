@@ -21,6 +21,9 @@
       updateAuditStateById : function ( _user_id, departmentId ) {
         return "UPDATE  `daily_report`.`rb_user` SET `rb_user_state` = '1' , `rb_department_id` = '" + departmentId + "' WHERE" + " `rb_user`.`rb_user_id` =  '" + _user_id + "';";
       },
+      resetPassword : function ( user_account, _user_password, _user_emil ) {
+        return "UPDATE  `daily_report`.`rb_user` SET `rb_user_pw` = '" + _user_password + "' WHERE" + " `rb_user`.`rb_user_account` =  '" + user_account + "' and  `rb_user`.`rb_user_email` =  '" + _user_emil + "';";
+      },
       idByName             : function ( user_account ) {
         return "select rb_user_id from rb_user where rb_user_account='" + user_account + "' ";
       },
