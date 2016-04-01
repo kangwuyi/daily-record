@@ -1,0 +1,73 @@
+.departmentAndGroupName {
+
+}
+
+.tab-content {
+  .tab-pane {
+    width    : 100%;
+    position : relative;
+  }
+}
+
+.dataContent {
+  width      : 1617px;
+  overflow-x : auto;
+  display    : inline-block;
+  position   : relative;
+  .dataLeftContent {
+    list-style       : none;
+    width            : 100px;
+    position         : absolute;
+    left             : 0px;
+    text-algn        : center;
+    text-align       : center;
+    padding-left     : 0px;
+    top              : 10px;
+    background-color : #008ead;
+    .dataBoxRelative {
+      width          : 100px;
+      height         : 150px;
+      text-align     : center;
+      vertical-align : middle;
+      display        : inline-block;
+      color          : #ffffff;
+    }
+    .dateHeight {
+      height      : 32px;
+      line-height : 32px;
+    }
+  }
+  .dataRightContent {
+    idth        : 1500px;
+    float       : left;
+    margin-left : 110px;
+    margin-top  : 10px;
+    .dateBox {
+      width       : 100%;
+      height      : 32px;
+      line-height : 32px;
+      list-style  : none;
+      .dataContentDate {
+        width   : 200px;
+        float   : left;
+        display : inline-block;
+      }
+    }
+    .noteBox {
+      .dataContentDate {
+        width      : 100%;
+        height     : 150px;
+        list-style : none;
+        margin-top    : 0px;
+        margin-bottom : 0px;
+        .td_content_box {
+          width : 200px;
+          float : left;
+
+        }
+      }
+
+    }
+  }
+
+}
