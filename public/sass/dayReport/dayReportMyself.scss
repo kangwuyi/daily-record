@@ -10,7 +10,7 @@
   }
 }
 
-.prose-tree {
+.dayReportTree {
   position : relative;
   width    : 960px;
   margin   : 0 auto;
@@ -45,10 +45,13 @@
     @include transition((height 1s cubic-bezier(0.025, 0.025, 0.000, 1.115), opacity 1s));
     bottom   : 0;
     .cls {
+      display         : inline-block;;
       padding         : 30px 0;
+      margin-right    : 50px;
       color           : #a1a4b8;
       zoom            : 1;
       list-style-type : none;
+      height          : 200px;
       &:after {
         content    : ".";
         display    : block;
@@ -60,7 +63,7 @@
         float       : left;
         display     : block;
         clear       : left;
-        width       : 200px;
+        width       : 100px;
         line-height : 24px;
         text-align  : right
       }
@@ -68,31 +71,31 @@
         @extend .version;
         font-size   : 18px;
         line-height : 32px;
-        color       : #bec1d5
+        color       : #bec1d5;
+        width       : 100px
       }
       .more {
         float       : left;
         display     : block;
-        width       : 650px;
-        margin-left : 100px;
-        line-height : 24px;
+        width       : 200px;
+        height      : 100px;
+        margin-left : 25px;
+        line-height : 15px;
+        overflow    : auto;
       }
       .intro {
         @extend .more;
         font-size   : 18px;
+        height      : 32px;
         line-height : 32px;
         color       : #63d029;
+
       }
     }
   }
 }
 
 .basicBg {
-  background : #23E5DB;
-  color      : #fff;
+  background : #23e5db;
+  color      : #ffffff;
 }
-
-
-
-
-

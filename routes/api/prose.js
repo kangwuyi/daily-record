@@ -80,7 +80,7 @@ exports.prose         = function ( req, res ) {
       } ]
     }, function ( err, results ) {
       res.render (
-        'client/in/prose',
+        'client/in/dayReportMyself',
         {
           title         : '瑞博科技｜日报',
           PostGetProse  : results.getDatenoteById.data,
@@ -135,7 +135,7 @@ exports.proseById     = function ( req, res ) {
     } ]
   }, function ( err, results ) {
     res.render (
-      'client/in/prose',
+      'client/in/dayReportMyself',
       {
         title         : '瑞博科技｜日报',
         PostGetProse  : results.getDatenoteByIdAndGroupId.data,
@@ -154,7 +154,7 @@ exports.allProse      = function ( req, res ) {
   var _userAccountmd5 = req.cookies.username
     , _data           = []
     , endTime         = req.query.endTime ? Number ( kcool.trim ( req.query.endTime ) ) : new Date ().getTime ()
-    , startTime       = req.query.startTime ? Number ( kcool.trim ( req.query.startTime ) ) : new Date ( endTime ).getNextDate ( - 4 ).getTime ()
+    , startTime       = req.query.startTime ? Number ( kcool.trim ( req.query.startTime ) ) : new Date ( endTime ).getNextDate ( - 6 ).getTime ()
     , thisDateDiff    = Math.floor ( new Date ( endTime ).diff ( new Date ( startTime ) ) )
     , poDataList      = [];
   for ( var i = thisDateDiff; i >= 0; i -- ) {
@@ -268,7 +268,7 @@ exports.allProse      = function ( req, res ) {
           return res.redirect ( 'back' );
         } else {
           res.render (
-            'client/in/allProse',
+            'client/in/dayReportAll',
             {
               title           : '瑞博科技｜日报',
               _data           : _data,
@@ -356,7 +356,7 @@ exports.poProse       = function ( req, res ) {
     } ]
   }, function ( err, results ) {
     res.render (
-      'client/po/add/prose',
+      'client/po/add/dayReportEdit',
       {
         title        : '瑞博科技｜日报',
         group        : results.queryGroupById.data_g,
