@@ -26,149 +26,164 @@
 <div class="dayReportWrapper" style="margin-top:200px;">
     <div class="container-fluid ">
         <div class="col-md-12" id="day_report_content" role="tabpanel">
-            <!-- Nav tabs -->
-             <ul class="nav nav-tabs" role="tablist">
-                <% _data.forEach(  function(_data_box, index){ %>
-                <li role="presentation" class="<%= (index === 0) ? 'active' : null %>">
-                    <a href="#department_<%= _data_box.id %>" aria-controls="home" role="tab"
-                       data-toggle="tab"><%= _data_box.name %></a>
+
+            <ul class="nav nav-tabs" role="tablist">
+                <% _data.forEach(  function(_data_box, index_d){
+                    if(_data_box.children.length === 1){%>
+
+                <li role="presentation" class="<%= (index_d === 0) ? 'active' : null %>">
+                    <a href="#<%= _data_box.id %>_<%= _data_box.children[0].id %>" id="<%= _data_box.id %>_<%= _data_box.children[0].id %>-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false"><%= _data_box.name %></a>
                 </li>
-                <% }) %>
-             </ul>
-            <!-- Tab panes -->
+                <% } else if (_data_box.children.length > 1){%>
+                <li role="presentation" class="dropdown <%= (index_d === 0) ? 'active' : null %>">
+                    <a href="#" id="myTabDrop_<%= _data_box.id %>" class="dropdown-toggle" data-toggle="dropdown" aria-controls="<%= _data_box.id %>-contents" aria-expanded="false">
+                        <%= _data_box.name %>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu theDepartmentFirstLink" aria-labelledby="myTabDrop_<%= _data_box.id %>" id="<%= _data_box.id %>-contents">
+                        <% _data_box.children.forEach(  function(_data_box_group, index_g){ %>
+                        <li class="<%= (index_g === 0) ? 'active' : null %>">
+                            <a href="#<%= _data_box.id %>_<%= _data_box_group.id %>" role="tab" id="<%= _data_box.id %>_<%= _data_box_group.id %>-tab" data-toggle="tab" aria-controls="dropdown_<%= _data_box_group.id %>" aria-expanded="<%= (index_g === 0) ? 'true' : null %>">@<%= _data_box_group.name %></a>
+                        </li>
+                        <%})%>
+                    </ul>
+                </li>
+                <%}}) %>
+            </ul>
             <div class="tab-content">
-                <% _data.forEach(  function(_data_box, index){
-                 var ql_editor_index = 1; %>
-                <div role="tabpanel" class="tab-pane <%= (index === 0) ? 'active' : null %>" id="department_<%= _data_box.id %>">
+                <% _data.forEach(  function(_data_box){
+                    var ql_editor_index = 0;
+                     _data_box.children.forEach(  function(_data_box_group){ %>
+                <div role="tabpanel" class="tab-pane fade" id="<%= _data_box.id %>_<%= _data_box_group.id %>" aria-labelledby="<%= _data_box.id %>_<%= _data_box_group.id %>-tab">
 
+                    <tr>
+                        <th>
+                            <table class="table dateContent">
+                                <caption><%= _data_box_group.name %></caption>
+                                <tbody class="table dateContent"
+                                       style="width: 1617px;overflow-x: auto;display: inline-block;">
+                                <% _data_box_group.children.forEach(  function(_data_box_user, index_user){ %>
+                                <% if(index_user === 0){ %>
+                                <tr style="width: 1620px; display: inline-block;">
+                                    <td class="td_date_box" style="width:100%;display: inline-block;padding:0;">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 100px;height: 50px;display: inline-block;background: #a7323b;">
+                                                    日期
+                                                </th>
+                                                <% poDataList.forEach(  function(poDataList_data){ %>
+                                                <th style="width: 217px;height: 50px;display: inline-block;"><%= poDataList_data %></th>
+                                                <% }); %>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                <tr style="width: 1620px;display: inline-block;">
+                                    <td class="td_date_user_box"
+                                        style="width: 100px;height: 150px;display: inline-block;background: #7EA7A1;">
+                                        <%= _data_box_user.uname %>
+                                    </td>
 
-
-                    <table class="table">
-                        <caption><%= _data_box.name %></caption>
-                        <tbody>
-                        <% _data_box.children.forEach(  function(_data_box_group){ %>
-                        <tr>
-                            <th>
-                                <table class="table dateContent">
-                                    <caption><%= _data_box_group.name %></caption>
-                                    <tbody class="table dateContent"
-                                           style="width: 1617px;overflow-x: auto;display: inline-block;">
-                                    <% _data_box_group.children.forEach(  function(_data_box_user, index_user){ %>
-                                    <% if(index_user === 0){ %>
-                                    <tr style="width: 1620px; display: inline-block;">
-                                        <td class="td_date_box" style="width:100%;display: inline-block;padding:0;">
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width: 100px;height: 50px;display: inline-block;background: #a7323b;">
-                                                        日期
-                                                    </th>
-                                                    <% poDataList.forEach(  function(poDataList_data){ %>
-                                                    <th style="width: 217px;height: 50px;display: inline-block;"><%= poDataList_data %></th>
-                                                    <% }); %>
-                                                </tr>
-                                                </thead>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <% } %>
-                                    <tr style="width: 1620px;display: inline-block;">
-                                        <td class="td_date_user_box"
-                                            style="width: 100px;height: 150px;display: inline-block;background: #7EA7A1;">
-                                            <%= _data_box_user.uname %>
-                                        </td>
-
-                                        <% poDataList.forEach(  function(poDataList_data){
-                                            var poDataList_data_sign = false;
-                                            var nowTimeFormat = ( new Date()).format('yyyy-MM-dd');
-                                        if(_data_box_user.children != ''){
-                                                _data_box_user.children.forEach(  function(_data_box_datenote, index_data){
-                                        if(poDataList_data === (new Date(Number(_data_box_datenote.ndate)).format('yyyy-MM-dd'))){
-                                            poDataList_data_sign = true;
-                                            var thisDatenoteTimeFormat = (new Date(Number(_data_box_datenote.ndate))).format('yyyy-MM-dd')
-                                                    , thisUserAccount = _data_box_datenote.uaccount;
-                                        %>
-                                        <td style="width: 210px;height: 150px;display: inline-block;background: #eefffa;overflow: auto;"
-                                            class="td_content_box"
-                                            id="quill_<%= _data_box_datenote.nid %>_<%= _data_box_datenote.ndate %>_<%= _data_box_datenote.gid ||
-                                            _data_box_group.id %>_<%= _data_box_user.uaccount %>"
-                                            datenote-id="<%= _data_box_datenote.nid %>"
-                                            date-time="<%= _data_box_datenote.ndate %>"
-                                            user-account="<%= _data_box_user.uaccount %>"
-                                            group-id="<%= _data_box_datenote.gid || _data_box_group.id %>">
-                                            <%- _data_box_datenote.ncontent %>
-                                        </td>
-                                        <% if(_data_box_user.uaccount === _userAccountmd5){ %>
-                                        <script>
-                                            $('#quill_<%=_data_box_datenote.nid %>_<%= _data_box_datenote.ndate %>_<%=
-                  _data_box_datenote.gid ||
-                    _data_box_group.id %>_<%= _data_box_user.uaccount %>').css({
-                                                'background': '#683BB0',
-                                                'color': '#fff'
-                                            })
-                                            var basicEditor = new Quill('#quill_<%=_data_box_datenote.nid %>_<%= _data_box_datenote.ndate %>_<%=
-                  _data_box_datenote.gid ||
-                    _data_box_group.id %>_<%= _data_box_user.uaccount %>');
-                                            $(document).ready(function () {
-                                                $('#ql-editor-<%= ql_editor_index %>').blur(function (event) {
-                                                    var _that = $(this);
-                                                    var _that_node_clone = _that.html();
-                                                    var datenote_id = _that.parent().attr('datenote-id');
-                                                    var group_id = _that.parent().attr('group-id');
-                                                    var user_account = _that.parent().attr('user-account');
-                                                    var date_time = _that.parent().attr('date-time');
-                                                    $.ajax({
-                                                        type: "post",
-                                                        url: "postProseById",
-                                                        data: {
-                                                            datenote_id: datenote_id,
-                                                            datenote_content: _that_node_clone,
-                                                            user_account: user_account,
-                                                            date_time: date_time,
-                                                            group_id: group_id
-                                                        },
-                                                        dataType: "json",
-                                                        success: function (data) {
-                                                            console.log('yes');
-                                                            alert('修改成功');
-                                                            window.location.reload();
-                                                        },
-                                                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                            console.log('textStatus');
-                                                            alert('修改成功');
-                                                            window.location.reload();
-                                                        }
-                                                    });
-                                                    event.stopPropagation();//阻止冒泡事件，上级的单击事件不会被调用
+                                    <% poDataList.forEach(  function(poDataList_data){
+                                        var poDataList_data_sign = false;
+                                        var nowTimeFormat = ( new Date()).format('yyyy-MM-dd');
+                                    if(_data_box_user.children != ''){
+                                            _data_box_user.children.forEach(  function(_data_box_datenote, index_data){
+                                    if(poDataList_data === (new Date(Number(_data_box_datenote.ndate)).format('yyyy-MM-dd'))){
+                                        poDataList_data_sign = true;
+                                        var thisDatenoteTimeFormat = (new Date(Number(_data_box_datenote.ndate))).format('yyyy-MM-dd')
+                                                , thisUserAccount = _data_box_datenote.uaccount;
+                                    %>
+                                    <td style="width: 210px;height: 150px;display: inline-block;background: #eefffa;overflow: auto;"
+                                        class="td_content_box"
+                                        id="quill_<%= _data_box_datenote.nid %>_<%= _data_box_datenote.ndate %>_<%= _data_box_datenote.gid ||
+                                        _data_box_group.id %>_<%= _data_box_user.uaccount %>"
+                                        datenote-id="<%= _data_box_datenote.nid %>"
+                                        date-time="<%= _data_box_datenote.ndate %>"
+                                        user-account="<%= _data_box_user.uaccount %>"
+                                        group-id="<%= _data_box_datenote.gid || _data_box_group.id %>">
+                                        <%- _data_box_datenote.ncontent %>
+                                    </td>
+                                    <% if(_data_box_user.uaccount === _userAccountmd5){ %>
+                                    <script>
+                                        $('#quill_<%=_data_box_datenote.nid %>_<%= _data_box_datenote.ndate %>_<%=
+              _data_box_datenote.gid ||
+                _data_box_group.id %>_<%= _data_box_user.uaccount %>').css({
+                                            'background': '#683BB0',
+                                            'color': '#fff'
+                                        })
+                                        var basicEditor = new Quill('#quill_<%=_data_box_datenote.nid %>_<%= _data_box_datenote.ndate %>_<%=
+              _data_box_datenote.gid ||
+                _data_box_group.id %>_<%= _data_box_user.uaccount %>');
+                                        $(document).ready(function () {
+                                            $('#ql-editor-<%= ql_editor_index %>').blur(function (event) {
+                                                var _that = $(this);
+                                                var _that_node_clone = _that.html();
+                                                var datenote_id = _that.parent().attr('datenote-id');
+                                                var group_id = _that.parent().attr('group-id');
+                                                var user_account = _that.parent().attr('user-account');
+                                                var date_time = _that.parent().attr('date-time');
+                                                $.ajax({
+                                                    type: "post",
+                                                    url: "postProseById",
+                                                    data: {
+                                                        datenote_id: datenote_id,
+                                                        datenote_content: _that_node_clone,
+                                                        user_account: user_account,
+                                                        date_time: date_time,
+                                                        group_id: group_id
+                                                    },
+                                                    dataType: "json",
+                                                    success: function (data) {
+                                                        console.log('yes');
+                                                        alert('修改成功');
+                                                        window.location.reload();
+                                                    },
+                                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                                        console.log('textStatus');
+                                                        alert('修改成功');
+                                                        window.location.reload();
+                                                    }
                                                 });
-                                                <% ql_editor_index = ql_editor_index + 1; %>
+                                                event.stopPropagation();//阻止冒泡事件，上级的单击事件不会被调用
                                             });
-                                        </script>
+                                            <% ql_editor_index = ql_editor_index + 1; %>
+                                        });
+                                    </script>
 
-                                        <% }}});}else{
-                                        %>
-                                        <td style="width: 300px;height: 150px;display: inline-block;background: #ffd6de;overflow: auto;"
-                                            class="td_content_box"
-                                            datenote-id="inexistence"
-                                            date-time="<%= new Date((new Date(poDataList_data).format('yyyy-MM-dd 12:59:59'))).getTime() %>"
-                                            user-account="<%= _data_box_user.uaccount %>" group-id="<%= _data_box_group.id %>">
-                                        </td>
-                                        <%
-                                        }
-                                        }); %>
-                                    </tr>
-                                    <% }); %>
-                                    </tbody>
-                                </table>
-                            </th>
-                        </tr>
-                        <% }); %>
-                        </tbody>
-                    </table>
+                                    <% }}});}else{
+                                    %>
+                                    <td style="width: 300px;height: 150px;display: inline-block;background: #ffd6de;overflow: auto;"
+                                        class="td_content_box"
+                                        datenote-id="inexistence"
+                                        date-time="<%= new Date((new Date(poDataList_data).format('yyyy-MM-dd 12:59:59'))).getTime() %>"
+                                        user-account="<%= _data_box_user.uaccount %>"
+                                        group-id="<%= _data_box_group.id %>">
+                                    </td>
+                                    <%
+                                    }
+                                    }); %>
+                                </tr>
+                                <% }); %>
+                                </tbody>
+                            </table>
+                        </th>
+                    </tr>
                 </div>
-                <% }) %>
+                <%})}) %>
             </div>
+            <script type="application/javascript">
+                (function($){
+                    $('.theDepartmentFirstLink').each(function(index, item){
+                        var _this = $(this),
+                                theDepartmentTabId = _this.find('li:first-child a').attr('href');
+                        $(theDepartmentTabId).addClass("active in");
+                    })
+                })($)
+            </script>
         </div>
     </div>
-</div>
 <%- include ../modulesTools/footerLoader %>
