@@ -77,7 +77,7 @@
           " u.rb_user_id='" + userId + "' and dn.rb_group_id = '" + userGroupId + "'";
       },
       getNoteDateByDataString                : function ( user_id, dataString ) {
-        return "select dn.rb_datenote_date from rb_user u, rb_datenote dn where u.rb_user_id =" +
+        return "select dn.rb_datenote_date,dn.rb_datenote_id from rb_user u, rb_datenote dn where u.rb_user_id =" +
           " dn.rb_datenote_user_id and u.rb_user_id='" + user_id + "' and FROM_UNIXTIME(floor(dn.rb_datenote_date/1000), '%Y-%m-%d') = '" + dataString + "'";
       },
       cheackNoteByDataGroupId                : function ( user_id, dataString, groupid ) {

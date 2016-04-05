@@ -193,7 +193,7 @@ exports.allProse      = function ( req, res ) {
             queryUserInfoByGroupId            : function ( auto_callback ) {
               User.queryUserInfoByGroupId ( group_id, function ( err, data ) {
                 if ( data.length < 1 ) {
-                  data = [ { rb_user_id : 99999, rb_user_name : '暂无' } ];
+                  data = [ { rb_user_id : 1, rb_user_name : '暂无' } ];
                   auto_callback ( err, data );
                 } else {
                   auto_callback ( err, data );
@@ -217,8 +217,8 @@ exports.allProse      = function ( req, res ) {
                 } );
                 if ( _poDataListSign === false ) {
                   _user__datenotedata.push ( {
-                    did      : '',
-                    gid      : '',
+                    did      : item_group.rb_department_id,
+                    gid      : item_group.rb_group_id,
                     uaccount : user_arr_item.rb_user_account,
                     uid      : user_arr_item.rb_user_id,
                     nid      : 'inexistence',
@@ -414,7 +414,6 @@ exports.postProseById = function ( req, res ) {
       } ]
     }, function ( err, results ) {
       var _user_id = results.idByName[ 0 ].rb_user_id;
-
       /**
        * 不存在状态日期
        */
@@ -488,8 +487,9 @@ exports.postProseById = function ( req, res ) {
             req.flash ( 'error', '程序出错，错误码：results!' );
             return res.redirect ( 'back' );
           }
+          var thisNewDateNoteId = results.getNoteDateByDataString[ results.getNoteDateByDataString.length - 1 ].rb_datenote_id;
           req.flash ( 'success', '添加成功!' );
-          return res.redirect ( 'back' );
+          return res.send({'success': true, content: '修改成功', thisId: thisNewDateNoteId});
         } );
       } else {
         /**
@@ -552,16 +552,18 @@ exports.postProseById = function ( req, res ) {
         }, function ( err, results ) {
           if ( err ) {
             req.flash ( 'error', '程序出错，错误码：results!' );
-            return res.redirect ( 'back' );
+            return res.send({'success': false, content: '程序出错，错误码：results!'});
           }
+          var thisNewDateNoteId = results.cheackNoteByDataGroupId[ results.cheackNoteByDataGroupId.length - 1 ].rb_datenote_id;
           req.flash ( 'success', '添加成功!' );
-          return res.redirect ( 'back' );
+          return res.send({'success': true, content: '修改成功',thisId: thisNewDateNoteId});
         } );
       }
     } );
   } else {
     Prose.postProseById ( datenote_id, datenote_content, function ( err, postProseById ) {
-      return res.redirect ( 'back' );
+      //return res.redirect ( 'back' );
+      return res.send({'success': true, content: '修改成功'});
     } )
   }
 };

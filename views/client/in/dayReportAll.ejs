@@ -3,34 +3,13 @@
 
 <link type="text/css" rel="stylesheet" href="../lib/quill.snow.css"/>
 <script type="text/javascript" src="../lib/quill.js"></script>
-<script>
-    Date.prototype.format = function (fmt) {
-        var week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', '星期日', '星期一', '星期二',
-            '星期三', '星期四', '星期五', '星期六'];
-        var o = {
-            "M+": this.getMonth() + 1, //月份
-            "d+": this.getDate(), //日
-            "h+": this.getHours(), //小时
-            "m+": this.getMinutes(), //分
-            "s+": this.getSeconds(), //秒
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-            "S": this.getMilliseconds(), //毫秒
-            "DD": week[this.getDay() + 7]
-        };
-        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o)
-            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr((k == "DD") ? 2 : ("" + o[k]).length)));
-        return fmt;
-    };
-</script>
-<div class="dayReportWrapper" style="margin-top:200px;">
+<div class="dayReportWrapper">
     <div class="container-fluid">
         <div class="col-md-12" id="day_report_content" role="tabpanel">
-
+            <!-- table 头 -->
             <ul class="nav nav-tabs" role="tablist">
                 <% _data.forEach(  function(_data_box, index_d){
                 if(_data_box.children.length === 1){ %>
-
                 <li role="presentation" class="<%= (index_d === 0) ? 'active' : null %>">
                     <a href="#<%= _data_box.id %>_<%= _data_box.children[0].id %>"
                        id="<%= _data_box.id %>_<%= _data_box.children[0].id %>-tab" role="tab" data-toggle="tab"
@@ -57,12 +36,15 @@
                 </li>
                 <% }}) %>
             </ul>
+            <!-- table 内容 -->
             <div class="tab-content">
                 <% _data.forEach(  function(_data_box){
-                    _data_box.children.forEach(  function(_data_box_group){ %>
-                <div role="tabpanel" class="tab-pane fade" id="<%= _data_box.id %>_<%= _data_box_group.id %>" aria-labelledby="<%= _data_box.id %>_<%= _data_box_group.id %>-tab">
+                        _data_box.children.forEach(  function(_data_box_group){ %>
+                <div role="tabpanel" class="tab-pane fade" id="<%= _data_box.id %>_<%= _data_box_group.id %>"
+                     aria-labelledby="<%= _data_box.id %>_<%= _data_box_group.id %>-tab">
                     <span class="departmentAndGroupName"><%= _data_box_group.name %></span>
-                    <div class="dataContent">
+                    <div class="dataContent clearfix">
+                        <!-- 用户栏 + “日期” -->
                         <ul class="dataLeftContent">
                             <li class="dataBoxRelative dateHeight">日期</li>
                             <% _data_box_group.children.forEach(  function(_data_box_user){ %>
@@ -70,29 +52,40 @@
                             <% }); %>
                         </ul>
                         <div class="dataRightContent">
-                            <ul class="dateBox dateHeight">
-                                <% poDataList.forEach(  function(poDataList_data){ %>
-                                <li class="dataContentDate" data-time="<%= (new Date(poDataList_data)).getTime() %>"><%= poDataList_data %></li>
-                                <% }); %>
-                            </ul>
-                            <div class="noteBox">
-                                <% _data_box_group.children.forEach(  function(_data_box_user){ %>
-                                <ul class="dataContentDate">
-                                    <% poDataList.forEach( function(poDataList_data){
-                                            _data_box_user.children.forEach(  function(_data_box_datenote){
-                                        _data_box_datenote.ndate = (typeof _data_box_datenote.ndate === 'number') ? _data_box_datenote.ndate : Number(_data_box_datenote.ndate);
-                                    if(poDataList_data === (new Date(_data_box_datenote.ndate)).format('yyyy-MM-dd')){%>
-                                    <li class="td_content_box"
-                                          id="quill_<%= _data_box_datenote.nid %>_<%= _data_box_datenote.ndate %>_<%= _data_box_datenote.gid || _data_box_group.id %>_<%= _data_box_user.uaccount %>"
-                                          datenote-id="<%= _data_box_datenote.nid %>"
-                                          date-time="<%= _data_box_datenote.ndate %>"
-                                          user-account="<%= _data_box_user.uaccount %>"
-                                          group-id="<%= _data_box_datenote.gid || _data_box_group.id %>">
-                                    <%- _data_box_datenote.ncontent %>
-                                </li>
-                                    <% }});}); %>
-                                </ul>
-                                <% }); %>
+                            <div class="dataRightContentOverflow">
+                                <div class="contentWidth100">
+                                    <!-- 日期栏 -->
+                                    <ul class="dateBox dateHeight">
+                                        <% poDataList.forEach(  function(poDataList_data){ %>
+                                        <li class="dataContentDate"
+                                            data-time="<%= (new Date(poDataList_data)).getTime() %>"><%= poDataList_data %></li>
+                                        <% }); %>
+                                    </ul>
+                                    <!-- 内容 -->
+                                    <div class="noteBox">
+                                        <% _data_box_group.children.forEach(  function(_data_box_user){ %>
+                                        <ul class="dataContentBox">
+                                            <% poDataList.forEach( function(poDataList_data){
+                                                    _data_box_user.children.forEach(  function(_data_box_datenote){
+                                                _data_box_datenote.ndate = (typeof _data_box_datenote.ndate === 'number') ? _data_box_datenote.ndate : Number(_data_box_datenote.ndate);
+                                            if(poDataList_data === (new Date(_data_box_datenote.ndate)).format('yyyy-MM-dd')){ %>
+                                            <li class="dataContentList">
+                                                <div class="contentBox <%= (_userAccountmd5 === _data_box_user.uaccount) ? 'myselfBg' : ''%>"
+                                                     id="quill_<%= _data_box_datenote.nid %>_<%= _data_box_datenote.ndate %>_<%= _data_box_datenote.gid %>_<%= _data_box_user.uaccount %>"
+                                                     datenote-id="<%= _data_box_datenote.nid %>"
+                                                     date-time="<%= _data_box_datenote.ndate %>"
+                                                     user-account="<%= _data_box_user.uaccount %>"
+                                                     group-id="<%= _data_box_datenote.gid %>"
+                                                     dblclick-status="<%= (_userAccountmd5 === _data_box_user.uaccount) ? 'true' : 'false'%>"
+                                                        >
+                                                    <%- _data_box_datenote.ncontent %>
+                                                </div>
+                                            </li>
+                                            <% }});}); %>
+                                        </ul>
+                                        <% }); %>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -100,6 +93,24 @@
                 <% })}) %>
             </div>
             <script type="application/javascript">
+                Date.prototype.format = function (fmt) {
+                    var week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', '星期日', '星期一', '星期二',
+                        '星期三', '星期四', '星期五', '星期六'];
+                    var o = {
+                        "M+": this.getMonth() + 1, //月份
+                        "d+": this.getDate(), //日
+                        "h+": this.getHours(), //小时
+                        "m+": this.getMinutes(), //分
+                        "s+": this.getSeconds(), //秒
+                        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                        "S": this.getMilliseconds(), //毫秒
+                        "DD": week[this.getDay() + 7]
+                    };
+                    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+                    for (var k in o)
+                        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr((k == "DD") ? 2 : ("" + o[k]).length)));
+                    return fmt;
+                };
                 (function ($) {
                     $('.theDepartmentFirstLink').each(function (index, item) {
                         var _this = $(this),
@@ -107,7 +118,78 @@
                         $(theDepartmentTabId).addClass("active in");
                     })
                 })($)
+                $(document).ready(function () {
+                    $('.noteBox').on('dblclick', '.dataContentList .contentBox', function(event){
+                        var _that = $(this),
+                            dblclickStatus = _that.attr('dblclick-status');
+                        if( dblclickStatus === 'false'){
+                            return false;
+                        }
+                        var basicEditor = new Quill ( '#' + this.id);
+                        _that.attr('dblclick-status', 'false');
+                        basicEditor = null;
+                        event.stopPropagation();//阻止冒泡事件，上级的单击事件不会被调用
+                    }).on('keydown', '.dataContentList .ql-editor', function(event){
+                        if (event.keyCode === 13 && event.ctrlKey) {
+                            event.preventDefault(); //阻止默认回车换行
+
+                        var _that            = $ ( this),
+                            _thatParent = _that.parent(),
+                            _that_node_clone = _that.html (),
+                            datenote_id = _thatParent.attr ( 'datenote-id' ),
+                            group_id = _thatParent.attr ( 'group-id' ),
+                            user_account = _thatParent.attr ( 'user-account' ),
+                            date_time = _thatParent.attr ( 'date-time'),
+                            _thatParentId = _thatParent.attr ( 'id');
+                        function deteleQuillArrayById(_domId){
+                            function unique ( arr, _domId) {
+                                var result = [], hash = {};
+                                for ( var i = 0, elem, idCache; ((elem = arr[ i ]) && (idCache = arr[ i ].container.id)) != null; i ++ ) {
+                                    if ( ! hash[ idCache ] && idCache !== _domId) {
+                                        result.push ( elem );
+                                        hash[ idCache ] = true;
+                                    }
+                                }
+                                return result;
+                            }
+                            window.Quill.editors = unique(window.Quill.editors, _domId);
+                        }
+                        $.ajax({
+                            type: "post",
+                            url: "postProseById",
+                            data: {
+                                datenote_id: datenote_id,
+                                datenote_content: _that_node_clone,
+                                user_account: user_account,
+                                date_time: date_time,
+                                group_id: group_id
+                            },
+                            dataType: "json",
+                            success: function (data) {
+                                _thatParent.attr('dblclick-status', 'true');
+                                _thatParent.html(_that_node_clone);
+                                if(window.Quill){
+                                    deteleQuillArrayById(_thatParentId);
+                                }
+                                _thatParent.attr('datenote-id', data.thisId)
+                                _thatParent.removeClass('ql-container');
+                                alert(data.content);
+                                //window.location.reload();
+                            },
+                            error: function (error) {
+                                _thatParent.attr('dblclick-status', 'true');
+                                _thatParent.html(_that_node_clone);
+                                if(window.Quill){
+                                    deteleQuillArrayById(_thatParentId);
+                                }
+                                alert(error.content);
+                            }
+                        });
+                        event.stopPropagation();
+                    }})
+                })
             </script>
         </div>
     </div>
+</div>
 <%- include ../modulesTools/footerLoader %>

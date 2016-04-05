@@ -115,52 +115,84 @@ body {
   position: relative; }
 
 .dataContent {
-  width: 1617px;
-  overflow-x: auto;
+  width: 100%;
   display: inline-block;
   position: relative; }
   .dataContent .dataLeftContent {
     list-style: none;
-    width: 100px;
-    position: absolute;
-    left: 0px;
-    text-algn: center;
+    width: 50px;
+    float: left;
     text-align: center;
-    padding-left: 0px;
-    top: 10px;
-    background-color: #008ead; }
+    padding: 0;
+    background-color: #008ead;
+    margin-right: -100%; }
     .dataContent .dataLeftContent .dataBoxRelative {
-      width: 100px;
+      width: 50px;
       height: 150px;
+      padding-top: 65px;
       text-align: center;
       vertical-align: middle;
       display: inline-block;
       color: #ffffff; }
     .dataContent .dataLeftContent .dateHeight {
       height: 32px;
-      line-height: 32px; }
-  .dataContent .dataRightContent {
-    idth: 1500px;
-    float: left;
-    margin-left: 110px;
-    margin-top: 10px; }
-    .dataContent .dataRightContent .dateBox {
-      width: 100%;
-      height: 32px;
       line-height: 32px;
-      list-style: none; }
-      .dataContent .dataRightContent .dateBox .dataContentDate {
-        width: 200px;
-        float: left;
-        display: inline-block; }
-    .dataContent .dataRightContent .noteBox .dataContentDate {
+      padding: 0px; }
+  .dataContent .dataRightContent {
+    width: 100%;
+    padding-left: 53px;
+    box-sizing: border-box; }
+    .dataContent .dataRightContent .dataRightContentOverflow {
       width: 100%;
-      height: 150px;
-      list-style: none;
-      margin-top: 0px;
-      margin-bottom: 0px; }
-      .dataContent .dataRightContent .noteBox .dataContentDate .td_content_box {
-        width: 200px;
-        float: left; }
+      overflow-x: auto; }
+      .dataContent .dataRightContent .dataRightContentOverflow .contentWidth100 {
+        width: 1500px; }
+        .dataContent .dataRightContent .dataRightContentOverflow .contentWidth100 .dateBox {
+          width: 100%;
+          height: 32px;
+          line-height: 32px;
+          list-style: none;
+          margin: 0;
+          padding: 0; }
+          .dataContent .dataRightContent .dataRightContentOverflow .contentWidth100 .dateBox .dataContentDate {
+            width: 214px;
+            float: left;
+            display: inline-block;
+            background: #62b1d0;
+            text-align: center; }
+        .dataContent .dataRightContent .dataRightContentOverflow .contentWidth100 .noteBox .dataContentBox {
+          width: 100%;
+          height: 150px;
+          list-style: none;
+          margin: 0;
+          padding: 0; }
+          .dataContent .dataRightContent .dataRightContentOverflow .contentWidth100 .noteBox .dataContentBox .dataContentList {
+            width: 214px;
+            float: left;
+            height: inherit;
+            background: #ff15b9;
+            box-sizing: border-box;
+            border: 1px solid #ffffff; }
+            .dataContent .dataRightContent .dataRightContentOverflow .contentWidth100 .noteBox .dataContentBox .dataContentList .contentBox {
+              width: 100%;
+              height: 100%;
+              border: 1px solid #eefffa;
+              background: #f2ffe5;
+              word-break: break-all;
+              text-indent: 2px; }
+              .dataContent .dataRightContent .dataRightContentOverflow .contentWidth100 .noteBox .dataContentBox .dataContentList .contentBox.ql-container {
+                padding: 2px;
+                color: #393939 !important; }
+              .dataContent .dataRightContent .dataRightContentOverflow .contentWidth100 .noteBox .dataContentBox .dataContentList .contentBox.myselfBg {
+                background: #ff938c;
+                color: #ffffff; }
+              .dataContent .dataRightContent .dataRightContentOverflow .contentWidth100 .noteBox .dataContentBox .dataContentList .contentBox .ql-editor {
+                background: #ffffff; }
+  .dataContent .clearfix:after {
+    height: 0;
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden; }
 
 /*# sourceMappingURL=dayReportIndex.css.map */

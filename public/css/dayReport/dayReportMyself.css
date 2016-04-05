@@ -1,0 +1,108 @@
+body {
+  color: rgba(255, 255, 255, 0.5);
+  zoom: 1;
+  font: 14px Arial, Helvetica, sans-serif;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  transition: color 0.5s ease; }
+
+.closeProse h2 i {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg); }
+.closeProse .list {
+  opacity: 0;
+  height: 0 !important; }
+
+.dayReportTree {
+  position: relative;
+  width: 960px;
+  margin: 0 auto; }
+  .dayReportTree h2 {
+    height: 40px;
+    width: 170px;
+    padding-right: 30px;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: right; }
+    .dayReportTree h2 a {
+      color: #58a6fb;
+      text-decoration: none; }
+      .dayReportTree h2 a i {
+        display: block;
+        position: relative;
+        height: 0;
+        width: 0;
+        left: 190px;
+        top: -20px;
+        border-width: 6px;
+        border-style: solid;
+        border-color: #59a7fb transparent transparent transparent;
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+        transition: 0.5s;
+        -webkit-transform-origin: 6px 3px;
+        -moz-transform-origin: 6px 3px;
+        -ms-transform-origin: 6px 3px;
+        -o-transform-origin: 6px 3px;
+        transform-origin: 6px 3px; }
+  .dayReportTree .list {
+    margin: 10px 0;
+    overflow: hidden;
+    -webkit-transition: height 1s cubic-bezier(0.025, 0.025, 0, 1.115), opacity 1s;
+    -moz-transition: height 1s cubic-bezier(0.025, 0.025, 0, 1.115), opacity 1s;
+    -ms-transition: height 1s cubic-bezier(0.025, 0.025, 0, 1.115), opacity 1s;
+    -o-transition: height 1s cubic-bezier(0.025, 0.025, 0, 1.115), opacity 1s;
+    transition: height 1s cubic-bezier(0.025, 0.025, 0, 1.115), opacity 1s;
+    bottom: 0; }
+    .dayReportTree .list .cls {
+      display: inline-block;
+      padding: 30px 0;
+      margin-right: 50px;
+      color: #a1a4b8;
+      zoom: 1;
+      list-style-type: none;
+      height: 200px; }
+      .dayReportTree .list .cls:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden; }
+      .dayReportTree .list .cls .version, .dayReportTree .list .cls .date {
+        float: left;
+        display: block;
+        clear: left;
+        width: 100px;
+        line-height: 24px;
+        text-align: right; }
+      .dayReportTree .list .cls .date {
+        font-size: 18px;
+        line-height: 32px;
+        color: #bec1d5;
+        width: 100px; }
+      .dayReportTree .list .cls .more, .dayReportTree .list .cls .intro {
+        float: left;
+        display: block;
+        width: 200px;
+        height: 100px;
+        margin-left: 25px;
+        line-height: 15px;
+        overflow: auto; }
+      .dayReportTree .list .cls .intro {
+        font-size: 18px;
+        height: 32px;
+        line-height: 32px;
+        color: #63d029; }
+
+.basicBg {
+  background: #23e5db;
+  color: #ffffff; }
+
+/*# sourceMappingURL=dayReportMyself.css.map */

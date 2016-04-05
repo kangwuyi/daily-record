@@ -10,23 +10,21 @@
 }
 
 .dataContent {
-  width      : 1617px;
-  overflow-x : auto;
-  display    : inline-block;
-  position   : relative;
+  width    : 100%;
+  display  : inline-block;
+  position : relative;
   .dataLeftContent {
     list-style       : none;
-    width            : 100px;
-    position         : absolute;
-    left             : 0px;
-    text-algn        : center;
+    width            : 50px;
+    float            : left;
     text-align       : center;
-    padding-left     : 0px;
-    top              : 10px;
+    padding          : 0;
     background-color : #008ead;
+    margin-right     : -100%;
     .dataBoxRelative {
-      width          : 100px;
+      width          : 50px;
       height         : 150px;
+      padding-top    : 65px;
       text-align     : center;
       vertical-align : middle;
       display        : inline-block;
@@ -35,39 +33,77 @@
     .dateHeight {
       height      : 32px;
       line-height : 32px;
+      padding     : 0px;
     }
   }
   .dataRightContent {
-    idth        : 1500px;
-    float       : left;
-    margin-left : 110px;
-    margin-top  : 10px;
-    .dateBox {
-      width       : 100%;
-      height      : 32px;
-      line-height : 32px;
-      list-style  : none;
-      .dataContentDate {
-        width   : 200px;
-        float   : left;
-        display : inline-block;
-      }
-    }
-    .noteBox {
-      .dataContentDate {
-        width      : 100%;
-        height     : 150px;
-        list-style : none;
-        margin-top    : 0px;
-        margin-bottom : 0px;
-        .td_content_box {
-          width : 200px;
-          float : left;
-
+    width        : 100%;
+    padding-left : 53px;
+    box-sizing   : border-box;
+    .dataRightContentOverflow {
+      width      : 100%;
+      overflow-x : auto;
+      .contentWidth100 {
+        width : 1500px;
+        .dateBox {
+          width       : 100%;
+          height      : 32px;
+          line-height : 32px;
+          list-style  : none;
+          margin      : 0;
+          padding     : 0;
+          .dataContentDate {
+            width      : 214px;
+            float      : left;
+            display    : inline-block;
+            background : #62b1d0;
+            text-align : center;
+          }
+        }
+        .noteBox {
+          .dataContentBox {
+            width      : 100%;
+            height     : 150px;
+            list-style : none;
+            margin     : 0;
+            padding    : 0;
+            .dataContentList {
+              width      : 214px;
+              float      : left;
+              height     : inherit;
+              background : #ff15b9;
+              box-sizing : border-box;
+              border     : 1px solid #ffffff;
+              .contentBox {
+                width       : 100%;
+                height      : 100%;
+                border      : 1px solid #eefffa;
+                background  : #f2ffe5;
+                word-break  : break-all;
+                text-indent : 2px;
+                &.ql-container {
+                  padding : 2px;
+                  color   : #393939 !important;
+                }
+                &.myselfBg {
+                  background : #ff938c;
+                  color      : #ffffff;
+                }
+                .ql-editor {
+                  background : #ffffff;
+                }
+              }
+            }
+          }
         }
       }
-
     }
   }
-
+  .clearfix:after {
+    height     : 0;
+    content    : ".";
+    display    : block;
+    clear      : both;
+    visibility : hidden;
+  }
 }
