@@ -50,6 +50,15 @@
       zoom            : 1;
       list-style-type : none;
       height          : 200px;
+      width           : 14%;
+      &.zeroBG{
+        .date{
+          background: #ff877e;
+        }
+        .more{
+          background: #ffbf8d;
+        }
+      }
       &:after {
         content    : ".";
         display    : block;

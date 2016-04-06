@@ -1,21 +1,75 @@
 <!-- 开始循环 -->
-<% PostDataProse.forEach(  function(PostDataProse){ %>
+<% function addDate(dd, dadd){
+    //可以加上错误处理
+        var a = new Date(dd)
+        a = a.valueOf()
+        a = a - dadd * 24 * 60 * 60 * 1000
+        a = new Date(a)
+        //alert(a.getFullYear() + "年" + (a.getMonth() + 1) + "月" + a.getDate() + "日")
+        return a;
+    }
+    PostDataProse.forEach( function(dataYear){ %>
 <div class="dayReportTree col-md-12 container-fluid">
-    <h2><a href="#"><%= PostDataProse %>月<i></i></a></h2>
+    <% dataYear.children.forEach( function(dataMonth){ %>
+    <h2><a href="#"><%= dataYear.name %>年<%= dataMonth.name %>月<i></i></a></h2>
     <ul class="list  row">
-        <% PostGetProse.forEach(  function(PostGetProse){ %>
-        <% if( PostDataProse == PostGetProse.dataMonth){ %>
-        <li class="cls col-md-2">
-            <p class="date"><%= PostGetProse.dataYear %>年<%= PostDataProse %>月<%= PostGetProse.dataDay %>日</p>
+        <% dataMonth.children.forEach( function(dataDay, index){
+            if(index === 0){
+                var indexCache = []
+                ,_thisDateCache = (new Date((typeof dataDay.rb_datenote_date === 'number' ? dataDay.rb_datenote_date : Number(dataDay.rb_datenote_date))))
+                ,_thisDateCacheFormat = _thisDateCache.format('yyyy-MM-dd');
+                switch (_thisDateCache.format('DD'))
+                {
+                    case '星期一':
+                        indexCache = [];
+                        break;
+                    case '星期二':
+                        indexCache = [addDate(_thisDateCacheFormat,1)];
+                        break;
+                    case '星期三':
+                        indexCache = [addDate(_thisDateCacheFormat,2),addDate(_thisDateCacheFormat,1)];
+                        break;
+                    case '星期四':
+                        indexCache = [addDate(_thisDateCacheFormat,3),addDate(_thisDateCacheFormat,2),addDate(_thisDateCacheFormat,1)];
+                        break;
+                    case '星期五':
+                        indexCache = [addDate(_thisDateCacheFormat,4),addDate(_thisDateCacheFormat,3),addDate(_thisDateCacheFormat,2),addDate(_thisDateCacheFormat,1)];
+                        break;
+                    case '星期六':
+                        indexCache = [addDate(_thisDateCacheFormat,5),addDate(_thisDateCacheFormat,4),addDate(_thisDateCacheFormat,3),addDate(_thisDateCacheFormat,2),addDate(_thisDateCacheFormat,1)];
+                        break;
+                    case '星期日':
+                        indexCache = [addDate(_thisDateCacheFormat,6),addDate(_thisDateCacheFormat,5),addDate(_thisDateCacheFormat,4),addDate(_thisDateCacheFormat,3),addDate(_thisDateCacheFormat,2),addDate(_thisDateCacheFormat,1)];
+                        break;
+                }
+                for(var i = 0; i < indexCache.length; i++){%>
+                <li class="cls zeroBG">
+                    <p class="date">
+                        <%= indexCache[i].format('yyyy') %>年<%= indexCache[i].format('MM') %>月<%= indexCache[i].format('dd') %>日<%= indexCache[i].format('DD') %>
+                    </p>
+                    <div class="more">
+                        <div class="iconfont dateList-<%= (typeof indexCache[i].format('dd') === 'number') ? indexCache[i].format('dd') : Number(indexCache[i].format('dd')) %>">
+                        </div>
+                        <div class="contentBox"></div>
+                    </div>
+                </li>
+                <%}
+            }
+        %>
+        <li class="cls">
+            <p class="date">
+                <%= dataDay.dataYear %>年<%= dataDay.dataMonth %>月<%= dataDay.dataDay %>日<%= (new Date((typeof dataDay.rb_datenote_date === 'number' ? dataDay.rb_datenote_date : Number(dataDay.rb_datenote_date)))).format('DD') %>
+            </p>
             <div class="more">
-                <div class="iconfont dateList-<%= (typeof PostGetProse.dataDay === 'number') ? PostGetProse.dataDay : Number(PostGetProse.dataDay) %>">
+                <div class="iconfont dateList-<%= (typeof dataDay.dataDay === 'number') ? dataDay.dataDay : Number(dataDay.dataDay) %>">
                 </div>
-                <div class="contentBox"><%- PostGetProse.rb_datenote_content %></div>
+                <div class="contentBox"><%- dataDay.rb_datenote_content %></div>
             </div>
         </li>
-        <% } %>
-        <% }); %>
-        <!-- 开始循环结束 -->
+        <% }) %>
     </ul>
+    <% }) %>
+    <!-- 开始循环结束 -->
+
 </div>
 <% }); %>

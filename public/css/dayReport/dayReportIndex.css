@@ -66,7 +66,12 @@ body {
       color: #a1a4b8;
       zoom: 1;
       list-style-type: none;
-      height: 200px; }
+      height: 200px;
+      width: 14%; }
+      .dayReportTree .list .cls.zeroBG .date {
+        background: #ff877e; }
+      .dayReportTree .list .cls.zeroBG .more, .dayReportTree .list .cls.zeroBG .intro {
+        background: #ffbf8d; }
       .dayReportTree .list .cls:after {
         content: ".";
         display: block;

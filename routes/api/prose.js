@@ -60,11 +60,30 @@ exports.prose = function (req, res) {
                 data[index].dataYear = new Date(dateGetTime).format("yyyy");
                 data[index].dataMonth = new Date(dateGetTime).format("MM");
                 data[index].dataDay = new Date(dateGetTime).format("dd");
-                PostDataProse.push(new Date(dateGetTime).format("MM"));
+                PostDataProse.push(new Date(dateGetTime).format("yyyy-MM"));
               }
               PostDataProse = kcool.unique(PostDataProse);
+              var dateCacheArr = []
+                , dateCacheArrYear = [];
+              PostDataProse.forEach(function (data) {
+                dateCacheArrYear.push((new Date(data)).format('yyyy'));
+              });
+              dateCacheArrYear = kcool.unique(dateCacheArrYear);
+              dateCacheArrYear.forEach(function (yearCache) {
+                var monthCacheArr = [];
+                PostDataProse.forEach(function (data) {
+                  if ((new Date(data)).format('yyyy') === yearCache) {
+                    monthCacheArr.push((new Date(data)).format('MM'))
+                  }
+                });
+                monthCacheArr = kcool.unique(monthCacheArr);
+                dateCacheArr.push({
+                  name: yearCache,
+                  children: monthCacheArr
+                });
+              });
               data_parent.data = data;
-              data_parent.PostDataProse = PostDataProse;
+              data_parent.dateCacheArr = dateCacheArr;
               callback(err, data_parent);
             }
           }
@@ -81,12 +100,32 @@ exports.prose = function (req, res) {
         });
       }]
     }, function (err, results) {
+      var newDateArr = [];
+      results.getDatenoteById.dateCacheArr.forEach(function (yearArguments) {
+        var monthCacheArr = [];
+        yearArguments.children.forEach(function (monthArguments) {
+          var dayCacheArr = [];
+          results.getDatenoteById.data.forEach(function (dataArguments) {
+            if ((monthArguments == dataArguments.dataMonth) && (yearArguments.name == dataArguments.dataYear)) {
+              dayCacheArr.push(dataArguments);
+            }
+          });
+          monthCacheArr.push({
+            name: monthArguments,
+            children: dayCacheArr
+          })
+        });
+        newDateArr.push({
+          name: yearArguments.name,
+          children: monthCacheArr.reverse()
+        })
+      });
       res.render(
         'client/in/dayReportMyself',
         {
           title: '瑞博科技｜日报',
-          PostGetProse: results.getDatenoteById.data,
-          PostDataProse: results.getDatenoteById.PostDataProse,
+          PostGetProse: results.getDatenoteById.dateCacheArr,
+          PostDataProse: newDateArr,
           loadTagOjNew: results.loadTagJsFn
         }
       );
