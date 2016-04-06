@@ -1,17 +1,12 @@
 <!-- 开始循环 -->
 <% PostDataProse.forEach(  function( PostDataProse ){ %>
-<div class="prose-tree col-md-12">
+<div class="dayReportTree col-md-12">
   <h2><a href="#"><%= PostDataProse %>月<i></i></a></h2>
   <ul class="list">
     <% PostGetProse.forEach(  function( PostGetProse ){ %>
     <% if( PostDataProse == PostGetProse.dataMonth){ %>
     <li class="cls">
-      <p class="date"><%= PostGetProse.dataYear %>年<%= PostGetProse.dataDay %>日</p>
-
-      <p class="intro"><%= PostGetProse.rb_group_name %> --- <%= PostGetProse.rb_user_name %></p>
-
-      <p class="version"><%= new Date ( Number ( PostGetProse.rb_datenote_date ) ) %></p>
-
+      <p class="date"><%= PostGetProse.dataYear %>年<%= PostDataProse %>月<%= PostGetProse.dataDay %>日</p>
       <div class="more">
         <p><%- PostGetProse.rb_datenote_content %></p>
       </div>

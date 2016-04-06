@@ -1403,7 +1403,6 @@ body {
     .dayReportTree .list .cls {
       display: inline-block;
       padding: 30px 0;
-      margin-right: 50px;
       color: #a1a4b8;
       zoom: 1;
       list-style-type: none;
@@ -1415,25 +1414,24 @@ body {
         clear: both;
         visibility: hidden; }
       .dayReportTree .list .cls .version, .dayReportTree .list .cls .date {
-        float: left;
         display: block;
         clear: left;
-        width: 100px;
         line-height: 24px;
-        text-align: right; }
+        text-align: center; }
       .dayReportTree .list .cls .date {
         font-size: 18px;
         line-height: 32px;
-        color: #bec1d5;
-        width: 100px; }
+        color: #ffffff;
+        background-color: #62b1d0; }
       .dayReportTree .list .cls .more, .dayReportTree .list .cls .intro {
         float: left;
         display: block;
-        width: 200px;
+        width: 210px;
         height: 100px;
-        margin-left: 25px;
         line-height: 15px;
-        overflow: auto; }
+        overflow: auto;
+        background-color: #f2ffe5;
+        text-indent: 10px; }
       .dayReportTree .list .cls .intro {
         font-size: 18px;
         height: 32px;

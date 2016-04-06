@@ -47,7 +47,7 @@
       },
       cheackUserIdCache    : function ( user_id_cache ) {
         return "select * from rb_user where rb_user_idcache='" + user_id_cache + "'";
-      }
+      },
     },
     rb_datenote   : {
       getDatenoteById                        : function ( user_id ) {

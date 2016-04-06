@@ -12,7 +12,8 @@ var kcool             = require ( './module/config/kcool' )
   , async             = require ( 'async' )
   , fs                = require ( 'fs' )
   , pem               = fs.readFileSync ( 'server.pem' )
-  , key               = pem.toString ( 'ascii' );
+  , key               = pem.toString ( 'ascii' )
+  , dSDate = require ( './module/config/dataSerialization' );
 /**
  * 跳转到查看所有组别的全部日报
  * @param req
@@ -52,21 +53,26 @@ exports.prose         = function ( req, res ) {
             } else {
               var PostDataProse = []
                 , data_parent   = {};
-              for ( var index = 0; index < data.length; index ++ ) {
-                var dateGetTime         = data[ index ].rb_datenote_date;
-                dateGetTime             = (typeof dateGetTime == Number) ? dateGetTime : Number ( dateGetTime );
-                data[ index ].dataYear  = new Date ( dateGetTime ).format ( "yyyy" );
-                data[ index ].dataMonth = new Date ( dateGetTime ).format ( "MM" );
-                data[ index ].dataDay   = new Date ( dateGetTime ).format ( "dd" );
-                PostDataProse.push ( new Date ( dateGetTime ).format ( "MM" ) );
-              }
-              PostDataProse             = kcool.unique ( PostDataProse );
-              data_parent.data          = data;
-              data_parent.PostDataProse = PostDataProse;
-              callback ( err, data_parent );
-            }
-          }
-        } );
+              data = dSDate.dataSerialization( data );
+                    for ( var index = 0; index < data.length; index ++ ) {
+                      var dateGetTime         = data[ index ].rb_datenote_date;
+                      dateGetTime             = (typeof dateGetTime == Number) ? dateGetTime : Number ( dateGetTime );
+                      data[ index ].dataYear  = new Date ( dateGetTime ).format ( "yyyy" );
+                      data[ index ].dataMonth = new Date ( dateGetTime ).format ( "MM" );
+                      data[ index ].dataDay   = new Date ( dateGetTime ).format ( "dd" );
+                      PostDataProse.push ( new Date ( dateGetTime ).format ( "MM" ) );
+                    }
+                    PostDataProse             = kcool.unique ( PostDataProse );
+                    data_parent.data          = data;
+                    data_parent.PostDataProse = PostDataProse;
+                    callback ( err, data_parent );
+                  }
+
+                }
+
+
+              })
+
       } ],
       loadTagJsFn       : [ 'cheackUserIdCache', 'getDatenoteById', function ( callback, result ) {
         loadTagJsFn ( function ( err, data ) {
