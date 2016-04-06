@@ -9,8 +9,9 @@ body {
   transition: color 0.5s ease; }
 
 .headerWrapper {
+  position: fixed;
   width: 100%;
-  background: #278CDE;
+  background: #278cde;
   z-index: 9;
   height: 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -30,7 +31,7 @@ body {
   height: 100%; }
 
 .logo span {
-  color: #fff;
+  color: #ffffff;
   font-size: 30px;
   font-weight: bold;
   font-family: Georgia, "Times New Roman", Times, serif; }

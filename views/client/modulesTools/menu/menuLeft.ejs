@@ -1,0 +1,41 @@
+<div class="menuLeftBox">
+    <div class="contentMoudle">
+        <% JSON.parse(loadTagOjNew).ArrJson.forEach(function(dataDepartment){ %>
+        <div class="dataDepartment">
+            <div class="dataDepartmentName"><%= dataDepartment.name %></div>
+            <div class="dataDepartmentChildren active">
+                <% dataDepartment.children.forEach(function(dataGroup){ %>
+                <div class="dataGroup">
+                    <div class="dataGroupName"><%= dataGroup.name %></div>
+                    <div class="dataGroupChildren">
+                        <% dataGroup.children.forEach(function(dataUser){ %>
+                        <div class="dataUser">
+                            <div class="dataUserName"><%= dataUser.name %></div>
+                            <div class="dataUserChildren">
+                                <% dataUser.children.forEach(function(dataContent){ %>
+                                <div class="dataContent">
+                                    <div class="dataContentName"><%= dataContent.name %></div>
+                                </div>
+                                <% }) %>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
+<script>
+    $('.contentMoudle').on('click', '.dataDepartmentName, .dataGroupName, .dataUserName', function (e) {
+        var _this = $(this),
+                _thisBorder = _this.siblings();
+        if(!_thisBorder.hasClass('active')){
+            _thisBorder.addClass('active').slideDown();
+        } else {
+            _thisBorder.removeClass('active').slideUp();
+        }
+    })
+</script>

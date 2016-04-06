@@ -1,0 +1,224 @@
+.menuLeftBox {
+  float      : left;
+  width      : 190px;
+  overflow   : hidden;
+  background : #278CDE;
+  display    : block;
+  position   : fixed;
+  left       : 0;
+  top        : 40px;
+  z-index    : 20;
+  clear      : both;
+  bottom     : 80px;
+  .contentMoudle {
+    overflow : auto;
+    width    : 100%;
+    height   : 100%;
+    padding  : 0.1px 0;
+    position : relative;
+    .dataDepartment {
+      width  : 100%;
+      height : auto;
+      color  : #ffffff;
+      .dataDepartmentName {
+        background  : #0C5692;
+        height      : 32px;
+        line-height : 32px;
+        text-align  : left;
+        text-indent : 20px;
+        font-size   : 20px;
+        font-weight : bold;
+        cursor      : pointer;
+        border-top: 2px solid #fff;
+      }
+      .dataDepartmentChildren{
+        &.active{
+
+        }
+        .dataGroup {
+          width   : 100%;
+          height  : auto;
+          .dataGroupName {
+            background  : #278CDE;
+            height      : 32px;
+            line-height : 32px;
+            text-align  : left;
+            text-indent : 40px;
+            font-size   : 20px;
+            font-weight : bold;
+            cursor      : pointer;
+          }
+          .dataGroupChildren{
+            display : none;
+            &.active{
+
+            }
+            .dataUser {
+              width   : 100%;
+              height  : auto;
+              .dataUserName {
+                background  : #769FC1;
+                height      : 32px;
+                line-height : 32px;
+                text-align  : left;
+                text-indent : 60px;
+                font-size   : 20px;
+                font-weight : bold;
+                cursor      : pointer;
+              }
+              .dataUserChildren{
+                display : none;
+                &.active{
+
+                }
+                .dataContent {
+                  width   : 100%;
+                  height  : auto;
+                  .dataContentName {
+                    background  : #840807;
+                    height      : 32px;
+                    line-height : 32px;
+                    text-align  : left;
+                    text-indent : 80px;
+                    font-size   : 20px;
+                    font-weight : bold;
+                    cursor      : pointer;
+                  }
+                  .dataContentChildren{
+
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .moveToLeftActive{
+      display : block;
+      -webkit-animation: moveToLeft .6s ease both;
+      -moz-animation: moveToLeft .6s ease both;
+      animation: moveToLeft .6s ease both;
+    }
+    @-webkit-keyframes moveToLeft {
+      to { -webkit-transform: translateX(-100%); }
+    }
+    @-moz-keyframes moveToLeft {
+      to { -moz-transform: translateX(-100%); }
+    }
+    @keyframes moveToLeft {
+      to { transform: translateX(-100%); }
+    }
+    //侧边栏动画效果
+    @-webkit-keyframes move_right {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        -webkit-transform: translateX(120px);
+        transform: translateX(120px);
+      }
+    }
+    @keyframes move_right {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        -webkit-transform: translateX(120px);
+        transform: translateX(120px);
+      }
+    }
+    @-webkit-keyframes move_left {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+        -webkit-transform: translateX(-120px);
+        transform: translateX(-120px);
+      }
+    }
+    @keyframes move_left {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+        -webkit-transform: translateX(-120px);
+        transform: translateX(-120px);
+      }
+    }
+    @-webkit-keyframes move_up {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        -webkit-transform: translateY(-250px);
+        transform: translateY(-250px);
+      }
+    }
+    @keyframes move_up {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        -webkit-transform: translateY(-250px);
+        transform: translateY(-250px);
+      }
+    }
+
+    .move_right {
+      -webkit-animation-name : move_right;
+      animation-name : move_right;
+      -webkit-animation-duration : 1s;
+      animation-duration : 1s;
+      -webkit-animation-iteration-count : 1;
+      animation-iteration-count : 1;
+      -webkit-animation-fill-mode : forwards;
+      animation-fill-mode : forwards;
+    }
+    .move_left {
+      -webkit-animation-name : move_left;
+      animation-name : move_left;
+      -webkit-animation-duration : 1s;
+      animation-duration : 1s;
+      -webkit-animation-iteration-count : 1;
+      animation-iteration-count : 1;
+      -webkit-animation-fill-mode : forwards;
+      animation-fill-mode : forwards;
+    }
+    .move_up {
+      -webkit-animation-name : move_up;
+      animation-name : move_up;
+      -webkit-animation-duration : 1s;
+      animation-duration : 1s;
+      -webkit-animation-iteration-count : 1;
+      animation-iteration-count : 1;
+      -webkit-animation-fill-mode : forwards;
+      animation-fill-mode : forwards;
+    }
+    .fadeIn {
+      -webkit-transform : translateX(120px);
+      transform : translateX(120px);
+      opacity: 1;
+    }
+    .fadeInUp {
+      -webkit-transform : translateY(-250px);
+      transform : translateY(-250px);
+      opacity: 1;
+      -webkit-transition :-webkit-transform .2s ease-out,opacity .2s ease-out;
+      transition :transform .2s ease-out, opacity .2s ease-out;
+    }
+    .fadeOutLeft {
+      -webkit-transform : translateX(-120px);
+      transform : translateX(-120px);
+      opacity: 0.0;
+      -webkit-transition :-webkit-transform .2s ease-out,opacity .2s ease-out;
+      transition :transform .2s ease-out, opacity .2s ease-out;
+    }
+  }
+}
