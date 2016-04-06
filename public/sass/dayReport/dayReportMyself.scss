@@ -44,19 +44,34 @@
     overflow : hidden;
     @include transition((height 1s cubic-bezier(0.025, 0.025, 0.000, 1.115), opacity 1s));
     bottom   : 0;
+    .dateCls {
+      list-style    : none;
+      margin-bottom : 10px;
+    }
+    .dateTitle {
+      width            : 14%;
+      display          : inline-block;
+      margin           : 0;
+      padding          : 0;
+      font-size        : 18px;
+      line-height      : 32px;
+      color            : #ffffff;
+      background-color : #62b1d0;
+      text-align       : center;
+    }
     .cls {
       display         : inline-block;;
       color           : #a1a4b8;
       zoom            : 1;
       list-style-type : none;
-      height          : 200px;
+      height          : 160px;
       width           : 14%;
-      &.zeroBG{
-        .date{
-          background: #ff877e;
+      &.zeroBG {
+        .date {
+          background : #ff877e;
         }
-        .more{
-          background: #ffbf8d;
+        .more {
+          background : #ffbf8d;
         }
       }
       &:after {

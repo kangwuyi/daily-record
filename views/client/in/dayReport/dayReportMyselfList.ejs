@@ -13,6 +13,15 @@
     <% dataYear.children.forEach( function(dataMonth){ %>
     <h2><a href="#"><%= dataYear.name %>年<%= dataMonth.name %>月<i></i></a></h2>
     <ul class="list  row">
+        <li class="dateCls">
+            <div class="dateTitle">星期一</div>
+            <div class="dateTitle">星期二</div>
+            <div class="dateTitle">星期三</div>
+            <div class="dateTitle">星期四</div>
+            <div class="dateTitle">星期五</div>
+            <div class="dateTitle">星期六</div>
+            <div class="dateTitle">星期日</div>
+        </li>
         <% dataMonth.children.forEach( function(dataDay, index){
             if(index === 0){
                 var indexCache = []
@@ -44,9 +53,6 @@
                 }
                 for(var i = 0; i < indexCache.length; i++){%>
                 <li class="cls zeroBG">
-                    <p class="date">
-                        <%= indexCache[i].format('yyyy') %>年<%= indexCache[i].format('MM') %>月<%= indexCache[i].format('dd') %>日<%= indexCache[i].format('DD') %>
-                    </p>
                     <div class="more">
                         <div class="iconfont dateList-<%= (typeof indexCache[i].format('dd') === 'number') ? indexCache[i].format('dd') : Number(indexCache[i].format('dd')) %>">
                         </div>
@@ -57,9 +63,6 @@
             }
         %>
         <li class="cls">
-            <p class="date">
-                <%= dataDay.dataYear %>年<%= dataDay.dataMonth %>月<%= dataDay.dataDay %>日<%= (new Date((typeof dataDay.rb_datenote_date === 'number' ? dataDay.rb_datenote_date : Number(dataDay.rb_datenote_date)))).format('DD') %>
-            </p>
             <div class="more">
                 <div class="iconfont dateList-<%= (typeof dataDay.dataDay === 'number') ? dataDay.dataDay : Number(dataDay.dataDay) %>">
                 </div>
