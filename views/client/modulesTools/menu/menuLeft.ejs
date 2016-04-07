@@ -1,32 +1,32 @@
 <div class="menuLeftBox">
-    <div class="contentMoudle">
+    <ul class="contentMoudle nav nav-list">
         <% JSON.parse(loadTagOjNew).ArrJson.forEach(function(dataDepartment){ %>
-        <div class="dataDepartment">
+        <li class="dataDepartment dropdown-toggle">
             <div class="dataDepartmentName"><%= dataDepartment.name %></div>
-            <div class="dataDepartmentChildren active">
+            <ul class="dataDepartmentChildren active">
                 <% dataDepartment.children.forEach(function(dataGroup){ %>
-                <div class="dataGroup">
+                <li class="dataGroup">
                     <div class="dataGroupName"><%= dataGroup.name %></div>
-                    <div class="dataGroupChildren">
+                    <ul class="dataGroupChildren">
                         <% dataGroup.children.forEach(function(dataUser){ %>
-                        <div class="dataUser">
+                        <li class="dataUser">
                             <div class="dataUserName"><%= dataUser.name %></div>
-                            <div class="dataUserChildren">
+                            <ul class="dataUserChildren">
                                 <% dataUser.children.forEach(function(dataContent){ %>
-                                <div class="dataContent">
+                                <li class="dataContent">
                                     <div class="dataContentName"><%= dataContent.name %></div>
-                                </div>
+                                </li>
                                 <% }) %>
-                            </div>
-                        </div>
+                            </ul>
+                        </li>
                         <% }) %>
-                    </div>
-                </div>
+                    </ul>
+                </li>
                 <% }) %>
-            </div>
-        </div>
+            </ul>
+        </li>
         <% }) %>
-    </div>
+    </ul>
 </div>
 <script>
     $('.contentMoudle').on('click', '.dataDepartmentName, .dataGroupName, .dataUserName', function (e) {

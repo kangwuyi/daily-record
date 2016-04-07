@@ -1,90 +1,155 @@
 .menuLeftBox {
-  float      : left;
-  width      : 190px;
-  overflow   : hidden;
-  display    : block;
-  position   : fixed;
-  left       : 0;
-  top        : 40px;
-  z-index    : 20;
-  clear      : both;
-  bottom     : 80px;
+  float            : left;
+  width            : 190px;
+  overflow         : hidden;
+  display          : block;
+  z-index          : 20;
+  clear            : both;
+  position         : inherit;
+  top              : 0;
+  bottom           : 0;
+  border-right     : 1px solid #ccc;
+  background-color : #f2f2f2;
+  font-family      : 'Open Sans';
+  font-size        : 13px;
+  color            : #393939;
   .contentMoudle {
-    overflow : auto;
-    width    : 100%;
-    height   : 100%;
-    padding  : 0.1px 0;
-    position : relative;
+    overflow      : auto;
+    width         : 100%;
+    height        : 100%;
+    position      : relative;
+    display       : block;
+    padding       : 0;
+    margin        : 0;
+    border        : 0;
+    border-top    : 1px solid #fcfcfc;
+    border-bottom : 1px solid #e5e5e5;
+    ul {
+      padding : 0;
+    }
+    & > li:first-child {
+      border-top : 0;
+    }
     .dataDepartment {
       width  : 100%;
       height : auto;
       color  : #ffffff;
-      .dataDepartmentName {
-        background  : #086fa1;
-        height      : 32px;
-        line-height : 32px;
-        text-align  : left;
-        text-indent : 20px;
-        font-size   : 20px;
-        font-weight : bold;
-        cursor      : pointer;
-        border-top: 2px solid #fff;
+      & > :hover {
+        background-color : #FFF;
+        color            : #1963aa;
       }
-      .dataDepartmentChildren{
-        &.active{
+      .dataDepartmentName {
+        text-align       : left;
+        text-indent      : 20px;
+        cursor           : pointer;
+        border-top       : 2px solid #fff;
+        height           : 38px;
+        line-height      : 36px;
+        padding          : 0 16px 0 7px;
+        background-color : #f9f9f9;
+        color            : #585858;
+        text-shadow      : none !important;
+        text-decoration  : none;
+        border-left      : 4px solid #f9f9f9;
+        &:hover{
+          border-left : 4px solid #25639e;
+        }
+      }
+      .dataDepartmentChildren {
+        &.active {
 
         }
+        li:first-child {
+          border-top : 1px solid #fafafa;
+        }
         .dataGroup {
-          width   : 100%;
-          height  : auto;
+          width  : 100%;
+          height : auto;
           .dataGroupName {
-            background  : #63add0;
-            height      : 32px;
-            line-height : 32px;
-            text-align  : left;
-            text-indent : 40px;
-            font-size   : 20px;
-            font-weight : bold;
-            cursor      : pointer;
+            position         : relative;
+            height           : 32px;
+            text-align       : left;
+            cursor           : pointer;
+            display          : block;
+            color            : #616161;
+            padding          : 7px 0 8px 37px;
+            margin           : 0;
+            border-top       : 1px dotted #e4e4e4;
+            background-color : #eee;
+            border-left      : 1px dotted #25639e;
+            &:before {
+              content     : "";
+              display     : inline-block;
+              position    : absolute;
+              width       : 8px;
+              left        : 18px;
+              top         : 17px;
+              border-top  : 1px solid #ccd7e2;
+            }
           }
-          .dataGroupChildren{
-            display : none;
-            &.active{
+          .dataGroupChildren {
+            display          : none;
+            background-color : #fff;
+            &.active {
 
             }
             .dataUser {
-              width   : 100%;
-              height  : auto;
+              width  : 100%;
+              height : auto;
               .dataUserName {
-                background  : #ffbf8d;
-                height      : 32px;
-                line-height : 32px;
-                text-align  : left;
-                text-indent : 60px;
-                font-size   : 20px;
-                font-weight : bold;
-                cursor      : pointer;
+                margin-left      : 20px;
+                height           : 32px;
+                text-align       : left;
+                cursor           : pointer;
+                display          : block;
+                position         : relative;
+                color            : #616161;
+                border-top       : 1px dotted #e4e4e4;
+                border-left      : 1px dotted #25639e;
+                background-color : #eee;
+                padding          : 7px 0 8px 37px;
+                &:before {
+                  content    : "";
+                  display    : inline-block;
+                  position   : absolute;
+                  width      : 8px;
+                  left       : 18px;
+                  top        : 17px;
+                  border-top : 1px solid #ccd7e2
+                }
               }
-              .dataUserChildren{
-                display : none;
-                &.active{
+              .dataUserChildren {
+                display          : none;
+                background-color : #fff;
+                &.active {
 
                 }
                 .dataContent {
-                  width   : 100%;
-                  height  : auto;
+                  width  : 100%;
+                  height : auto;
                   .dataContentName {
-                    background  : #04376c;
-                    height      : 32px;
-                    line-height : 32px;
-                    text-align  : left;
-                    text-indent : 80px;
-                    font-size   : 20px;
-                    font-weight : bold;
-                    cursor      : pointer;
+                    background-color : #fff;
+                    height           : 32px;
+                    text-align       : left;
+                    cursor           : pointer;
+                    display          : block;
+                    position         : relative;
+                    color            : #616161;
+                    padding          : 7px 0 8px 60px;
+                    margin           : 0 0 0 20px;
+                    border-left      : 1px dotted #25639e;
+                    &:before {
+                      content    : "";
+                      display    : inline-block;
+                      position   : absolute;
+                      width      : 8px;
+                      left       : 40px;
+                      top        : 17px;
+                      border-top : 1px solid #ccd7e2
+                    }
                   }
-                  .dataContentChildren{
-
+                  .dataContentChildren {
+                    color : #777;
                   }
                 }
               }
@@ -93,131 +158,137 @@
         }
       }
     }
-    .moveToLeftActive{
-      display : block;
-      -webkit-animation: moveToLeft .6s ease both;
-      -moz-animation: moveToLeft .6s ease both;
-      animation: moveToLeft .6s ease both;
+    .moveToLeftActive {
+      display           : block;
+      -webkit-animation : moveToLeft .6s ease both;
+      -moz-animation    : moveToLeft .6s ease both;
+      animation         : moveToLeft .6s ease both;
     }
     @-webkit-keyframes moveToLeft {
-      to { -webkit-transform: translateX(-100%); }
+      to {
+        -webkit-transform : translateX(-100%);
+      }
     }
     @-moz-keyframes moveToLeft {
-      to { -moz-transform: translateX(-100%); }
+      to {
+        -moz-transform : translateX(-100%);
+      }
     }
     @keyframes moveToLeft {
-      to { transform: translateX(-100%); }
+      to {
+        transform : translateX(-100%);
+      }
     }
     //侧边栏动画效果
     @-webkit-keyframes move_right {
       from {
-        opacity: 0;
+        opacity : 0;
       }
       to {
-        opacity: 1;
-        -webkit-transform: translateX(120px);
-        transform: translateX(120px);
+        opacity           : 1;
+        -webkit-transform : translateX(120px);
+        transform         : translateX(120px);
       }
     }
     @keyframes move_right {
       from {
-        opacity: 0;
+        opacity : 0;
       }
       to {
-        opacity: 1;
-        -webkit-transform: translateX(120px);
-        transform: translateX(120px);
+        opacity           : 1;
+        -webkit-transform : translateX(120px);
+        transform         : translateX(120px);
       }
     }
     @-webkit-keyframes move_left {
       from {
-        opacity: 1;
+        opacity : 1;
       }
       to {
-        opacity: 0;
-        -webkit-transform: translateX(-120px);
-        transform: translateX(-120px);
+        opacity           : 0;
+        -webkit-transform : translateX(-120px);
+        transform         : translateX(-120px);
       }
     }
     @keyframes move_left {
       from {
-        opacity: 1;
+        opacity : 1;
       }
       to {
-        opacity: 0;
-        -webkit-transform: translateX(-120px);
-        transform: translateX(-120px);
+        opacity           : 0;
+        -webkit-transform : translateX(-120px);
+        transform         : translateX(-120px);
       }
     }
     @-webkit-keyframes move_up {
       from {
-        opacity: 0;
+        opacity : 0;
       }
       to {
-        opacity: 1;
-        -webkit-transform: translateY(-250px);
-        transform: translateY(-250px);
+        opacity           : 1;
+        -webkit-transform : translateY(-250px);
+        transform         : translateY(-250px);
       }
     }
     @keyframes move_up {
       from {
-        opacity: 0;
+        opacity : 0;
       }
       to {
-        opacity: 1;
-        -webkit-transform: translateY(-250px);
-        transform: translateY(-250px);
+        opacity           : 1;
+        -webkit-transform : translateY(-250px);
+        transform         : translateY(-250px);
       }
     }
 
     .move_right {
-      -webkit-animation-name : move_right;
-      animation-name : move_right;
-      -webkit-animation-duration : 1s;
-      animation-duration : 1s;
+      -webkit-animation-name            : move_right;
+      animation-name                    : move_right;
+      -webkit-animation-duration        : 1s;
+      animation-duration                : 1s;
       -webkit-animation-iteration-count : 1;
-      animation-iteration-count : 1;
-      -webkit-animation-fill-mode : forwards;
-      animation-fill-mode : forwards;
+      animation-iteration-count         : 1;
+      -webkit-animation-fill-mode       : forwards;
+      animation-fill-mode               : forwards;
     }
     .move_left {
-      -webkit-animation-name : move_left;
-      animation-name : move_left;
-      -webkit-animation-duration : 1s;
-      animation-duration : 1s;
+      -webkit-animation-name            : move_left;
+      animation-name                    : move_left;
+      -webkit-animation-duration        : 1s;
+      animation-duration                : 1s;
       -webkit-animation-iteration-count : 1;
-      animation-iteration-count : 1;
-      -webkit-animation-fill-mode : forwards;
-      animation-fill-mode : forwards;
+      animation-iteration-count         : 1;
+      -webkit-animation-fill-mode       : forwards;
+      animation-fill-mode               : forwards;
     }
     .move_up {
-      -webkit-animation-name : move_up;
-      animation-name : move_up;
-      -webkit-animation-duration : 1s;
-      animation-duration : 1s;
+      -webkit-animation-name            : move_up;
+      animation-name                    : move_up;
+      -webkit-animation-duration        : 1s;
+      animation-duration                : 1s;
       -webkit-animation-iteration-count : 1;
-      animation-iteration-count : 1;
-      -webkit-animation-fill-mode : forwards;
-      animation-fill-mode : forwards;
+      animation-iteration-count         : 1;
+      -webkit-animation-fill-mode       : forwards;
+      animation-fill-mode               : forwards;
     }
     .fadeIn {
       -webkit-transform : translateX(120px);
-      transform : translateX(120px);
-      opacity: 1;
+      transform         : translateX(120px);
+      opacity           : 1;
     }
     .fadeInUp {
-      -webkit-transform : translateY(-250px);
-      transform : translateY(-250px);
-      opacity: 1;
-      -webkit-transition :-webkit-transform .2s ease-out,opacity .2s ease-out;
-      transition :transform .2s ease-out, opacity .2s ease-out;
+      -webkit-transform  : translateY(-250px);
+      transform          : translateY(-250px);
+      opacity            : 1;
+      -webkit-transition : -webkit-transform .2s ease-out, opacity .2s ease-out;
+      transition         : transform .2s ease-out, opacity .2s ease-out;
     }
     .fadeOutLeft {
-      -webkit-transform : translateX(-120px);
-      transform : translateX(-120px);
-      opacity: 0.0;
-      -webkit-transition :-webkit-transform .2s ease-out,opacity .2s ease-out;
-      transition :transform .2s ease-out, opacity .2s ease-out;
+      -webkit-transform  : translateX(-120px);
+      transform          : translateX(-120px);
+      opacity            : 0.0;
+      -webkit-transition : -webkit-transform .2s ease-out, opacity .2s ease-out;
+      transition         : transform .2s ease-out, opacity .2s ease-out;
     }
   }
 }

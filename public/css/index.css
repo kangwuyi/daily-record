@@ -148,11 +148,17 @@ body {
   -o-transition: color 0.5s ease;
   transition: color 0.5s ease; }
 
+html {
+  width: 100%;
+  height: 100%; }
+  html body {
+    display: inline-block;
+    width: 100%;
+    height: 100%; }
+
 .headerWrapper {
-  position: fixed;
   width: 100%;
   background: #278cde;
-  z-index: 9;
   height: 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
@@ -883,72 +889,131 @@ body {
   width: 190px;
   overflow: hidden;
   display: block;
-  position: fixed;
-  left: 0;
-  top: 40px;
   z-index: 20;
   clear: both;
-  bottom: 80px; }
+  position: inherit;
+  top: 0;
+  bottom: 0;
+  border-right: 1px solid #ccc;
+  background-color: #f2f2f2;
+  font-family: 'Open Sans';
+  font-size: 13px;
+  color: #393939; }
   .menuLeftBox .contentMoudle {
     overflow: auto;
     width: 100%;
     height: 100%;
-    padding: 0.1px 0;
-    position: relative; }
+    position: relative;
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid #fcfcfc;
+    border-bottom: 1px solid #e5e5e5; }
+    .menuLeftBox .contentMoudle ul {
+      padding: 0; }
+    .menuLeftBox .contentMoudle > li:first-child {
+      border-top: 0; }
     .menuLeftBox .contentMoudle .dataDepartment {
       width: 100%;
       height: auto;
       color: #ffffff; }
+      .menuLeftBox .contentMoudle .dataDepartment > :hover {
+        background-color: #FFF;
+        color: #1963aa; }
       .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentName {
-        background: #086fa1;
-        height: 32px;
-        line-height: 32px;
         text-align: left;
         text-indent: 20px;
-        font-size: 20px;
-        font-weight: bold;
         cursor: pointer;
-        border-top: 2px solid #fff; }
+        border-top: 2px solid #fff;
+        height: 38px;
+        line-height: 36px;
+        padding: 0 16px 0 7px;
+        background-color: #f9f9f9;
+        color: #585858;
+        text-shadow: none !important;
+        text-decoration: none;
+        border-left: 4px solid #f9f9f9; }
+        .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentName:hover {
+          border-left: 4px solid #25639e; }
+      .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren li:first-child {
+        border-top: 1px solid #fafafa; }
       .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup {
         width: 100%;
         height: auto; }
         .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupName {
-          background: #63add0;
+          position: relative;
           height: 32px;
-          line-height: 32px;
           text-align: left;
-          text-indent: 40px;
-          font-size: 20px;
-          font-weight: bold;
-          cursor: pointer; }
+          cursor: pointer;
+          display: block;
+          color: #616161;
+          padding: 7px 0 8px 37px;
+          margin: 0;
+          border-top: 1px dotted #e4e4e4;
+          background-color: #eee;
+          border-left: 1px dotted #25639e; }
+          .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupName:before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            width: 8px;
+            left: 18px;
+            top: 17px;
+            border-top: 1px solid #ccd7e2; }
         .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupChildren {
-          display: none; }
+          display: none;
+          background-color: #fff; }
           .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupChildren .dataUser {
             width: 100%;
             height: auto; }
             .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupChildren .dataUser .dataUserName {
-              background: #ffbf8d;
+              margin-left: 20px;
               height: 32px;
-              line-height: 32px;
               text-align: left;
-              text-indent: 60px;
-              font-size: 20px;
-              font-weight: bold;
-              cursor: pointer; }
+              cursor: pointer;
+              display: block;
+              position: relative;
+              color: #616161;
+              border-top: 1px dotted #e4e4e4;
+              border-left: 1px dotted #25639e;
+              background-color: #eee;
+              padding: 7px 0 8px 37px; }
+              .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupChildren .dataUser .dataUserName:before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                width: 8px;
+                left: 18px;
+                top: 17px;
+                border-top: 1px solid #ccd7e2; }
             .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupChildren .dataUser .dataUserChildren {
-              display: none; }
+              display: none;
+              background-color: #fff; }
               .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupChildren .dataUser .dataUserChildren .dataContent {
                 width: 100%;
                 height: auto; }
                 .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupChildren .dataUser .dataUserChildren .dataContent .dataContentName {
-                  background: #04376c;
+                  background-color: #fff;
                   height: 32px;
-                  line-height: 32px;
                   text-align: left;
-                  text-indent: 80px;
-                  font-size: 20px;
-                  font-weight: bold;
-                  cursor: pointer; }
+                  cursor: pointer;
+                  display: block;
+                  position: relative;
+                  color: #616161;
+                  padding: 7px 0 8px 60px;
+                  margin: 0 0 0 20px;
+                  border-left: 1px dotted #25639e; }
+                  .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupChildren .dataUser .dataUserChildren .dataContent .dataContentName:before {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    width: 8px;
+                    left: 40px;
+                    top: 17px;
+                    border-top: 1px solid #ccd7e2; }
+                .menuLeftBox .contentMoudle .dataDepartment .dataDepartmentChildren .dataGroup .dataGroupChildren .dataUser .dataUserChildren .dataContent .dataContentChildren {
+                  color: #777; }
     .menuLeftBox .contentMoudle .moveToLeftActive {
       display: block;
       -webkit-animation: moveToLeft .6s ease both;
@@ -1040,13 +1105,13 @@ body {
       -webkit-transform: translateY(-250px);
       transform: translateY(-250px);
       opacity: 1;
-      -webkit-transition: -webkit-transform .2s ease-out,opacity .2s ease-out;
+      -webkit-transition: -webkit-transform .2s ease-out, opacity .2s ease-out;
       transition: transform .2s ease-out, opacity .2s ease-out; }
     .menuLeftBox .contentMoudle .fadeOutLeft {
       -webkit-transform: translateX(-120px);
       transform: translateX(-120px);
       opacity: 0.0;
-      -webkit-transition: -webkit-transform .2s ease-out,opacity .2s ease-out;
+      -webkit-transition: -webkit-transform .2s ease-out, opacity .2s ease-out;
       transition: transform .2s ease-out, opacity .2s ease-out; }
 
 body {
@@ -1063,17 +1128,17 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 500px;
+  height: 300px;
   font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "\9ED1\4F53", Arial, sans-serif;
   color: #222;
   font-size: 12px; }
   .loginBox .formBox {
     margin-top: 200px;
     width: 100%;
-    height: 500px; }
+    height: 300px; }
   .loginBox .top_div_box {
     position: relative;
-    left: -100px;
+    /*left         : -100px;*/
     margin: 0 auto auto;
     border: 1px solid #e7e7e7;
     border-image: none;

@@ -8,11 +8,17 @@ body {
   -o-transition: color 0.5s ease;
   transition: color 0.5s ease; }
 
+html {
+  width: 100%;
+  height: 100%; }
+  html body {
+    display: inline-block;
+    width: 100%;
+    height: 100%; }
+
 .headerWrapper {
-  position: fixed;
   width: 100%;
   background: #278cde;
-  z-index: 9;
   height: 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
