@@ -10,23 +10,24 @@
     }
     PostDataProse.forEach( function(dataYear){ %>
 <div class="dayReportTree col-md-12 container-fluid">
-    <% dataYear.children.forEach( function(dataMonth){ %>
-    <h2><a href="#"><%= dataYear.name %>年<%= dataMonth.name %>月<i></i></a></h2>
-    <ul class="list">
-        <li class="dateCls">
-            <div class="dateTitle">星期一</div>
-            <div class="dateTitle">星期二</div>
-            <div class="dateTitle">星期三</div>
-            <div class="dateTitle">星期四</div>
-            <div class="dateTitle">星期五</div>
-            <div class="dateTitle">星期六</div>
-            <div class="dateTitle">星期日</div>
-        </li>
-        <% dataMonth.children.forEach( function(dataDay, index){
+    <div class="dayReportTreeAuto">
+        <% dataYear.children.forEach( function(dataMonth){ %>
+        <h2><a href="#"><%= dataYear.name %>年<%= dataMonth.name %>月<i></i></a></h2>
+        <ul class="list">
+            <li class="dateCls">
+                <div class="dateTitle">星期一</div>
+                <div class="dateTitle">星期二</div>
+                <div class="dateTitle">星期三</div>
+                <div class="dateTitle">星期四</div>
+                <div class="dateTitle">星期五</div>
+                <div class="dateTitle">星期六</div>
+                <div class="dateTitle">星期日</div>
+            </li>
+            <% dataMonth.children.forEach( function(dataDay, index){
             if(index === 0){
                 var indexCache = []
-                ,_thisDateCache = (new Date((typeof dataDay.rb_datenote_date === 'number' ? dataDay.rb_datenote_date : Number(dataDay.rb_datenote_date))))
-                ,_thisDateCacheFormat = _thisDateCache.format('yyyy-MM-dd');
+                        ,_thisDateCache = (new Date((typeof dataDay.rb_datenote_date === 'number' ? dataDay.rb_datenote_date : Number(dataDay.rb_datenote_date))))
+                        ,_thisDateCacheFormat = _thisDateCache.format('yyyy-MM-dd');
                 switch (_thisDateCache.format('DD'))
                 {
                     case '星期一':
@@ -51,28 +52,28 @@
                         indexCache = [addDate(_thisDateCacheFormat,6),addDate(_thisDateCacheFormat,5),addDate(_thisDateCacheFormat,4),addDate(_thisDateCacheFormat,3),addDate(_thisDateCacheFormat,2),addDate(_thisDateCacheFormat,1)];
                         break;
                 }
-                for(var i = 0; i < indexCache.length; i++){%>
-                <li class="cls zeroBG">
-                    <div class="more">
-                        <div class="iconfont dateList-<%= (typeof indexCache[i].format('dd') === 'number') ? indexCache[i].format('dd') : Number(indexCache[i].format('dd')) %>">
-                        </div>
-                        <div class="contentBox"></div>
+            for(var i = 0; i < indexCache.length; i++){%>
+            <li class="cls zeroBG">
+                <div class="more">
+                    <div class="iconfont dateList-<%= (typeof indexCache[i].format('dd') === 'number') ? indexCache[i].format('dd') : Number(indexCache[i].format('dd')) %>">
                     </div>
-                </li>
-                <%}
-            }
-        %>
-        <li class="cls">
-            <div class="more">
-                <div class="iconfont dateList-<%= (typeof dataDay.dataDay === 'number') ? dataDay.dataDay : Number(dataDay.dataDay) %>">
+                    <div class="contentBox"></div>
                 </div>
-                <div class="contentBox"><%- dataDay.rb_datenote_content %></div>
-            </div>
-        </li>
+            </li>
+            <%}
+            }
+            %>
+            <li class="cls">
+                <div class="more">
+                    <div class="iconfont dateList-<%= (typeof dataDay.dataDay === 'number') ? dataDay.dataDay : Number(dataDay.dataDay) %>">
+                    </div>
+                    <div class="contentBox"><%- dataDay.rb_datenote_content %></div>
+                </div>
+            </li>
+            <% }) %>
+        </ul>
         <% }) %>
-    </ul>
-    <% }) %>
-    <!-- 开始循环结束 -->
-
+        <!-- 开始循环结束 -->
+    </div>
 </div>
 <% }); %>

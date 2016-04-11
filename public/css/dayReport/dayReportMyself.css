@@ -21,7 +21,11 @@ body {
 .dayReportTree {
   position: relative;
   width: 960px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  overflow: auto; }
+  .dayReportTree .dayReportTreeAuto {
+    width: 1500px;
+    height: 100%; }
   .dayReportTree h2 {
     height: 40px;
     width: 170px;

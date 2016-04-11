@@ -25,7 +25,7 @@
         return "UPDATE  `daily_report`.`rb_user` SET `rb_user_pw` = '" + _user_password + "' WHERE" + " `rb_user`.`rb_user_account` =  '" + user_account + "' and  `rb_user`.`rb_user_email` =  '" + _user_emil + "';";
       },
       idByName             : function ( user_account ) {
-        return "select rb_user_id from rb_user where rb_user_account='" + user_account + "' ";
+        return "select * from rb_user where rb_user_account='" + user_account + "' ";
       },
       idById               : function ( user_id ) {
         return "select * from rb_user where rb_user_id='" + user_id + "' ";

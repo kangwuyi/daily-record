@@ -489,7 +489,7 @@ exports.postProseById = function (req, res) {
      */
     getDatenoteByIdAndGroupIdAndTime: ['idByName', function (callback, result) {
       Prose.getDatenoteByIdAndGroupIdAndTime(
-        result.idByName.rb_user_idcache,
+        result.idByName[0].rb_user_idcache,
         _group_id,
         date_timeFormat,
         function (err, data) {
@@ -503,16 +503,11 @@ exports.postProseById = function (req, res) {
     }]
     }, function (err, results) {
       var _user_id = results.idByName[0].rb_user_id;
-      /**
-       * 不存在状态日期
-       */
       if (results.getDatenoteByIdAndGroupIdAndTime.length < 1) {
-
-
         Prose.interDatenoteInfo(
         _user_id,
         '没有标题',
-        date_timeFormat,
+        date_time,
         datenote_content,
         _group_id,
         function (err, interDatenoteInfo_data) {
@@ -521,7 +516,7 @@ exports.postProseById = function (req, res) {
             return res.redirect('back');
           } else {
             Prose.getDatenoteByIdAndGroupIdAndTime(
-            results.idByName.rb_user_idcache,
+            results.idByName[0].rb_user_idcache,
             _group_id,
             date_timeFormat,
             function (err, getDatenoteByIdAndGroupIdAndTime_data) {
@@ -550,7 +545,7 @@ exports.postProseById = function (req, res) {
               return res.redirect('back');
             } else {
                 Prose.getDatenoteByIdAndGroupIdAndTime(
-                results.idByName.rb_user_idcache,
+                results.idByName[0].rb_user_idcache,
                 _group_id,
                 date_timeFormat,
                 function (err, getDatenoteByIdAndGroupIdAndTime_data) {
