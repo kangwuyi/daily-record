@@ -14,7 +14,7 @@
                             <ul class="dataUserChildren">
                                 <% dataUser.children.forEach(function(dataContent){ %>
                                 <li class="dataContent">
-                                    <div class="dataContentName"><%= dataContent.name %></div>
+                                    <a class="dataContentName" href="<%= dataContent.url %>"><%= dataContent.name %></a>
                                 </li>
                                 <% }) %>
                             </ul>
