@@ -51,9 +51,33 @@ exports.prose         = function (req, res) {
             if (data.length < 1) {
               callback(err, {data: [], PostDataProse: []});
             } else {
-              var PostDataProse = []
-                , data_parent   = {};
-              data              = dSDate.dataSerialization(data);
+                 var PostDataProse = []
+                , data_parent = {}
+                , _startTime = (typeof data[0].rb_datenote_date === 'number') ? data[0].rb_datenote_date : Number(data[0].rb_datenote_date)
+                , _endTime = (typeof data[data.length - 1].rb_datenote_date === 'number') ? data[data.length - 1].rb_datenote_date : Number(data[data.length - 1].rb_datenote_date)
+                , thisDateDiff = Math.floor(new Date(_endTime).diff(new Date(_startTime)))
+                , poDataList = []
+                , _user__datenotedata = [];
+              for (var i = thisDateDiff; i >= 0; i--) {
+                poDataList.push(new Date(_startTime).getNextDate(i).format('yyyy-MM-dd'))
+              }
+              poDataList.forEach(function (poDataList_item) {
+                var _poDataListSign = false;
+                data.forEach(function (datenote_arr_item) {
+                  var _noteDateTime = (typeof datenote_arr_item.rb_datenote_date === 'number') ? datenote_arr_item.rb_datenote_date : Number(datenote_arr_item.rb_datenote_date);
+                  if (new Date(_noteDateTime).format('yyyy-MM-dd') === poDataList_item) {
+                    _user__datenotedata.push(datenote_arr_item);
+                    _poDataListSign = true;
+                  }
+                });
+                if (_poDataListSign === false) {
+                  _user__datenotedata.push({
+                    rb_datenote_content: '',
+                    rb_datenote_date: new Date(poDataList_item).getTime()
+                  })
+                }
+              });
+              data = dSDate.dataSerialization(_user__datenotedata);
               for (var index = 0; index < data.length; index++) {
                 var dateGetTime       = data[index].rb_datenote_date;
                 dateGetTime           = (typeof dateGetTime == Number) ? dateGetTime : Number(dateGetTime);
@@ -151,8 +175,32 @@ exports.proseById     = function (req, res) {
             callback(err, {data: [], PostDataProse: []});
           } else {
             var PostDataProse = []
-              , data_parent   = {};
-            data              = dSDate.dataSerialization(data);
+                , data_parent = {}
+                , _startTime = (typeof data[0].rb_datenote_date === 'number') ? data[0].rb_datenote_date : Number(data[0].rb_datenote_date)
+                , _endTime = (typeof data[data.length - 1].rb_datenote_date === 'number') ? data[data.length - 1].rb_datenote_date : Number(data[data.length - 1].rb_datenote_date)
+                , thisDateDiff = Math.floor(new Date(_endTime).diff(new Date(_startTime)))
+                , poDataList = []
+                , _user__datenotedata = [];
+              for (var i = thisDateDiff; i >= 0; i--) {
+                poDataList.push(new Date(_startTime).getNextDate(i).format('yyyy-MM-dd'))
+              }
+              poDataList.forEach(function (poDataList_item) {
+                var _poDataListSign = false;
+                data.forEach(function (datenote_arr_item) {
+                  var _noteDateTime = (typeof datenote_arr_item.rb_datenote_date === 'number') ? datenote_arr_item.rb_datenote_date : Number(datenote_arr_item.rb_datenote_date);
+                  if (new Date(_noteDateTime).format('yyyy-MM-dd') === poDataList_item) {
+                    _user__datenotedata.push(datenote_arr_item);
+                    _poDataListSign = true;
+                  }
+                });
+                if (_poDataListSign === false) {
+                  _user__datenotedata.push({
+                    rb_datenote_content: '',
+                    rb_datenote_date: new Date(poDataList_item).getTime()
+                  })
+                }
+              });
+              data = dSDate.dataSerialization(_user__datenotedata);
             for (var index = 0; index < data.length; index++) {
               var dateGetTime       = data[index].rb_datenote_date;
               dateGetTime           = (typeof dateGetTime == Number) ? dateGetTime : Number(dateGetTime);
